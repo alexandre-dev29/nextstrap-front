@@ -1,0 +1,800 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+union GenericMorph = Banner | Category | I18NLocale | Product | Review | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
+
+type Banner {
+    bannerImage: UploadFileEntityResponse!
+    buttonText: String!
+    createdAt: DateTime
+    description: String!
+    discount: String
+    largeText1: String
+    largeText2: String
+    locale: String
+    localizations(filters: BannerFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): BannerRelationResponseCollection
+    midText: String
+    productName: String!
+    products(filters: ProductFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ProductRelationResponseCollection
+    publishedAt: DateTime
+    saleTime: String
+    smallText: String!
+    updatedAt: DateTime
+}
+
+type BannerEntity {
+    attributes: Banner
+    id: ID
+}
+
+type BannerEntityResponse {
+    data: BannerEntity
+}
+
+type BannerEntityResponseCollection {
+    data: [BannerEntity!]!
+    meta: ResponseCollectionMeta!
+}
+
+type BannerRelationResponseCollection {
+    data: [BannerEntity!]!
+}
+
+type Category {
+    category: String
+    categoryImage: UploadFileEntityResponse
+    createdAt: DateTime
+    products(filters: ProductFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ProductRelationResponseCollection
+    publishedAt: DateTime
+    updatedAt: DateTime
+}
+
+type CategoryEntity {
+    attributes: Category
+    id: ID
+}
+
+type CategoryEntityResponse {
+    data: CategoryEntity
+}
+
+type CategoryEntityResponseCollection {
+    data: [CategoryEntity!]!
+    meta: ResponseCollectionMeta!
+}
+
+type I18NLocale {
+    code: String
+    createdAt: DateTime
+    name: String
+    updatedAt: DateTime
+}
+
+type I18NLocaleEntity {
+    attributes: I18NLocale
+    id: ID
+}
+
+type I18NLocaleEntityResponse {
+    data: I18NLocaleEntity
+}
+
+type I18NLocaleEntityResponseCollection {
+    data: [I18NLocaleEntity!]!
+    meta: ResponseCollectionMeta!
+}
+
+type Mutation {
+    createBanner(data: BannerInput!, locale: I18NLocaleCode): BannerEntityResponse
+    createBannerLocalization(data: BannerInput, id: ID, locale: I18NLocaleCode): BannerEntityResponse
+    createCategory(data: CategoryInput!): CategoryEntityResponse
+    createProduct(data: ProductInput!): ProductEntityResponse
+    createReview(data: ReviewInput!, locale: I18NLocaleCode): ReviewEntityResponse
+    createReviewLocalization(data: ReviewInput, id: ID, locale: I18NLocaleCode): ReviewEntityResponse
+    createUploadFile(data: UploadFileInput!): UploadFileEntityResponse
+    "Create a new role"
+    createUsersPermissionsRole(data: UsersPermissionsRoleInput!): UsersPermissionsCreateRolePayload
+    "Create a new user"
+    createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
+    deleteBanner(id: ID!, locale: I18NLocaleCode): BannerEntityResponse
+    deleteCategory(id: ID!): CategoryEntityResponse
+    deleteProduct(id: ID!): ProductEntityResponse
+    deleteReview(id: ID!, locale: I18NLocaleCode): ReviewEntityResponse
+    deleteUploadFile(id: ID!): UploadFileEntityResponse
+    "Delete an existing role"
+    deleteUsersPermissionsRole(id: ID!): UsersPermissionsDeleteRolePayload
+    "Update an existing user"
+    deleteUsersPermissionsUser(id: ID!): UsersPermissionsUserEntityResponse!
+    "Confirm an email users email address"
+    emailConfirmation(confirmation: String!): UsersPermissionsLoginPayload
+    "Request a reset password token"
+    forgotPassword(email: String!): UsersPermissionsPasswordPayload
+    login(input: UsersPermissionsLoginInput!): UsersPermissionsLoginPayload!
+    multipleUpload(field: String, files: [Upload]!, ref: String, refId: ID): [UploadFileEntityResponse]!
+    "Register a user"
+    register(input: UsersPermissionsRegisterInput!): UsersPermissionsLoginPayload!
+    removeFile(id: ID!): UploadFileEntityResponse
+    "Reset user password. Confirm with a code (resetToken from forgotPassword)"
+    resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
+    updateBanner(data: BannerInput!, id: ID!, locale: I18NLocaleCode): BannerEntityResponse
+    updateCategory(data: CategoryInput!, id: ID!): CategoryEntityResponse
+    updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
+    updateProduct(data: ProductInput!, id: ID!): ProductEntityResponse
+    updateReview(data: ReviewInput!, id: ID!, locale: I18NLocaleCode): ReviewEntityResponse
+    updateUploadFile(data: UploadFileInput!, id: ID!): UploadFileEntityResponse
+    "Update an existing role"
+    updateUsersPermissionsRole(data: UsersPermissionsRoleInput!, id: ID!): UsersPermissionsUpdateRolePayload
+    "Update an existing user"
+    updateUsersPermissionsUser(data: UsersPermissionsUserInput!, id: ID!): UsersPermissionsUserEntityResponse!
+    upload(field: String, file: Upload!, info: FileInfoInput, ref: String, refId: ID): UploadFileEntityResponse!
+}
+
+type Pagination {
+    page: Int!
+    pageCount: Int!
+    pageSize: Int!
+    total: Int!
+}
+
+type Product {
+    banner: BannerEntityResponse
+    category: CategoryEntityResponse
+    createdAt: DateTime
+    description: String!
+    productImages(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileRelationResponseCollection!
+    productName: String!
+    productPrice: Float!
+    productSlug: String!
+    publishedAt: DateTime
+    reviews(filters: ReviewFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ReviewRelationResponseCollection
+    updatedAt: DateTime
+}
+
+type ProductEntity {
+    attributes: Product
+    id: ID
+}
+
+type ProductEntityResponse {
+    data: ProductEntity
+}
+
+type ProductEntityResponseCollection {
+    data: [ProductEntity!]!
+    meta: ResponseCollectionMeta!
+}
+
+type ProductRelationResponseCollection {
+    data: [ProductEntity!]!
+}
+
+type Query {
+    banner(id: ID, locale: I18NLocaleCode): BannerEntityResponse
+    banners(filters: BannerFiltersInput, locale: I18NLocaleCode, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): BannerEntityResponseCollection
+    categories(filters: CategoryFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): CategoryEntityResponseCollection
+    category(id: ID): CategoryEntityResponse
+    i18NLocale(id: ID): I18NLocaleEntityResponse
+    i18NLocales(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): I18NLocaleEntityResponseCollection
+    me: UsersPermissionsMe
+    product(id: ID): ProductEntityResponse
+    products(filters: ProductFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ProductEntityResponseCollection
+    review(id: ID, locale: I18NLocaleCode): ReviewEntityResponse
+    reviews(filters: ReviewFiltersInput, locale: I18NLocaleCode, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ReviewEntityResponseCollection
+    uploadFile(id: ID): UploadFileEntityResponse
+    uploadFiles(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileEntityResponseCollection
+    usersPermissionsRole(id: ID): UsersPermissionsRoleEntityResponse
+    usersPermissionsRoles(filters: UsersPermissionsRoleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsRoleEntityResponseCollection
+    usersPermissionsUser(id: ID): UsersPermissionsUserEntityResponse
+    usersPermissionsUsers(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsUserEntityResponseCollection
+}
+
+type ResponseCollectionMeta {
+    pagination: Pagination!
+}
+
+type Review {
+    createdAt: DateTime
+    locale: String
+    localizations(filters: ReviewFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ReviewRelationResponseCollection
+    product: ProductEntityResponse
+    publishedAt: DateTime
+    rating: Float!
+    reviewText: String
+    updatedAt: DateTime
+    users_permissions_user: UsersPermissionsUserEntityResponse
+}
+
+type ReviewEntity {
+    attributes: Review
+    id: ID
+}
+
+type ReviewEntityResponse {
+    data: ReviewEntity
+}
+
+type ReviewEntityResponseCollection {
+    data: [ReviewEntity!]!
+    meta: ResponseCollectionMeta!
+}
+
+type ReviewRelationResponseCollection {
+    data: [ReviewEntity!]!
+}
+
+type UploadFile {
+    alternativeText: String
+    caption: String
+    createdAt: DateTime
+    ext: String
+    formats: JSON
+    hash: String!
+    height: Int
+    mime: String!
+    name: String!
+    previewUrl: String
+    provider: String!
+    provider_metadata: JSON
+    related: [GenericMorph]
+    size: Float!
+    updatedAt: DateTime
+    url: String!
+    width: Int
+}
+
+type UploadFileEntity {
+    attributes: UploadFile
+    id: ID
+}
+
+type UploadFileEntityResponse {
+    data: UploadFileEntity
+}
+
+type UploadFileEntityResponseCollection {
+    data: [UploadFileEntity!]!
+    meta: ResponseCollectionMeta!
+}
+
+type UploadFileRelationResponseCollection {
+    data: [UploadFileEntity!]!
+}
+
+type UsersPermissionsCreateRolePayload {
+    ok: Boolean!
+}
+
+type UsersPermissionsDeleteRolePayload {
+    ok: Boolean!
+}
+
+type UsersPermissionsLoginPayload {
+    jwt: String
+    user: UsersPermissionsMe!
+}
+
+type UsersPermissionsMe {
+    blocked: Boolean
+    confirmed: Boolean
+    email: String
+    id: ID!
+    role: UsersPermissionsMeRole
+    username: String!
+}
+
+type UsersPermissionsMeRole {
+    description: String
+    id: ID!
+    name: String!
+    type: String
+}
+
+type UsersPermissionsPasswordPayload {
+    ok: Boolean!
+}
+
+type UsersPermissionsPermission {
+    action: String!
+    createdAt: DateTime
+    role: UsersPermissionsRoleEntityResponse
+    updatedAt: DateTime
+}
+
+type UsersPermissionsPermissionEntity {
+    attributes: UsersPermissionsPermission
+    id: ID
+}
+
+type UsersPermissionsPermissionRelationResponseCollection {
+    data: [UsersPermissionsPermissionEntity!]!
+}
+
+type UsersPermissionsRole {
+    createdAt: DateTime
+    description: String
+    name: String!
+    permissions(filters: UsersPermissionsPermissionFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsPermissionRelationResponseCollection
+    type: String
+    updatedAt: DateTime
+    users(filters: UsersPermissionsUserFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UsersPermissionsUserRelationResponseCollection
+}
+
+type UsersPermissionsRoleEntity {
+    attributes: UsersPermissionsRole
+    id: ID
+}
+
+type UsersPermissionsRoleEntityResponse {
+    data: UsersPermissionsRoleEntity
+}
+
+type UsersPermissionsRoleEntityResponseCollection {
+    data: [UsersPermissionsRoleEntity!]!
+    meta: ResponseCollectionMeta!
+}
+
+type UsersPermissionsUpdateRolePayload {
+    ok: Boolean!
+}
+
+type UsersPermissionsUser {
+    blocked: Boolean
+    confirmed: Boolean
+    createdAt: DateTime
+    email: String!
+    provider: String
+    reviews(filters: ReviewFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ReviewRelationResponseCollection
+    role: UsersPermissionsRoleEntityResponse
+    updatedAt: DateTime
+    username: String!
+}
+
+type UsersPermissionsUserEntity {
+    attributes: UsersPermissionsUser
+    id: ID
+}
+
+type UsersPermissionsUserEntityResponse {
+    data: UsersPermissionsUserEntity
+}
+
+type UsersPermissionsUserEntityResponseCollection {
+    data: [UsersPermissionsUserEntity!]!
+    meta: ResponseCollectionMeta!
+}
+
+type UsersPermissionsUserRelationResponseCollection {
+    data: [UsersPermissionsUserEntity!]!
+}
+
+enum PublicationState {
+    LIVE
+    PREVIEW
+}
+
+"A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar."
+scalar DateTime
+
+"A string used to identify an i18n locale"
+scalar I18NLocaleCode
+
+"The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf)."
+scalar JSON
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload
+
+input BannerFiltersInput {
+    and: [BannerFiltersInput]
+    buttonText: StringFilterInput
+    createdAt: DateTimeFilterInput
+    description: StringFilterInput
+    discount: StringFilterInput
+    id: IDFilterInput
+    largeText1: StringFilterInput
+    largeText2: StringFilterInput
+    locale: StringFilterInput
+    localizations: BannerFiltersInput
+    midText: StringFilterInput
+    not: BannerFiltersInput
+    or: [BannerFiltersInput]
+    productName: StringFilterInput
+    products: ProductFiltersInput
+    publishedAt: DateTimeFilterInput
+    saleTime: StringFilterInput
+    smallText: StringFilterInput
+    updatedAt: DateTimeFilterInput
+}
+
+input BannerInput {
+    bannerImage: ID
+    buttonText: String
+    description: String
+    discount: String
+    largeText1: String
+    largeText2: String
+    midText: String
+    productName: String
+    products: [ID]
+    publishedAt: DateTime
+    saleTime: String
+    smallText: String
+}
+
+input BooleanFilterInput {
+    and: [Boolean]
+    between: [Boolean]
+    contains: Boolean
+    containsi: Boolean
+    endsWith: Boolean
+    eq: Boolean
+    gt: Boolean
+    gte: Boolean
+    in: [Boolean]
+    lt: Boolean
+    lte: Boolean
+    ne: Boolean
+    not: BooleanFilterInput
+    notContains: Boolean
+    notContainsi: Boolean
+    notIn: [Boolean]
+    notNull: Boolean
+    null: Boolean
+    or: [Boolean]
+    startsWith: Boolean
+}
+
+input CategoryFiltersInput {
+    and: [CategoryFiltersInput]
+    category: StringFilterInput
+    createdAt: DateTimeFilterInput
+    id: IDFilterInput
+    not: CategoryFiltersInput
+    or: [CategoryFiltersInput]
+    products: ProductFiltersInput
+    publishedAt: DateTimeFilterInput
+    updatedAt: DateTimeFilterInput
+}
+
+input CategoryInput {
+    category: String
+    categoryImage: ID
+    products: [ID]
+    publishedAt: DateTime
+}
+
+input DateTimeFilterInput {
+    and: [DateTime]
+    between: [DateTime]
+    contains: DateTime
+    containsi: DateTime
+    endsWith: DateTime
+    eq: DateTime
+    gt: DateTime
+    gte: DateTime
+    in: [DateTime]
+    lt: DateTime
+    lte: DateTime
+    ne: DateTime
+    not: DateTimeFilterInput
+    notContains: DateTime
+    notContainsi: DateTime
+    notIn: [DateTime]
+    notNull: Boolean
+    null: Boolean
+    or: [DateTime]
+    startsWith: DateTime
+}
+
+input FileInfoInput {
+    alternativeText: String
+    caption: String
+    name: String
+}
+
+input FloatFilterInput {
+    and: [Float]
+    between: [Float]
+    contains: Float
+    containsi: Float
+    endsWith: Float
+    eq: Float
+    gt: Float
+    gte: Float
+    in: [Float]
+    lt: Float
+    lte: Float
+    ne: Float
+    not: FloatFilterInput
+    notContains: Float
+    notContainsi: Float
+    notIn: [Float]
+    notNull: Boolean
+    null: Boolean
+    or: [Float]
+    startsWith: Float
+}
+
+input I18NLocaleFiltersInput {
+    and: [I18NLocaleFiltersInput]
+    code: StringFilterInput
+    createdAt: DateTimeFilterInput
+    id: IDFilterInput
+    name: StringFilterInput
+    not: I18NLocaleFiltersInput
+    or: [I18NLocaleFiltersInput]
+    updatedAt: DateTimeFilterInput
+}
+
+input IDFilterInput {
+    and: [ID]
+    between: [ID]
+    contains: ID
+    containsi: ID
+    endsWith: ID
+    eq: ID
+    gt: ID
+    gte: ID
+    in: [ID]
+    lt: ID
+    lte: ID
+    ne: ID
+    not: IDFilterInput
+    notContains: ID
+    notContainsi: ID
+    notIn: [ID]
+    notNull: Boolean
+    null: Boolean
+    or: [ID]
+    startsWith: ID
+}
+
+input IntFilterInput {
+    and: [Int]
+    between: [Int]
+    contains: Int
+    containsi: Int
+    endsWith: Int
+    eq: Int
+    gt: Int
+    gte: Int
+    in: [Int]
+    lt: Int
+    lte: Int
+    ne: Int
+    not: IntFilterInput
+    notContains: Int
+    notContainsi: Int
+    notIn: [Int]
+    notNull: Boolean
+    null: Boolean
+    or: [Int]
+    startsWith: Int
+}
+
+input JSONFilterInput {
+    and: [JSON]
+    between: [JSON]
+    contains: JSON
+    containsi: JSON
+    endsWith: JSON
+    eq: JSON
+    gt: JSON
+    gte: JSON
+    in: [JSON]
+    lt: JSON
+    lte: JSON
+    ne: JSON
+    not: JSONFilterInput
+    notContains: JSON
+    notContainsi: JSON
+    notIn: [JSON]
+    notNull: Boolean
+    null: Boolean
+    or: [JSON]
+    startsWith: JSON
+}
+
+input PaginationArg {
+    limit: Int
+    page: Int
+    pageSize: Int
+    start: Int
+}
+
+input ProductFiltersInput {
+    and: [ProductFiltersInput]
+    banner: BannerFiltersInput
+    category: CategoryFiltersInput
+    createdAt: DateTimeFilterInput
+    description: StringFilterInput
+    id: IDFilterInput
+    not: ProductFiltersInput
+    or: [ProductFiltersInput]
+    productName: StringFilterInput
+    productPrice: FloatFilterInput
+    productSlug: StringFilterInput
+    publishedAt: DateTimeFilterInput
+    reviews: ReviewFiltersInput
+    updatedAt: DateTimeFilterInput
+}
+
+input ProductInput {
+    banner: ID
+    category: ID
+    description: String
+    productImages: [ID]
+    productName: String
+    productPrice: Float
+    productSlug: String
+    publishedAt: DateTime
+    reviews: [ID]
+}
+
+input ReviewFiltersInput {
+    and: [ReviewFiltersInput]
+    createdAt: DateTimeFilterInput
+    id: IDFilterInput
+    locale: StringFilterInput
+    localizations: ReviewFiltersInput
+    not: ReviewFiltersInput
+    or: [ReviewFiltersInput]
+    product: ProductFiltersInput
+    publishedAt: DateTimeFilterInput
+    rating: FloatFilterInput
+    reviewText: StringFilterInput
+    updatedAt: DateTimeFilterInput
+    users_permissions_user: UsersPermissionsUserFiltersInput
+}
+
+input ReviewInput {
+    product: ID
+    publishedAt: DateTime
+    rating: Float
+    reviewText: String
+    users_permissions_user: ID
+}
+
+input StringFilterInput {
+    and: [String]
+    between: [String]
+    contains: String
+    containsi: String
+    endsWith: String
+    eq: String
+    gt: String
+    gte: String
+    in: [String]
+    lt: String
+    lte: String
+    ne: String
+    not: StringFilterInput
+    notContains: String
+    notContainsi: String
+    notIn: [String]
+    notNull: Boolean
+    null: Boolean
+    or: [String]
+    startsWith: String
+}
+
+input UploadFileFiltersInput {
+    alternativeText: StringFilterInput
+    and: [UploadFileFiltersInput]
+    caption: StringFilterInput
+    createdAt: DateTimeFilterInput
+    ext: StringFilterInput
+    formats: JSONFilterInput
+    hash: StringFilterInput
+    height: IntFilterInput
+    id: IDFilterInput
+    mime: StringFilterInput
+    name: StringFilterInput
+    not: UploadFileFiltersInput
+    or: [UploadFileFiltersInput]
+    previewUrl: StringFilterInput
+    provider: StringFilterInput
+    provider_metadata: JSONFilterInput
+    size: FloatFilterInput
+    updatedAt: DateTimeFilterInput
+    url: StringFilterInput
+    width: IntFilterInput
+}
+
+input UploadFileInput {
+    alternativeText: String
+    caption: String
+    ext: String
+    formats: JSON
+    hash: String
+    height: Int
+    mime: String
+    name: String
+    previewUrl: String
+    provider: String
+    provider_metadata: JSON
+    size: Float
+    url: String
+    width: Int
+}
+
+input UsersPermissionsLoginInput {
+    identifier: String!
+    password: String!
+    provider: String! = "local"
+}
+
+input UsersPermissionsPermissionFiltersInput {
+    action: StringFilterInput
+    and: [UsersPermissionsPermissionFiltersInput]
+    createdAt: DateTimeFilterInput
+    id: IDFilterInput
+    not: UsersPermissionsPermissionFiltersInput
+    or: [UsersPermissionsPermissionFiltersInput]
+    role: UsersPermissionsRoleFiltersInput
+    updatedAt: DateTimeFilterInput
+}
+
+input UsersPermissionsRegisterInput {
+    email: String!
+    password: String!
+    username: String!
+}
+
+input UsersPermissionsRoleFiltersInput {
+    and: [UsersPermissionsRoleFiltersInput]
+    createdAt: DateTimeFilterInput
+    description: StringFilterInput
+    id: IDFilterInput
+    name: StringFilterInput
+    not: UsersPermissionsRoleFiltersInput
+    or: [UsersPermissionsRoleFiltersInput]
+    permissions: UsersPermissionsPermissionFiltersInput
+    type: StringFilterInput
+    updatedAt: DateTimeFilterInput
+    users: UsersPermissionsUserFiltersInput
+}
+
+input UsersPermissionsRoleInput {
+    description: String
+    name: String
+    permissions: [ID]
+    type: String
+    users: [ID]
+}
+
+input UsersPermissionsUserFiltersInput {
+    and: [UsersPermissionsUserFiltersInput]
+    blocked: BooleanFilterInput
+    confirmationToken: StringFilterInput
+    confirmed: BooleanFilterInput
+    createdAt: DateTimeFilterInput
+    email: StringFilterInput
+    id: IDFilterInput
+    not: UsersPermissionsUserFiltersInput
+    or: [UsersPermissionsUserFiltersInput]
+    password: StringFilterInput
+    provider: StringFilterInput
+    resetPasswordToken: StringFilterInput
+    reviews: ReviewFiltersInput
+    role: UsersPermissionsRoleFiltersInput
+    updatedAt: DateTimeFilterInput
+    username: StringFilterInput
+}
+
+input UsersPermissionsUserInput {
+    blocked: Boolean
+    confirmationToken: String
+    confirmed: Boolean
+    email: String
+    password: String
+    provider: String
+    resetPasswordToken: String
+    reviews: [ID]
+    role: ID
+    username: String
+}
