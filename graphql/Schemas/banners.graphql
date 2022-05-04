@@ -6,6 +6,7 @@ query banners($filters: BannerFiltersInput, $locale: I18NLocaleCode, $pagination
                 productName
                 description
                 smallText
+                bannerPrice
                 midText
                 largeText1
                 largeText2
@@ -42,6 +43,7 @@ query banner($id: ID, $locale: I18NLocaleCode){
                 productName
                 description
                 smallText
+                bannerPrice
                 midText
                 largeText1
                 largeText2

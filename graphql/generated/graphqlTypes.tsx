@@ -26,6 +26,7 @@ export type Scalars = {
 export type Banner = {
   __typename?: 'Banner';
   bannerImage: UploadFileEntityResponse;
+  bannerPrice?: Maybe<Scalars['Float']>;
   buttonText: Scalars['String'];
   createdAt?: Maybe<Scalars['DateTime']>;
   description: Scalars['String'];
@@ -78,6 +79,7 @@ export type BannerEntityResponseCollection = {
 
 export type BannerFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<BannerFiltersInput>>>;
+  bannerPrice?: InputMaybe<FloatFilterInput>;
   buttonText?: InputMaybe<StringFilterInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   description?: InputMaybe<StringFilterInput>;
@@ -100,6 +102,7 @@ export type BannerFiltersInput = {
 
 export type BannerInput = {
   bannerImage?: InputMaybe<Scalars['ID']>;
+  bannerPrice?: InputMaybe<Scalars['Float']>;
   buttonText?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   discount?: InputMaybe<Scalars['String']>;
@@ -1225,7 +1228,7 @@ export type BannersQueryVariables = Exact<{
 }>;
 
 
-export type BannersQuery = { __typename?: 'Query', banners?: { __typename?: 'BannerEntityResponseCollection', data: Array<{ __typename?: 'BannerEntity', id?: string | null, attributes?: { __typename?: 'Banner', productName: string, description: string, smallText: string, midText?: string | null, largeText1?: string | null, largeText2?: string | null, buttonText: string, discount?: string | null, saleTime?: string | null, locale?: string | null, createdAt?: any | null, updatedAt?: any | null, bannerImage: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', name: string, previewUrl?: string | null, url: string, createdAt?: any | null, updatedAt?: any | null, mime: string } | null } | null } } | null }> } | null };
+export type BannersQuery = { __typename?: 'Query', banners?: { __typename?: 'BannerEntityResponseCollection', data: Array<{ __typename?: 'BannerEntity', id?: string | null, attributes?: { __typename?: 'Banner', productName: string, description: string, smallText: string, bannerPrice?: number | null, midText?: string | null, largeText1?: string | null, largeText2?: string | null, buttonText: string, discount?: string | null, saleTime?: string | null, locale?: string | null, createdAt?: any | null, updatedAt?: any | null, bannerImage: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', name: string, previewUrl?: string | null, url: string, createdAt?: any | null, updatedAt?: any | null, mime: string } | null } | null } } | null }> } | null };
 
 export type BannerQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']>;
@@ -1233,7 +1236,7 @@ export type BannerQueryVariables = Exact<{
 }>;
 
 
-export type BannerQuery = { __typename?: 'Query', banner?: { __typename?: 'BannerEntityResponse', data?: { __typename?: 'BannerEntity', id?: string | null, attributes?: { __typename?: 'Banner', productName: string, description: string, smallText: string, midText?: string | null, largeText1?: string | null, largeText2?: string | null, buttonText: string, discount?: string | null, saleTime?: string | null, locale?: string | null, createdAt?: any | null, updatedAt?: any | null, bannerImage: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', name: string, previewUrl?: string | null, url: string, createdAt?: any | null, updatedAt?: any | null, mime: string } | null } | null } } | null } | null } | null };
+export type BannerQuery = { __typename?: 'Query', banner?: { __typename?: 'BannerEntityResponse', data?: { __typename?: 'BannerEntity', id?: string | null, attributes?: { __typename?: 'Banner', productName: string, description: string, smallText: string, bannerPrice?: number | null, midText?: string | null, largeText1?: string | null, largeText2?: string | null, buttonText: string, discount?: string | null, saleTime?: string | null, locale?: string | null, createdAt?: any | null, updatedAt?: any | null, bannerImage: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', name: string, previewUrl?: string | null, url: string, createdAt?: any | null, updatedAt?: any | null, mime: string } | null } | null } } | null } | null } | null };
 
 export type ProductsQueryVariables = Exact<{
   filters?: InputMaybe<ProductFiltersInput>;
@@ -1268,6 +1271,7 @@ export const BannersDocument = gql`
         productName
         description
         smallText
+        bannerPrice
         midText
         largeText1
         largeText2
@@ -1336,6 +1340,7 @@ export const BannerDocument = gql`
         productName
         description
         smallText
+        bannerPrice
         midText
         largeText1
         largeText2

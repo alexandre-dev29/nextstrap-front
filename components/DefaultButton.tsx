@@ -1,14 +1,16 @@
 interface DefaultButtonProps {
-  textButton: string;
+  textButton: string | undefined;
   onClickAction: () => void;
   isFilled: boolean;
   isSmall: boolean;
+  customStyle?: string;
+  children?: any;
 }
 
 export default function DefaultButton(props: DefaultButtonProps) {
   return (
     <button
-      className={`border-gray-800 border-2 ${
+      className={`border-gray-800 ${props.customStyle} border-2 ${
         props.isSmall ? "px-6 py-2" : "px-8 py-2 "
       } text-sm rounded-sm transition-all duration-300  ${
         props.isFilled
@@ -17,7 +19,10 @@ export default function DefaultButton(props: DefaultButtonProps) {
       }`}
       onClick={props.onClickAction}
     >
-      {props.textButton}
+      <div className={"flex items-center"}>
+        {props.children}
+        {props.textButton}
+      </div>
     </button>
   );
 }

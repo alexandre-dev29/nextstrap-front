@@ -9,6 +9,7 @@ union GenericMorph = Banner | Category | I18NLocale | Product | Review | UploadF
 
 type Banner {
     bannerImage: UploadFileEntityResponse!
+    bannerPrice: Float
     buttonText: String!
     createdAt: DateTime
     description: String!
@@ -390,6 +391,7 @@ scalar Upload
 
 input BannerFiltersInput {
     and: [BannerFiltersInput]
+    bannerPrice: FloatFilterInput
     buttonText: StringFilterInput
     createdAt: DateTimeFilterInput
     description: StringFilterInput
@@ -412,6 +414,7 @@ input BannerFiltersInput {
 
 input BannerInput {
     bannerImage: ID
+    bannerPrice: Float
     buttonText: String
     description: String
     discount: String
