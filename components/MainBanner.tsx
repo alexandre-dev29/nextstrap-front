@@ -2,6 +2,7 @@ import { useBannersQuery } from "../graphql/generated/graphqlTypes";
 import DefaultButton from "./DefaultButton";
 import Image from "next/image";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { Loading } from "@nextui-org/react";
 
 export default function MainBanner() {
   const { loading, data } = useBannersQuery({
@@ -12,7 +13,13 @@ export default function MainBanner() {
   return (
     <div className={"flex w-3/4 bg-white mx-auto h-1/3"}>
       {loading ? (
-        <div>loading</div>
+        <div
+          className={
+            "h-[10rem] flex items-center justify-center mx-auto rounded-lg"
+          }
+        >
+          <Loading size="xl" color={"currentColor"} />
+        </div>
       ) : (
         <div className={"flex "}>
           <div className={"p-24 w-2/3 flex flex-col items-start "}>

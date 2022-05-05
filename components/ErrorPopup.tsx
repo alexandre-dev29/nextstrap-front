@@ -1,5 +1,6 @@
 import { Button, Col, Modal, Row, Text } from "@nextui-org/react";
 import { ErrorTypeGraphQl } from "../graphql/ConfigTypes";
+import DefaultButton from "./DefaultButton";
 
 /* eslint-disable-next-line */
 export interface ErrorPopupProps {
@@ -32,24 +33,21 @@ export function ErrorPopup(props: ErrorPopupProps) {
           <Col>
             {props.messages.map((currentMessage, index) => (
               <Row key={index} justify={"center"}>
-                <Text
-                  h1
-                  size={16}
-                  css={{
-                    textGradient: "45deg, $yellow500 -20%, $red500 100%",
-                  }}
-                  weight="bold"
-                >
+                <p className={"text-center font-semibold "}>
+                  {" "}
                   {currentMessage}
-                </Text>
+                </p>
               </Row>
             ))}
           </Col>
         </Modal.Body>
         <Modal.Footer>
-          <Button auto onClick={props.onCloseEvent}>
-            Okay,Close
-          </Button>
+          <DefaultButton
+            textButton={"Okay Close"}
+            onClickAction={props.onCloseEvent}
+            isFilled={false}
+            isSmall={false}
+          />
         </Modal.Footer>
       </Modal>
     </div>
