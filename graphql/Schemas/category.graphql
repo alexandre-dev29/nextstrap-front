@@ -1,0 +1,25 @@
+query categories($filters: CategoryFiltersInput, $pagination: PaginationArg = {}, $publicationState: PublicationState = LIVE, $sort: [String] = []){
+    categories(sort: $sort, publicationState: $publicationState, filters: $filters, pagination: $pagination){
+        data {
+            id
+            attributes {
+                category
+                createdAt
+                updatedAt
+            }
+        }
+    }
+}
+
+query category($id: ID){
+    category(id: $id){
+        data {
+            id
+            attributes {
+                category
+                createdAt
+                updatedAt
+            }
+        }
+    }
+}
