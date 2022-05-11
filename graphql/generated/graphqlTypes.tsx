@@ -1238,6 +1238,23 @@ export type BannerQueryVariables = Exact<{
 
 export type BannerQuery = { __typename?: 'Query', banner?: { __typename?: 'BannerEntityResponse', data?: { __typename?: 'BannerEntity', id?: string | null, attributes?: { __typename?: 'Banner', productName: string, description: string, smallText: string, bannerPrice?: number | null, midText?: string | null, largeText1?: string | null, largeText2?: string | null, buttonText: string, discount?: string | null, saleTime?: string | null, locale?: string | null, createdAt?: any | null, updatedAt?: any | null, bannerImage: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', name: string, previewUrl?: string | null, url: string, createdAt?: any | null, updatedAt?: any | null, mime: string } | null } | null } } | null } | null } | null };
 
+export type CategoriesQueryVariables = Exact<{
+  filters?: InputMaybe<CategoryFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>> | InputMaybe<Scalars['String']>>;
+}>;
+
+
+export type CategoriesQuery = { __typename?: 'Query', categories?: { __typename?: 'CategoryEntityResponseCollection', data: Array<{ __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', category?: string | null, createdAt?: any | null, updatedAt?: any | null } | null }> } | null };
+
+export type CategoryQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['ID']>;
+}>;
+
+
+export type CategoryQuery = { __typename?: 'Query', category?: { __typename?: 'CategoryEntityResponse', data?: { __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', category?: string | null, createdAt?: any | null, updatedAt?: any | null } | null } | null } | null };
+
 export type ProductsQueryVariables = Exact<{
   filters?: InputMaybe<ProductFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
@@ -1397,6 +1414,98 @@ export function useBannerLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Ban
 export type BannerQueryHookResult = ReturnType<typeof useBannerQuery>;
 export type BannerLazyQueryHookResult = ReturnType<typeof useBannerLazyQuery>;
 export type BannerQueryResult = Apollo.QueryResult<BannerQuery, BannerQueryVariables>;
+export const CategoriesDocument = gql`
+    query categories($filters: CategoryFiltersInput, $pagination: PaginationArg = {}, $publicationState: PublicationState = LIVE, $sort: [String] = []) {
+  categories(
+    sort: $sort
+    publicationState: $publicationState
+    filters: $filters
+    pagination: $pagination
+  ) {
+    data {
+      id
+      attributes {
+        category
+        createdAt
+        updatedAt
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useCategoriesQuery__
+ *
+ * To run a query within a React component, call `useCategoriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCategoriesQuery({
+ *   variables: {
+ *      filters: // value for 'filters'
+ *      pagination: // value for 'pagination'
+ *      publicationState: // value for 'publicationState'
+ *      sort: // value for 'sort'
+ *   },
+ * });
+ */
+export function useCategoriesQuery(baseOptions?: Apollo.QueryHookOptions<CategoriesQuery, CategoriesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CategoriesQuery, CategoriesQueryVariables>(CategoriesDocument, options);
+      }
+export function useCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CategoriesQuery, CategoriesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CategoriesQuery, CategoriesQueryVariables>(CategoriesDocument, options);
+        }
+export type CategoriesQueryHookResult = ReturnType<typeof useCategoriesQuery>;
+export type CategoriesLazyQueryHookResult = ReturnType<typeof useCategoriesLazyQuery>;
+export type CategoriesQueryResult = Apollo.QueryResult<CategoriesQuery, CategoriesQueryVariables>;
+export const CategoryDocument = gql`
+    query category($id: ID) {
+  category(id: $id) {
+    data {
+      id
+      attributes {
+        category
+        createdAt
+        updatedAt
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useCategoryQuery__
+ *
+ * To run a query within a React component, call `useCategoryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCategoryQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useCategoryQuery(baseOptions?: Apollo.QueryHookOptions<CategoryQuery, CategoryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CategoryQuery, CategoryQueryVariables>(CategoryDocument, options);
+      }
+export function useCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CategoryQuery, CategoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CategoryQuery, CategoryQueryVariables>(CategoryDocument, options);
+        }
+export type CategoryQueryHookResult = ReturnType<typeof useCategoryQuery>;
+export type CategoryLazyQueryHookResult = ReturnType<typeof useCategoryLazyQuery>;
+export type CategoryQueryResult = Apollo.QueryResult<CategoryQuery, CategoryQueryVariables>;
 export const ProductsDocument = gql`
     query products($filters: ProductFiltersInput, $pagination: PaginationArg = {}, $publicationState: PublicationState = LIVE, $sort: [String] = []) {
   products(

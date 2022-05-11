@@ -5,6 +5,7 @@ import {
   AiOutlineShopping,
 } from "react-icons/ai";
 import DefaultButton from "./DefaultButton";
+import Link from "next/link";
 
 export default function NavBarComponent() {
   return (
@@ -12,7 +13,9 @@ export default function NavBarComponent() {
       <span className={"cursor-pointer"}>
         <AiOutlineMenu className={"text-2xl"} />
       </span>
-      <h1 className={"text-xl m-0 ml-8 flex-1"}>NextStrap.</h1>
+      <Link href={"/"}>
+        <h1 className={"text-xl m-0 ml-8 flex-1 cursor-pointer"}>NextStrap.</h1>
+      </Link>
       <div className={"flex items-center w-1/5 justify-around"}>
         <button className={"m-0"}>
           <AiOutlineSearch size={24} />

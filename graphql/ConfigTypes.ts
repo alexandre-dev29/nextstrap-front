@@ -12,7 +12,7 @@ export const authLinkApp = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "",
+      authorization: `Bearer ${process.env.NEXT_PUBLIC_APP_ACCESS_TOKEN}`,
     },
   };
 });

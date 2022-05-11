@@ -53,7 +53,13 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const client = new ApolloClient({
     link: from([errorLink, authLinkApp, httpLinkApp]),
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      typePolicies: {
+        CategoryEntity: {
+          keyFields: ["id", "attributes"],
+        },
+      },
+    }),
   });
 
   return (
