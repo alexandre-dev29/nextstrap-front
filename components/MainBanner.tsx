@@ -3,12 +3,14 @@ import DefaultButton from "./DefaultButton";
 import Image from "next/image";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Loading } from "@nextui-org/react";
+import { useECommerceStore } from "../states/ProductStates";
 
 export default function MainBanner() {
   const { loading, data } = useBannersQuery({
     fetchPolicy: "cache-first",
     errorPolicy: "all",
   });
+
   const currentBanner = data?.banners?.data[0];
   return (
     <div className={"flex w-3/4 bg-white mx-auto h-1/3"}>

@@ -6,10 +6,12 @@ import { Card } from "@nextui-org/react";
 import { AiOutlineHeart, AiOutlineStar } from "react-icons/ai";
 import DefaultButton from "../../components/DefaultButton";
 import ProductSuggestion from "../../components/ProductSuggestion";
+import { useECommerceStore } from "../../states/ProductStates";
 
 const ProductDetails = () => {
   const router = useRouter();
   const { slug } = router.query;
+  const { decQty, incQty, qty, onAdd, setShowCart } = useECommerceStore();
   const { data } = useProductQuery({
     fetchPolicy: "cache-and-network",
     errorPolicy: "all",
@@ -105,7 +107,9 @@ const ProductDetails = () => {
             />
             <DefaultButton
               textButton={"Add To Card"}
-              onClickAction={() => {}}
+              onClickAction={() => {
+                onAdd(data.product?.data, 1);
+              }}
               isFilled={true}
               isSmall={false}
             />

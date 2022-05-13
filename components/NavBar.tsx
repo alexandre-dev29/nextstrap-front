@@ -6,8 +6,10 @@ import {
 } from "react-icons/ai";
 import DefaultButton from "./DefaultButton";
 import Link from "next/link";
+import { useECommerceStore } from "../states/ProductStates";
 
 export default function NavBarComponent() {
+  const { totalQuantities } = useECommerceStore();
   return (
     <div className={"w-full bg-white h-[7vh] flex items-center px-12"}>
       <span className={"cursor-pointer"}>
@@ -23,8 +25,15 @@ export default function NavBarComponent() {
         <button className={"m-0"}>
           <AiOutlineHeart size={24} />
         </button>
-        <button className={"m-0"}>
+        <button className={"m-0 relative"}>
           <AiOutlineShopping size={24} />
+          <p
+            className={
+              "absolute -top-6 -right-2 bg-orange-500 rounded-full px-[5px] text-sm text-white"
+            }
+          >
+            {totalQuantities}
+          </p>
         </button>
 
         <DefaultButton

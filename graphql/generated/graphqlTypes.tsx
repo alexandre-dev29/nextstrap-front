@@ -616,6 +616,7 @@ export type Product = {
   productPrice: Scalars['Float'];
   productSlug: Scalars['String'];
   publishedAt?: Maybe<Scalars['DateTime']>;
+  quantity: Scalars['Int'];
   reviews?: Maybe<ReviewRelationResponseCollection>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
@@ -665,6 +666,7 @@ export type ProductFiltersInput = {
   productPrice?: InputMaybe<FloatFilterInput>;
   productSlug?: InputMaybe<StringFilterInput>;
   publishedAt?: InputMaybe<DateTimeFilterInput>;
+  quantity?: InputMaybe<IntFilterInput>;
   reviews?: InputMaybe<ReviewFiltersInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
@@ -678,6 +680,7 @@ export type ProductInput = {
   productPrice?: InputMaybe<Scalars['Float']>;
   productSlug?: InputMaybe<Scalars['String']>;
   publishedAt?: InputMaybe<Scalars['DateTime']>;
+  quantity?: InputMaybe<Scalars['Int']>;
   reviews?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
