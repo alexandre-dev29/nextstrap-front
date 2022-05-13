@@ -1,7 +1,9 @@
 import { ProductEntity } from "../graphql/generated/graphqlTypes";
 import { StateProduct } from "../UiTypes/StateProduct";
 
-const GetProductState = (productEntity: ProductEntity): StateProduct => {
+export const GetProductState = (
+  productEntity: ProductEntity | any
+): StateProduct => {
   return {
     productId: productEntity.id ?? "",
     description: productEntity.attributes?.description ?? "",

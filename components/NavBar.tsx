@@ -1,15 +1,24 @@
 import {
+  AiOutlineDelete,
   AiOutlineHeart,
   AiOutlineMenu,
   AiOutlineSearch,
   AiOutlineShopping,
+  AiOutlineShoppingCart,
 } from "react-icons/ai";
 import DefaultButton from "./DefaultButton";
 import Link from "next/link";
 import { useECommerceStore } from "../states/ProductStates";
+import { Button, Card, Popover, Text } from "@nextui-org/react";
+import React, { useEffect, useState } from "react";
+import CardItem from "./CardItem";
 
 export default function NavBarComponent() {
-  const { totalQuantities } = useECommerceStore();
+  const { totalQuantities, cardItems, onRemove } = useECommerceStore();
+  const [isSSR, setIsSSR] = useState(true);
+  useEffect(() => {
+    setIsSSR(false);
+  }, []);
   return (
     <div className={"w-full bg-white h-[7vh] flex items-center px-12"}>
       <span className={"cursor-pointer"}>
@@ -25,16 +34,55 @@ export default function NavBarComponent() {
         <button className={"m-0"}>
           <AiOutlineHeart size={24} />
         </button>
-        <button className={"m-0 relative"}>
-          <AiOutlineShopping size={24} />
-          <p
-            className={
-              "absolute -top-6 -right-2 bg-orange-500 rounded-full px-[5px] text-sm text-white"
-            }
-          >
-            {totalQuantities}
-          </p>
-        </button>
+        <Popover>
+          <Popover.Trigger>
+            <Button
+              animated={true}
+              auto
+              flat
+              color={"warning"}
+              className={"m-0 relative"}
+            >
+              <AiOutlineShopping size={24} />
+              <p
+                className={
+                  "absolute  top-1 right-1 bg-orange-500 rounded-full px-[5px] text-sm text-white"
+                }
+              >
+                {!isSSR && totalQuantities}
+              </p>
+            </Button>
+          </Popover.Trigger>
+          <Popover.Content>
+            <div className={"flex flex-col justify-between"}>
+              <div className={"max-h-[500px]"}>
+                {cardItems.length == 0 ? (
+                  <p className={"p-8"}>The Card is Empty</p>
+                ) : (
+                  cardItems.map((item) => (
+                    <CardItem
+                      key={item.productId}
+                      item={item}
+                      onClick={() => {
+                        onRemove(item);
+                      }}
+                    />
+                  ))
+                )}
+              </div>
+              <div className={"bg-gray-900 flex justify-center z-50"}>
+                <button
+                  className={
+                    "p-2 w-full text-white flex items-center justify-center"
+                  }
+                >
+                  <AiOutlineShoppingCart className={"mr-4"} size={20} />
+                  View Card
+                </button>
+              </div>
+            </div>
+          </Popover.Content>
+        </Popover>
 
         <DefaultButton
           textButton={"Login"}

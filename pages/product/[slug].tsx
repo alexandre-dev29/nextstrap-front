@@ -7,6 +7,7 @@ import { AiOutlineHeart, AiOutlineStar } from "react-icons/ai";
 import DefaultButton from "../../components/DefaultButton";
 import ProductSuggestion from "../../components/ProductSuggestion";
 import { useECommerceStore } from "../../states/ProductStates";
+import { GetProductState } from "../../Utils/UtilFunc";
 
 const ProductDetails = () => {
   const router = useRouter();
@@ -91,7 +92,8 @@ const ProductDetails = () => {
             <p className={"ml-4 text-xl font-semibold"}>
               {data?.product?.data?.attributes?.reviews?.data.length}{" "}
               {`${
-                data?.product?.data?.attributes?.reviews?.data?.length > 1
+                (data?.product?.data?.attributes?.reviews?.data?.length ?? 0) >
+                1
                   ? "reviews"
                   : "review"
               }`}
@@ -108,7 +110,7 @@ const ProductDetails = () => {
             <DefaultButton
               textButton={"Add To Card"}
               onClickAction={() => {
-                onAdd(data.product?.data, 1);
+                onAdd(GetProductState(data?.product?.data), 1);
               }}
               isFilled={true}
               isSmall={false}
