@@ -8,6 +8,7 @@ query products($filters: ProductFiltersInput, $pagination: PaginationArg = {}, $
                 productPrice
                 productSlug
                 publishedAt
+                quantity
                 category {
                     data {
                         id
@@ -64,6 +65,7 @@ query product($id: ID){
                 productPrice
                 productSlug
                 publishedAt
+                quantity
                 category {
                     data {
                         id

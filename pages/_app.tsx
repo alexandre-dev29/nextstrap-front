@@ -19,6 +19,7 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { DarkTheme, LightTheme } from "../config/ThemeConfig";
 import { NextUIProvider } from "@nextui-org/react";
 import { UserContext } from "../config/UserContext";
+import { Toaster } from "react-hot-toast";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -81,6 +82,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <NextUIProvider>
           <ApolloProvider client={client}>
             <UserContext.Provider value={currentUser}>
+              <Toaster />
               <Component {...pageProps} />
             </UserContext.Provider>
           </ApolloProvider>

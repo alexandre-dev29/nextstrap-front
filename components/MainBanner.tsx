@@ -4,12 +4,22 @@ import Image from "next/image";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Loading } from "@nextui-org/react";
 import { useECommerceStore } from "../states/ProductStates";
+import { GetProductState } from "../Utils/UtilFunc";
+import { StateProduct } from "../UiTypes/StateProduct";
+import { useRouter } from "next/router";
 
 export default function MainBanner() {
   const { loading, data } = useBannersQuery({
     fetchPolicy: "cache-first",
     errorPolicy: "all",
   });
+  const { onAdd } = useECommerceStore();
+  const router = useRouter();
+
+  async function handleBuyNow(product: StateProduct) {
+    onAdd(product, 1);
+    await router.push("/Cart");
+  }
 
   const currentBanner = data?.banners?.data[0];
   return (
@@ -46,14 +56,27 @@ export default function MainBanner() {
             <div className={"flex"}>
               <DefaultButton
                 textButton={currentBanner?.attributes?.buttonText}
-                onClickAction={() => {}}
+                onClickAction={async () => {
+                  await handleBuyNow(
+                    GetProductState(
+                      currentBanner?.attributes?.products?.data[0]
+                    )
+                  );
+                }}
                 isFilled={false}
                 isSmall={false}
                 customStyle={"mt-5"}
               />
               <DefaultButton
                 textButton={"Add To Card"}
-                onClickAction={() => {}}
+                onClickAction={() => {
+                  onAdd(
+                    GetProductState(
+                      currentBanner?.attributes?.products?.data[0]
+                    ),
+                    1
+                  );
+                }}
                 isFilled={true}
                 isSmall={false}
                 customStyle={"mt-5 ml-5"}

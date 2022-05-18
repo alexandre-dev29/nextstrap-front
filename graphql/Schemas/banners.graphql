@@ -13,6 +13,18 @@ query banners($filters: BannerFiltersInput, $locale: I18NLocaleCode, $pagination
                 buttonText
                 discount
                 saleTime
+                products{
+                    data {
+                        id
+                        attributes {
+                            productName
+                            productSlug
+                            productPrice
+                            description
+                            quantity
+                        }
+                    }
+                }
                 bannerImage {
                     data {
                         id

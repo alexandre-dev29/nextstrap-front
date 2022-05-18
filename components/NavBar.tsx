@@ -12,6 +12,9 @@ import { useECommerceStore } from "../states/ProductStates";
 import { Button, Card, Popover, Text } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import CardItem from "./CardItem";
+import getStripe from "../Utils/getStripe";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 export default function NavBarComponent() {
   const { totalQuantities, cardItems, onRemove } = useECommerceStore();
@@ -19,6 +22,9 @@ export default function NavBarComponent() {
   useEffect(() => {
     setIsSSR(false);
   }, []);
+
+  const router = useRouter();
+
   return (
     <div className={"w-full bg-white h-[7vh] flex items-center px-12"}>
       <span className={"cursor-pointer"}>
@@ -75,6 +81,9 @@ export default function NavBarComponent() {
                   className={
                     "p-2 w-full text-white flex items-center justify-center"
                   }
+                  onClick={async () => {
+                    await router.push("/Cart");
+                  }}
                 >
                   <AiOutlineShoppingCart className={"mr-4"} size={20} />
                   View Card

@@ -151,6 +151,7 @@ type Product {
     productPrice: Float!
     productSlug: String!
     publishedAt: DateTime
+    quantity: Int!
     reviews(filters: ReviewFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ReviewRelationResponseCollection
     updatedAt: DateTime
 }
@@ -622,6 +623,7 @@ input ProductFiltersInput {
     productPrice: FloatFilterInput
     productSlug: StringFilterInput
     publishedAt: DateTimeFilterInput
+    quantity: IntFilterInput
     reviews: ReviewFiltersInput
     updatedAt: DateTimeFilterInput
 }
@@ -635,6 +637,7 @@ input ProductInput {
     productPrice: Float
     productSlug: String
     publishedAt: DateTime
+    quantity: Int
     reviews: [ID]
 }
 

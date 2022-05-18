@@ -1231,7 +1231,7 @@ export type BannersQueryVariables = Exact<{
 }>;
 
 
-export type BannersQuery = { __typename?: 'Query', banners?: { __typename?: 'BannerEntityResponseCollection', data: Array<{ __typename?: 'BannerEntity', id?: string | null, attributes?: { __typename?: 'Banner', productName: string, description: string, smallText: string, bannerPrice?: number | null, midText?: string | null, largeText1?: string | null, largeText2?: string | null, buttonText: string, discount?: string | null, saleTime?: string | null, locale?: string | null, createdAt?: any | null, updatedAt?: any | null, bannerImage: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', name: string, previewUrl?: string | null, url: string, createdAt?: any | null, updatedAt?: any | null, mime: string } | null } | null } } | null }> } | null };
+export type BannersQuery = { __typename?: 'Query', banners?: { __typename?: 'BannerEntityResponseCollection', data: Array<{ __typename?: 'BannerEntity', id?: string | null, attributes?: { __typename?: 'Banner', productName: string, description: string, smallText: string, bannerPrice?: number | null, midText?: string | null, largeText1?: string | null, largeText2?: string | null, buttonText: string, discount?: string | null, saleTime?: string | null, locale?: string | null, createdAt?: any | null, updatedAt?: any | null, products?: { __typename?: 'ProductRelationResponseCollection', data: Array<{ __typename?: 'ProductEntity', id?: string | null, attributes?: { __typename?: 'Product', productName: string, productSlug: string, productPrice: number, description: string, quantity: number } | null }> } | null, bannerImage: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', name: string, previewUrl?: string | null, url: string, createdAt?: any | null, updatedAt?: any | null, mime: string } | null } | null } } | null }> } | null };
 
 export type BannerQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']>;
@@ -1266,14 +1266,14 @@ export type ProductsQueryVariables = Exact<{
 }>;
 
 
-export type ProductsQuery = { __typename?: 'Query', products?: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id?: string | null, attributes?: { __typename?: 'Product', productName: string, description: string, productPrice: number, productSlug: string, publishedAt?: any | null, updatedAt?: any | null, createdAt?: any | null, category?: { __typename?: 'CategoryEntityResponse', data?: { __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', category?: string | null } | null } | null } | null, productImages: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, previewUrl?: string | null, mime: string, name: string } | null }> }, reviews?: { __typename?: 'ReviewRelationResponseCollection', data: Array<{ __typename?: 'ReviewEntity', id?: string | null, attributes?: { __typename?: 'Review', reviewText?: string | null, rating: number, createdAt?: any | null, updatedAt?: any | null, users_permissions_user?: { __typename?: 'UsersPermissionsUserEntityResponse', data?: { __typename?: 'UsersPermissionsUserEntity', id?: string | null, attributes?: { __typename?: 'UsersPermissionsUser', username: string, email: string } | null } | null } | null } | null }> } | null } | null }> } | null };
+export type ProductsQuery = { __typename?: 'Query', products?: { __typename?: 'ProductEntityResponseCollection', data: Array<{ __typename?: 'ProductEntity', id?: string | null, attributes?: { __typename?: 'Product', productName: string, description: string, productPrice: number, productSlug: string, publishedAt?: any | null, quantity: number, updatedAt?: any | null, createdAt?: any | null, category?: { __typename?: 'CategoryEntityResponse', data?: { __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', category?: string | null } | null } | null } | null, productImages: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, previewUrl?: string | null, mime: string, name: string } | null }> }, reviews?: { __typename?: 'ReviewRelationResponseCollection', data: Array<{ __typename?: 'ReviewEntity', id?: string | null, attributes?: { __typename?: 'Review', reviewText?: string | null, rating: number, createdAt?: any | null, updatedAt?: any | null, users_permissions_user?: { __typename?: 'UsersPermissionsUserEntityResponse', data?: { __typename?: 'UsersPermissionsUserEntity', id?: string | null, attributes?: { __typename?: 'UsersPermissionsUser', username: string, email: string } | null } | null } | null } | null }> } | null } | null }> } | null };
 
 export type ProductQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type ProductQuery = { __typename?: 'Query', product?: { __typename?: 'ProductEntityResponse', data?: { __typename?: 'ProductEntity', id?: string | null, attributes?: { __typename?: 'Product', productName: string, description: string, productPrice: number, productSlug: string, publishedAt?: any | null, updatedAt?: any | null, createdAt?: any | null, category?: { __typename?: 'CategoryEntityResponse', data?: { __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', category?: string | null } | null } | null } | null, productImages: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, previewUrl?: string | null, mime: string, name: string } | null }> }, reviews?: { __typename?: 'ReviewRelationResponseCollection', data: Array<{ __typename?: 'ReviewEntity', id?: string | null, attributes?: { __typename?: 'Review', reviewText?: string | null, rating: number, createdAt?: any | null, updatedAt?: any | null, users_permissions_user?: { __typename?: 'UsersPermissionsUserEntityResponse', data?: { __typename?: 'UsersPermissionsUserEntity', id?: string | null, attributes?: { __typename?: 'UsersPermissionsUser', username: string, email: string } | null } | null } | null } | null }> } | null } | null } | null } | null };
+export type ProductQuery = { __typename?: 'Query', product?: { __typename?: 'ProductEntityResponse', data?: { __typename?: 'ProductEntity', id?: string | null, attributes?: { __typename?: 'Product', productName: string, description: string, productPrice: number, productSlug: string, publishedAt?: any | null, quantity: number, updatedAt?: any | null, createdAt?: any | null, category?: { __typename?: 'CategoryEntityResponse', data?: { __typename?: 'CategoryEntity', id?: string | null, attributes?: { __typename?: 'Category', category?: string | null } | null } | null } | null, productImages: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, previewUrl?: string | null, mime: string, name: string } | null }> }, reviews?: { __typename?: 'ReviewRelationResponseCollection', data: Array<{ __typename?: 'ReviewEntity', id?: string | null, attributes?: { __typename?: 'Review', reviewText?: string | null, rating: number, createdAt?: any | null, updatedAt?: any | null, users_permissions_user?: { __typename?: 'UsersPermissionsUserEntityResponse', data?: { __typename?: 'UsersPermissionsUserEntity', id?: string | null, attributes?: { __typename?: 'UsersPermissionsUser', username: string, email: string } | null } | null } | null } | null }> } | null } | null } | null } | null };
 
 
 export const BannersDocument = gql`
@@ -1298,6 +1298,18 @@ export const BannersDocument = gql`
         buttonText
         discount
         saleTime
+        products {
+          data {
+            id
+            attributes {
+              productName
+              productSlug
+              productPrice
+              description
+              quantity
+            }
+          }
+        }
         bannerImage {
           data {
             id
@@ -1525,6 +1537,7 @@ export const ProductsDocument = gql`
         productPrice
         productSlug
         publishedAt
+        quantity
         category {
           data {
             id
@@ -1613,6 +1626,7 @@ export const ProductDocument = gql`
         productPrice
         productSlug
         publishedAt
+        quantity
         category {
           data {
             id

@@ -8,18 +8,22 @@ import DefaultButton from "../../components/DefaultButton";
 import ProductSuggestion from "../../components/ProductSuggestion";
 import { useECommerceStore } from "../../states/ProductStates";
 import { GetProductState } from "../../Utils/UtilFunc";
+import { StateProduct } from "../../UiTypes/StateProduct";
 
 const ProductDetails = () => {
   const router = useRouter();
   const { slug } = router.query;
-  const { decQty, incQty, qty, onAdd, setShowCart } = useECommerceStore();
-  const { data } = useProductQuery({
+  const { onAdd } = useECommerceStore();
+  const { data, loading } = useProductQuery({
     fetchPolicy: "cache-and-network",
     errorPolicy: "all",
     variables: { id: `${slug}` },
   });
+  async function handleBuyNow(product: StateProduct) {
+    onAdd(product, 1);
+    await router.push("/Cart");
+  }
   const [imageIndex, setImageIndex] = useState(0);
-
   return (
     <LayoutElement>
       <div className={"p-12 bg-white flex justify-between shadow-md"}>
@@ -102,7 +106,9 @@ const ProductDetails = () => {
           <div className={"mt-2"}>
             <DefaultButton
               textButton={"Buy Now"}
-              onClickAction={() => {}}
+              onClickAction={async () => {
+                await handleBuyNow(GetProductState(data?.product?.data));
+              }}
               isFilled={false}
               isSmall={false}
               customStyle={"mr-8"}
@@ -118,7 +124,11 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
-      <ProductSuggestion />
+      {loading ? (
+        <p>Loading</p>
+      ) : (
+        <ProductSuggestion currentProduct={data?.product?.data} />
+      )}
     </LayoutElement>
   );
 };

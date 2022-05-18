@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { AiOutlineDelete } from "react-icons/ai";
+import { StateProduct } from "../UiTypes/StateProduct";
 
-function CardItem(props: { item: any; onClick: () => void }) {
+function CardItem(props: { item: StateProduct | any; onClick: () => void }) {
   return (
     <div className={"p-2 flex items-start min-w-[350px] pr-4"}>
       {" "}
       <Image
-        src={"/other.jpg"}
+        src={`http://localhost:1337${props.item.productImages?.data[0].attributes?.url}`}
         alt={"Image from source"}
         width={60}
         height={50}
