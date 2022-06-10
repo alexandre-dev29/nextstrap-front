@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Card, Col, Row, Text } from "@nextui-org/react";
 import Link from "next/link";
+import Image from "next/image";
 
 interface ProductCardProps {
   productName?: string;
@@ -30,12 +31,12 @@ const ProductCard = ({
       </Card.Header>
       <Card.Body>
         <Link href={`/product/${productId}`} className={"cursor-pointer"}>
-          <Card.Image
-            src={`http://localhost:1337${productImage.url}`}
-            className={"cursor-pointer"}
-            height={300}
-            width="100%"
-            alt={productImage.name}
+          <Image
+            src={`${productImage.url}` || ""}
+            height={400}
+            width={400}
+            alt={"headphones"}
+            className={"absolute -top-12 -left-14 cursor-pointer"}
           />
         </Link>
       </Card.Body>

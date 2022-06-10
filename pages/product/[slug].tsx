@@ -9,6 +9,7 @@ import ProductSuggestion from "../../components/ProductSuggestion";
 import { useECommerceStore } from "../../states/ProductStates";
 import { GetProductState } from "../../Utils/UtilFunc";
 import { StateProduct } from "../../UiTypes/StateProduct";
+import Image from "next/image";
 
 const ProductDetails = () => {
   const router = useRouter();
@@ -30,15 +31,23 @@ const ProductDetails = () => {
         <div className="w-2/5">
           <Card cover>
             <Card.Body>
-              <Card.Image
-                src={`http://localhost:1337${data?.product?.data?.attributes?.productImages?.data[imageIndex]?.attributes?.url}`}
+              <Image
+                src={`${
+                  data?.product?.data?.attributes?.productImages?.data[
+                    imageIndex
+                  ]?.attributes?.url || "/other.jpg"
+                }`}
                 height={350}
-                width="100%"
+                placeholder={"blur"}
+                blurDataURL="/headphone.jpg"
+                width={500}
+                quality={75}
                 alt={
                   data?.product?.data?.attributes?.productImages?.data[
                     imageIndex
                   ]?.attributes?.name
                 }
+                className={"absolute -top-12 -left-14 cursor-pointer"}
               />
             </Card.Body>
           </Card>
@@ -55,12 +64,12 @@ const ProductDetails = () => {
                     }}
                   >
                     <Card.Body>
-                      <Card.Image
-                        src={`http://localhost:1337${currentImage.attributes?.url}`}
-                        className={"cursor-pointer"}
+                      <Image
+                        src={`${currentImage.attributes?.url || "/other.jpg"}`}
                         height={110}
                         width="120"
                         alt={"alexandre"}
+                        className={"absolute -top-12 -left-14 cursor-pointer"}
                       />
                     </Card.Body>
                   </Card>

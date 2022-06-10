@@ -82,7 +82,7 @@ export const useECommerceStore = create<IProductState, any>(
             set((state) => ({
               totalPrice:
                 state.totalPrice -
-                findProduct.productPrice * findProduct.productPrice,
+                findProduct.productPrice * findProduct.quantity,
               totalQuantities: state.totalQuantities - findProduct.quantity,
               cardItems: tempCart,
             }));

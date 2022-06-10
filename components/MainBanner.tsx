@@ -89,7 +89,7 @@ export default function MainBanner() {
             <Image
               src={
                 //TODO remove this hard coded url
-                `http://localhost:1337${currentBanner?.attributes?.bannerImage?.data?.attributes?.url}` ||
+                `${currentBanner?.attributes?.bannerImage?.data?.attributes?.url}` ||
                 ""
               }
               height={600}

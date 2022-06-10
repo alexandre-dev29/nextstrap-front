@@ -4,6 +4,7 @@ import { useECommerceStore } from "../../states/ProductStates";
 import Image from "next/image";
 import {
   AiOutlineCreditCard,
+  AiOutlineDelete,
   AiOutlineMinus,
   AiOutlinePlus,
 } from "react-icons/ai";
@@ -12,7 +13,8 @@ import getStripe from "../../Utils/getStripe";
 import toast from "react-hot-toast";
 
 const Index = () => {
-  const { cardItems, totalPrice, toggleCartItemQuantity } = useECommerceStore();
+  const { cardItems, totalPrice, toggleCartItemQuantity, onRemove } =
+    useECommerceStore();
   const [isSSR, setIsSSR] = useState(true);
   useEffect(() => {
     setIsSSR(false);
@@ -35,16 +37,22 @@ const Index = () => {
       <h3 className={"font-medium tracking-widest text-3xl"}>Shopping Cart</h3>
       <div className={"w-2/3 mx-auto mt-12 bg-white px-12 py-4"}>
         <div className={"flex justify-between"}>
-          <p className={"font-bold"}>Product</p>
-          <p className={"font-bold ml-24"}>Quantity</p>
+          <p className={"font-bold ml-12"}>Product</p>
+          <p className={"font-bold ml-12"}>Quantity</p>
           <p className={"font-bold"}>SubTotal</p>
         </div>
         {!isSSR &&
           cardItems.map((product) => (
             <div className={"p-2 flex items-center"} key={product.productId}>
               <div className={"w-1/2 flex items-center"}>
+                <AiOutlineDelete
+                  className={
+                    "mr-6 text-red-500 cursor-pointer text-2xl transition-all duration-500 transform hover:scale-125"
+                  }
+                  onClick={() => onRemove(product)}
+                />
                 <Image
-                  src={`http://localhost:1337${product.productImages?.data[0].attributes?.url}`}
+                  src={`${product.productImages?.data[0].attributes?.url}`}
                   height={90}
                   width="100px"
                   alt={product.productName}

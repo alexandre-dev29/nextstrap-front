@@ -21,7 +21,7 @@ export default async function handler(
           { shipping_rate: "shr_1KskikFuFBSPfhhSzq3lUy6U" },
         ],
         line_items: req.body.map((item: StateProduct) => {
-          const img = `http://localhost:1337${item.productImages?.data[0].attributes?.url}`;
+          const img = `${item.productImages?.data[0].attributes?.url}`;
           return {
             price_data: {
               currency: "usd",
