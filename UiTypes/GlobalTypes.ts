@@ -5,6 +5,6 @@ export interface RegisterFormElement {
 }
 
 export interface LoginFormElement {
-  email: string;
+  username: string;
   password: string;
 }

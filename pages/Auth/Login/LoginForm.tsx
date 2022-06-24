@@ -5,18 +5,31 @@ import { Button, Loading } from "@nextui-org/react";
 import { LoginFormElement } from "../../../UiTypes/GlobalTypes";
 import { FooterRegister, HeadingLogin, LoginInputs } from "./UtilsLogin";
 import DefaultButton from "../../../components/DefaultButton";
+import { useLoginMutation } from "../../../graphql/generated/graphqlTypes";
 
 type Props = {};
 
 export default function LoginForm({}: Props) {
   const [loadingActive, setLoadingActive] = useState("none");
+  const [loginMutation] = useLoginMutation({
+    fetchPolicy: "network-only",
+    errorPolicy: "all",
+  });
   //handling submit event on the form
   const onSubmitLogin: SubmitHandler<LoginFormElement> = async ({
-    email,
+    username,
     password,
   }) => {
     setLoadingActive("block");
-    // TODO implement the Login Logic
+    const { data, errors } = await loginMutation({
+      variables: { input: { identifier: username, password: password } },
+    });
+
+    if (!errors) {
+      localStorage.setItem("accessToken", `${data?.login.jwt}`);
+      localStorage.setItem("currentUser", JSON.stringify(data?.login.user));
+      window.location.assign("/");
+    }
     setLoadingActive("none");
   };
 
@@ -45,7 +58,7 @@ export default function LoginForm({}: Props) {
 
           <LoginInputs
             errors={errors}
-            useFormRegisterReturn={register("email", {
+            useFormRegisterReturn={register("username", {
               required: true,
             })}
             useFormRegisterReturn1={register("password", {

@@ -42,9 +42,9 @@ export function LoginInputs(props: {
       <InputComponent
         errors={props.errors}
         useFormRegisterReturn={props.useFormRegisterReturn}
-        placeHolder={"Email"}
-        autocomplete={"phoneNumber"}
-        elementToCheck={props.errors.email}
+        placeHolder={"username"}
+        autocomplete={"current-username"}
+        elementToCheck={props.errors.username}
       />
       <InputComponent
         errors={props.errors}
