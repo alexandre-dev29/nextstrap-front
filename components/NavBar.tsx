@@ -1,29 +1,35 @@
 import {
-  AiOutlineDelete,
   AiOutlineHeart,
+  AiOutlineLogout,
   AiOutlineMenu,
   AiOutlineSearch,
   AiOutlineShopping,
   AiOutlineShoppingCart,
+  AiOutlineUser,
 } from "react-icons/ai";
 import DefaultButton from "./DefaultButton";
 import Link from "next/link";
 import { useECommerceStore } from "../states/ProductStates";
-import { Button, Card, Popover, Text } from "@nextui-org/react";
+import { Button, Popover } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
 import CardItem from "./CardItem";
-import getStripe from "../Utils/getStripe";
-import toast from "react-hot-toast";
 import { useRouter } from "next/router";
+import { useUser } from "../config/UserContext";
 
 export default function NavBarComponent() {
   const { totalQuantities, cardItems, onRemove } = useECommerceStore();
+  const { currentUser } = useUser();
   const [isSSR, setIsSSR] = useState(true);
   useEffect(() => {
     setIsSSR(false);
   }, []);
-
   const router = useRouter();
+
+  const logoutUser = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("currentUser");
+    window.location.reload();
+  };
 
   return (
     <div className={"w-full bg-white h-[7vh] flex items-center px-12"}>
@@ -37,9 +43,11 @@ export default function NavBarComponent() {
         <button className={"m-0"}>
           <AiOutlineSearch size={24} />
         </button>
-        <button className={"m-0"}>
-          <AiOutlineHeart size={24} />
-        </button>
+        <Link href={"/favorite"} className={"m-0 cursor-pointer"}>
+          <span>
+            <AiOutlineHeart size={24} className={"cursor-pointer"} />
+          </span>
+        </Link>
         <Popover>
           <Popover.Trigger>
             <Button
@@ -93,14 +101,44 @@ export default function NavBarComponent() {
           </Popover.Content>
         </Popover>
 
-        <DefaultButton
-          textButton={"Login"}
-          onClickAction={async () => {
-            await router.push("/Auth/Login")
-          }}
-          isFilled={true}
-          isSmall={true}
-        />
+        {!currentUser ? (
+          <DefaultButton
+            textButton={"Login"}
+            onClickAction={async () => {
+              await router.push("/Auth/Login");
+            }}
+            isFilled={true}
+            isSmall={true}
+          />
+        ) : (
+          <Popover>
+            <Popover.Trigger>
+              <Button
+                animated={true}
+                auto
+                flat
+                color={"warning"}
+                className={"m-0 relative"}
+              >
+                <AiOutlineUser size={24} />
+                <p>{currentUser.username}</p>
+              </Button>
+            </Popover.Trigger>
+            <Popover.Content>
+              <div className={"px-8 py-4"}>
+                <button
+                  className={"flex items-center"}
+                  onClick={() => {
+                    logoutUser();
+                  }}
+                >
+                  <AiOutlineLogout size={20} className={"mr-2"} />
+                  Logout
+                </button>
+              </div>
+            </Popover.Content>
+          </Popover>
+        )}
       </div>
     </div>
   );

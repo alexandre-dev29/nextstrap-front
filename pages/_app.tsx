@@ -20,18 +20,24 @@ import { DarkTheme, LightTheme } from "../config/ThemeConfig";
 import { NextUIProvider } from "@nextui-org/react";
 import { UserContext } from "../config/UserContext";
 import { Toaster } from "react-hot-toast";
+import { useRouter } from "next/router";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [errorType, setErrorType] = useState(ErrorTypeGraphQl.Request);
   const [currentUser, setCurrentUser] = useState(null);
   const [messagesError, setMessagesError] = useState([""]);
+  const router = useRouter();
 
   useEffect(() => {
     if (localStorage.getItem("currentUser")) {
       setCurrentUser(JSON.parse(localStorage.getItem("currentUser") || ""));
     }
-  }, []);
+    console.log("Called");
+    if (pageProps.protected && !currentUser) {
+      router.push("/Auth/Login");
+    }
+  }, [router.pathname]);
 
   function closeModal() {
     setIsOpen(false);
