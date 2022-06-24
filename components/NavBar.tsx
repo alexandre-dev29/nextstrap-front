@@ -95,7 +95,9 @@ export default function NavBarComponent() {
 
         <DefaultButton
           textButton={"Login"}
-          onClickAction={() => {}}
+          onClickAction={async () => {
+            await router.push("/Auth/Login")
+          }}
           isFilled={true}
           isSmall={true}
         />

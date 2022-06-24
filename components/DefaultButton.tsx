@@ -5,6 +5,7 @@ interface DefaultButtonProps {
   isSmall: boolean;
   customStyle?: string;
   children?: any;
+  buttonType?: "reset" | "button" | "submit" | undefined;
 }
 
 export default function DefaultButton(props: DefaultButtonProps) {
@@ -17,6 +18,7 @@ export default function DefaultButton(props: DefaultButtonProps) {
           ? "bg-gray-800 text-white hover:bg-gray-900"
           : "hover:bg-gray-800 hover:text-white"
       }`}
+      type={props.buttonType}
       onClick={props.onClickAction}
     >
       <div className={"flex items-center"}>
