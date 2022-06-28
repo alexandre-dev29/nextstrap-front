@@ -1,7 +1,8 @@
-import { Link, Text, theme } from "@nextui-org/react";
+import { Text, theme } from "@nextui-org/react";
 import { FieldErrors, UseFormRegisterReturn } from "react-hook-form";
 import { LoginFormElement } from "../../../UiTypes/GlobalTypes";
 import InputComponent from "../../../components/input-component";
+import Link from "next/link";
 import React from "react";
 
 export function HeadingLogin() {
@@ -58,7 +59,7 @@ export function LoginInputs(props: {
   );
 }
 
-export function FooterRegister() {
+export function FooterRegister(props: { isRegister: boolean }) {
   return (
     <p
       style={{
@@ -67,8 +68,8 @@ export function FooterRegister() {
       }}
     >
       {"Don't have an account?"}
-      <Link href={"/Auth/Register"}>
-        <span
+      <Link href={props.isRegister ? "/Auth/Login" : "/Auth/Register"}>
+        <a
           style={{
             color: theme.colors.gray700.value,
             textDecoration: "underline",
@@ -77,8 +78,8 @@ export function FooterRegister() {
             fontWeight: "bold",
           }}
         >
-          Register
-        </span>
+          {props.isRegister ? "Login here" : "Register here"}
+        </a>
       </Link>
     </p>
   );

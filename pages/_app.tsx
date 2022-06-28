@@ -33,11 +33,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     if (localStorage.getItem("currentUser")) {
       setCurrentUser(JSON.parse(localStorage.getItem("currentUser") || ""));
     }
-    console.log("Called");
     if (pageProps.protected && !currentUser) {
       router.push("/Auth/Login");
     }
-  }, [router.pathname]);
+  }, [router.pathname, currentUser]);
 
   function closeModal() {
     setIsOpen(false);

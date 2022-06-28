@@ -5,7 +5,7 @@ schema {
     mutation: Mutation
 }
 
-union GenericMorph = Banner | Category | I18NLocale | Product | Review | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
+union GenericMorph = Banner | Category | Favorite | I18NLocale | Product | Review | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser
 
 type Banner {
     bannerImage: UploadFileEntityResponse!
@@ -68,6 +68,32 @@ type CategoryEntityResponseCollection {
     meta: ResponseCollectionMeta!
 }
 
+type Favorite {
+    createdAt: DateTime
+    products(filters: ProductFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ProductRelationResponseCollection
+    publishedAt: DateTime
+    updatedAt: DateTime
+    users_permissions_user: UsersPermissionsUserEntityResponse
+}
+
+type FavoriteEntity {
+    attributes: Favorite
+    id: ID
+}
+
+type FavoriteEntityResponse {
+    data: FavoriteEntity
+}
+
+type FavoriteEntityResponseCollection {
+    data: [FavoriteEntity!]!
+    meta: ResponseCollectionMeta!
+}
+
+type FavoriteRelationResponseCollection {
+    data: [FavoriteEntity!]!
+}
+
 type I18NLocale {
     code: String
     createdAt: DateTime
@@ -93,6 +119,7 @@ type Mutation {
     createBanner(data: BannerInput!, locale: I18NLocaleCode): BannerEntityResponse
     createBannerLocalization(data: BannerInput, id: ID, locale: I18NLocaleCode): BannerEntityResponse
     createCategory(data: CategoryInput!): CategoryEntityResponse
+    createFavorite(data: FavoriteInput!): FavoriteEntityResponse
     createProduct(data: ProductInput!): ProductEntityResponse
     createReview(data: ReviewInput!, locale: I18NLocaleCode): ReviewEntityResponse
     createReviewLocalization(data: ReviewInput, id: ID, locale: I18NLocaleCode): ReviewEntityResponse
@@ -103,6 +130,7 @@ type Mutation {
     createUsersPermissionsUser(data: UsersPermissionsUserInput!): UsersPermissionsUserEntityResponse!
     deleteBanner(id: ID!, locale: I18NLocaleCode): BannerEntityResponse
     deleteCategory(id: ID!): CategoryEntityResponse
+    deleteFavorite(id: ID!): FavoriteEntityResponse
     deleteProduct(id: ID!): ProductEntityResponse
     deleteReview(id: ID!, locale: I18NLocaleCode): ReviewEntityResponse
     deleteUploadFile(id: ID!): UploadFileEntityResponse
@@ -123,6 +151,7 @@ type Mutation {
     resetPassword(code: String!, password: String!, passwordConfirmation: String!): UsersPermissionsLoginPayload
     updateBanner(data: BannerInput!, id: ID!, locale: I18NLocaleCode): BannerEntityResponse
     updateCategory(data: CategoryInput!, id: ID!): CategoryEntityResponse
+    updateFavorite(data: FavoriteInput!, id: ID!): FavoriteEntityResponse
     updateFileInfo(id: ID!, info: FileInfoInput): UploadFileEntityResponse!
     updateProduct(data: ProductInput!, id: ID!): ProductEntityResponse
     updateReview(data: ReviewInput!, id: ID!, locale: I18NLocaleCode): ReviewEntityResponse
@@ -146,6 +175,7 @@ type Product {
     category: CategoryEntityResponse
     createdAt: DateTime
     description: String!
+    favorites(filters: FavoriteFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): FavoriteRelationResponseCollection
     productImages(filters: UploadFileFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): UploadFileRelationResponseCollection!
     productName: String!
     productPrice: Float!
@@ -179,6 +209,8 @@ type Query {
     banners(filters: BannerFiltersInput, locale: I18NLocaleCode, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): BannerEntityResponseCollection
     categories(filters: CategoryFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): CategoryEntityResponseCollection
     category(id: ID): CategoryEntityResponse
+    favorite(id: ID): FavoriteEntityResponse
+    favorites(filters: FavoriteFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): FavoriteEntityResponseCollection
     i18NLocale(id: ID): I18NLocaleEntityResponse
     i18NLocales(filters: I18NLocaleFiltersInput, pagination: PaginationArg = {}, sort: [String] = []): I18NLocaleEntityResponseCollection
     me: UsersPermissionsMe
@@ -494,6 +526,24 @@ input DateTimeFilterInput {
     startsWith: DateTime
 }
 
+input FavoriteFiltersInput {
+    and: [FavoriteFiltersInput]
+    createdAt: DateTimeFilterInput
+    id: IDFilterInput
+    not: FavoriteFiltersInput
+    or: [FavoriteFiltersInput]
+    products: ProductFiltersInput
+    publishedAt: DateTimeFilterInput
+    updatedAt: DateTimeFilterInput
+    users_permissions_user: UsersPermissionsUserFiltersInput
+}
+
+input FavoriteInput {
+    products: [ID]
+    publishedAt: DateTime
+    users_permissions_user: ID
+}
+
 input FileInfoInput {
     alternativeText: String
     caption: String
@@ -616,6 +666,7 @@ input ProductFiltersInput {
     category: CategoryFiltersInput
     createdAt: DateTimeFilterInput
     description: StringFilterInput
+    favorites: FavoriteFiltersInput
     id: IDFilterInput
     not: ProductFiltersInput
     or: [ProductFiltersInput]
@@ -632,6 +683,7 @@ input ProductInput {
     banner: ID
     category: ID
     description: String
+    favorites: [ID]
     productImages: [ID]
     productName: String
     productPrice: Float

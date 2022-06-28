@@ -8,7 +8,7 @@ const Home: NextPage = () => {
     <LayoutElement>
       <div className={"h-full"}>
         <MainBanner />
-        <ProductLists />
+        <ProductLists key={2} />
       </div>
     </LayoutElement>
   );

@@ -29,5 +29,6 @@ mutation  register($input: UsersPermissionsRegisterInput!){
                 description
             }
         }
+        jwt
     }
 }

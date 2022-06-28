@@ -31,13 +31,15 @@ const ProductCard = ({
       </Card.Header>
       <Card.Body>
         <Link href={`/product/${productId}`} className={"cursor-pointer"}>
-          <Image
-            src={`${productImage.url}` || ""}
-            height={400}
-            width={400}
-            alt={"headphones"}
-            className={"absolute -top-12 -left-14 cursor-pointer"}
-          />
+          <a>
+            <Image
+              src={`${productImage.url}` || ""}
+              height={400}
+              width={400}
+              alt={"headphones"}
+              className={"absolute -top-12 -left-14 cursor-pointer"}
+            />
+          </a>
         </Link>
       </Card.Body>
       <Card.Footer
