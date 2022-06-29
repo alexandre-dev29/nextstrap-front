@@ -61,3 +61,44 @@ query favorites($filters: FavoriteFiltersInput, $pagination: PaginationArg = {},
     }
 }
 
+mutation updateFavorite($data: FavoriteInput!, $id: ID!){
+    updateFavorite(id: $id, data: $data){
+        data {
+            id
+            attributes {
+                products{
+                    data {
+                        id
+                        attributes {
+                            productName
+                            description
+                            productPrice
+                            productSlug
+                            publishedAt
+                            quantity
+                            category {
+                                data {
+                                    id
+                                    attributes {
+                                        category
+                                    }
+                                }
+                            }
+                            productImages{
+                                data {
+                                    id
+                                    attributes {
+                                        url
+                                        previewUrl
+                                        mime
+                                        name
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

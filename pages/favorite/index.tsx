@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { LayoutElement } from "../../components/Layout";
 import {
-  FavoriteEntityResponseCollection,
   ProductEntity,
   useFavoritesQuery,
 } from "../../graphql/generated/graphqlTypes";
 import ProductCard from "../../components/ProductCard";
-import { GetProductState } from "../../Utils/UtilFunc";
+import { getProductsFromFavorite, GetProductState } from "../../Utils/UtilFunc";
 import { useECommerceStore } from "../../states/ProductStates";
 
 const Index = () => {
@@ -58,12 +57,6 @@ const Index = () => {
       </div>
     </LayoutElement>
   );
-};
-
-const getProductsFromFavorite = (
-  favoriteData: FavoriteEntityResponseCollection | any
-): ProductEntity[] => {
-  return favoriteData?.data[0].attributes.products.data;
 };
 
 export async function getStaticProps(context: any) {

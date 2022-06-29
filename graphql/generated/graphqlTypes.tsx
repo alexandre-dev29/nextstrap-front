@@ -1586,6 +1586,66 @@ export type FavoritesQuery = {
   } | null;
 };
 
+export type UpdateFavoriteMutationVariables = Exact<{
+  data: FavoriteInput;
+  id: Scalars["ID"];
+}>;
+
+export type UpdateFavoriteMutation = {
+  __typename?: "Mutation";
+  updateFavorite?: {
+    __typename?: "FavoriteEntityResponse";
+    data?: {
+      __typename?: "FavoriteEntity";
+      id?: string | null;
+      attributes?: {
+        __typename?: "Favorite";
+        products?: {
+          __typename?: "ProductRelationResponseCollection";
+          data: Array<{
+            __typename?: "ProductEntity";
+            id?: string | null;
+            attributes?: {
+              __typename?: "Product";
+              productName: string;
+              description: string;
+              productPrice: number;
+              productSlug: string;
+              publishedAt?: any | null;
+              quantity: number;
+              category?: {
+                __typename?: "CategoryEntityResponse";
+                data?: {
+                  __typename?: "CategoryEntity";
+                  id?: string | null;
+                  attributes?: {
+                    __typename?: "Category";
+                    category?: string | null;
+                  } | null;
+                } | null;
+              } | null;
+              productImages: {
+                __typename?: "UploadFileRelationResponseCollection";
+                data: Array<{
+                  __typename?: "UploadFileEntity";
+                  id?: string | null;
+                  attributes?: {
+                    __typename?: "UploadFile";
+                    url: string;
+                    previewUrl?: string | null;
+                    mime: string;
+                    name: string;
+                  } | null;
+                }>;
+              };
+            } | null;
+          }>;
+        } | null;
+      } | null;
+    } | null;
+  } | null;
+};
+
 export type ProductsQueryVariables = Exact<{
   filters?: InputMaybe<ProductFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
@@ -2349,6 +2409,93 @@ export type FavoritesLazyQueryHookResult = ReturnType<
 export type FavoritesQueryResult = Apollo.QueryResult<
   FavoritesQuery,
   FavoritesQueryVariables
+>;
+export const UpdateFavoriteDocument = gql`
+  mutation updateFavorite($data: FavoriteInput!, $id: ID!) {
+    updateFavorite(id: $id, data: $data) {
+      data {
+        id
+        attributes {
+          products {
+            data {
+              id
+              attributes {
+                productName
+                description
+                productPrice
+                productSlug
+                publishedAt
+                quantity
+                category {
+                  data {
+                    id
+                    attributes {
+                      category
+                    }
+                  }
+                }
+                productImages {
+                  data {
+                    id
+                    attributes {
+                      url
+                      previewUrl
+                      mime
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+export type UpdateFavoriteMutationFn = Apollo.MutationFunction<
+  UpdateFavoriteMutation,
+  UpdateFavoriteMutationVariables
+>;
+
+/**
+ * __useUpdateFavoriteMutation__
+ *
+ * To run a mutation, you first call `useUpdateFavoriteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateFavoriteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateFavoriteMutation, { data, loading, error }] = useUpdateFavoriteMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useUpdateFavoriteMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    UpdateFavoriteMutation,
+    UpdateFavoriteMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    UpdateFavoriteMutation,
+    UpdateFavoriteMutationVariables
+  >(UpdateFavoriteDocument, options);
+}
+export type UpdateFavoriteMutationHookResult = ReturnType<
+  typeof useUpdateFavoriteMutation
+>;
+export type UpdateFavoriteMutationResult =
+  Apollo.MutationResult<UpdateFavoriteMutation>;
+export type UpdateFavoriteMutationOptions = Apollo.BaseMutationOptions<
+  UpdateFavoriteMutation,
+  UpdateFavoriteMutationVariables
 >;
 export const ProductsDocument = gql`
   query products(
