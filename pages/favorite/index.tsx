@@ -5,9 +5,13 @@ import {
   ProductEntity,
   useFavoritesQuery,
 } from "../../graphql/generated/graphqlTypes";
+import ProductCard from "../../components/ProductCard";
+import { GetProductState } from "../../Utils/UtilFunc";
+import { useECommerceStore } from "../../states/ProductStates";
 
 const Index = () => {
   const [currentUser, setCurrentUser] = useState({ username: "", email: "" });
+  const { onAdd } = useECommerceStore();
   useEffect(() => {
     if (localStorage.getItem("currentUser")) {
       const parsedObject = JSON.parse(
@@ -27,12 +31,30 @@ const Index = () => {
   let allProducts: ProductEntity[] = [];
   if (data?.favorites !== undefined)
     allProducts = getProductsFromFavorite(data?.favorites);
-  console.log(allProducts);
 
   return (
     <LayoutElement>
-      <div>
-        <p>Alexandre mwenze</p>
+      <div
+        className={
+          "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-10/12 gap-5"
+        }
+      >
+        {allProducts?.map((product) => (
+          <ProductCard
+            productName={product.attributes?.productName}
+            productPrice={product.attributes?.productPrice}
+            productImage={
+              product.attributes?.productImages?.data[0]?.attributes
+            }
+            key={product.id}
+            productSlug={product.attributes?.productSlug}
+            productId={product.id ?? "0"}
+            buttonText={"Add To Card"}
+            onClickButton={() => {
+              onAdd(GetProductState(product), 1);
+            }}
+          />
+        ))}
       </div>
     </LayoutElement>
   );
