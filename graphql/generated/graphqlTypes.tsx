@@ -225,6 +225,62 @@ export type DateTimeFilterInput = {
   startsWith?: InputMaybe<Scalars["DateTime"]>;
 };
 
+export type Favorite = {
+  __typename?: "Favorite";
+  createdAt?: Maybe<Scalars["DateTime"]>;
+  products?: Maybe<ProductRelationResponseCollection>;
+  publishedAt?: Maybe<Scalars["DateTime"]>;
+  updatedAt?: Maybe<Scalars["DateTime"]>;
+  user?: Maybe<UsersPermissionsUserEntityResponse>;
+};
+
+export type FavoriteProductsArgs = {
+  filters?: InputMaybe<ProductFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
+};
+
+export type FavoriteEntity = {
+  __typename?: "FavoriteEntity";
+  attributes?: Maybe<Favorite>;
+  id?: Maybe<Scalars["ID"]>;
+};
+
+export type FavoriteEntityResponse = {
+  __typename?: "FavoriteEntityResponse";
+  data?: Maybe<FavoriteEntity>;
+};
+
+export type FavoriteEntityResponseCollection = {
+  __typename?: "FavoriteEntityResponseCollection";
+  data: Array<FavoriteEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type FavoriteFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<FavoriteFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<FavoriteFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<FavoriteFiltersInput>>>;
+  products?: InputMaybe<ProductFiltersInput>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+  user?: InputMaybe<UsersPermissionsUserFiltersInput>;
+};
+
+export type FavoriteInput = {
+  products?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
+  publishedAt?: InputMaybe<Scalars["DateTime"]>;
+  user?: InputMaybe<Scalars["ID"]>;
+};
+
+export type FavoriteRelationResponseCollection = {
+  __typename?: "FavoriteRelationResponseCollection";
+  data: Array<FavoriteEntity>;
+};
+
 export type FileInfoInput = {
   alternativeText?: InputMaybe<Scalars["String"]>;
   caption?: InputMaybe<Scalars["String"]>;
@@ -257,6 +313,7 @@ export type FloatFilterInput = {
 export type GenericMorph =
   | Banner
   | Category
+  | Favorite
   | I18NLocale
   | Product
   | Review
@@ -375,6 +432,7 @@ export type Mutation = {
   createBanner?: Maybe<BannerEntityResponse>;
   createBannerLocalization?: Maybe<BannerEntityResponse>;
   createCategory?: Maybe<CategoryEntityResponse>;
+  createFavorite?: Maybe<FavoriteEntityResponse>;
   createProduct?: Maybe<ProductEntityResponse>;
   createReview?: Maybe<ReviewEntityResponse>;
   createReviewLocalization?: Maybe<ReviewEntityResponse>;
@@ -385,6 +443,7 @@ export type Mutation = {
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   deleteBanner?: Maybe<BannerEntityResponse>;
   deleteCategory?: Maybe<CategoryEntityResponse>;
+  deleteFavorite?: Maybe<FavoriteEntityResponse>;
   deleteProduct?: Maybe<ProductEntityResponse>;
   deleteReview?: Maybe<ReviewEntityResponse>;
   deleteUploadFile?: Maybe<UploadFileEntityResponse>;
@@ -405,6 +464,7 @@ export type Mutation = {
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
   updateBanner?: Maybe<BannerEntityResponse>;
   updateCategory?: Maybe<CategoryEntityResponse>;
+  updateFavorite?: Maybe<FavoriteEntityResponse>;
   updateFileInfo: UploadFileEntityResponse;
   updateProduct?: Maybe<ProductEntityResponse>;
   updateReview?: Maybe<ReviewEntityResponse>;
@@ -429,6 +489,10 @@ export type MutationCreateBannerLocalizationArgs = {
 
 export type MutationCreateCategoryArgs = {
   data: CategoryInput;
+};
+
+export type MutationCreateFavoriteArgs = {
+  data: FavoriteInput;
 };
 
 export type MutationCreateProductArgs = {
@@ -464,6 +528,10 @@ export type MutationDeleteBannerArgs = {
 };
 
 export type MutationDeleteCategoryArgs = {
+  id: Scalars["ID"];
+};
+
+export type MutationDeleteFavoriteArgs = {
   id: Scalars["ID"];
 };
 
@@ -532,6 +600,11 @@ export type MutationUpdateCategoryArgs = {
   id: Scalars["ID"];
 };
 
+export type MutationUpdateFavoriteArgs = {
+  data: FavoriteInput;
+  id: Scalars["ID"];
+};
+
 export type MutationUpdateFileInfoArgs = {
   id: Scalars["ID"];
   info?: InputMaybe<FileInfoInput>;
@@ -592,6 +665,7 @@ export type Product = {
   category?: Maybe<CategoryEntityResponse>;
   createdAt?: Maybe<Scalars["DateTime"]>;
   description: Scalars["String"];
+  favorites?: Maybe<FavoriteRelationResponseCollection>;
   productImages: UploadFileRelationResponseCollection;
   productName: Scalars["String"];
   productPrice: Scalars["Float"];
@@ -600,6 +674,13 @@ export type Product = {
   quantity: Scalars["Int"];
   reviews?: Maybe<ReviewRelationResponseCollection>;
   updatedAt?: Maybe<Scalars["DateTime"]>;
+};
+
+export type ProductFavoritesArgs = {
+  filters?: InputMaybe<FavoriteFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
 };
 
 export type ProductProductImagesArgs = {
@@ -638,6 +719,7 @@ export type ProductFiltersInput = {
   category?: InputMaybe<CategoryFiltersInput>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
   description?: InputMaybe<StringFilterInput>;
+  favorites?: InputMaybe<FavoriteFiltersInput>;
   id?: InputMaybe<IdFilterInput>;
   not?: InputMaybe<ProductFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ProductFiltersInput>>>;
@@ -654,6 +736,7 @@ export type ProductInput = {
   banner?: InputMaybe<Scalars["ID"]>;
   category?: InputMaybe<Scalars["ID"]>;
   description?: InputMaybe<Scalars["String"]>;
+  favorites?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
   productImages?: InputMaybe<Array<InputMaybe<Scalars["ID"]>>>;
   productName?: InputMaybe<Scalars["String"]>;
   productPrice?: InputMaybe<Scalars["Float"]>;
@@ -679,6 +762,8 @@ export type Query = {
   banners?: Maybe<BannerEntityResponseCollection>;
   categories?: Maybe<CategoryEntityResponseCollection>;
   category?: Maybe<CategoryEntityResponse>;
+  favorite?: Maybe<FavoriteEntityResponse>;
+  favorites?: Maybe<FavoriteEntityResponseCollection>;
   i18NLocale?: Maybe<I18NLocaleEntityResponse>;
   i18NLocales?: Maybe<I18NLocaleEntityResponseCollection>;
   me?: Maybe<UsersPermissionsMe>;
@@ -716,6 +801,17 @@ export type QueryCategoriesArgs = {
 
 export type QueryCategoryArgs = {
   id?: InputMaybe<Scalars["ID"]>;
+};
+
+export type QueryFavoriteArgs = {
+  id?: InputMaybe<Scalars["ID"]>;
+};
+
+export type QueryFavoritesArgs = {
+  filters?: InputMaybe<FavoriteFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
 };
 
 export type QueryI18NLocaleArgs = {
@@ -1395,6 +1491,101 @@ export type CategoryQuery = {
   } | null;
 };
 
+export type CreateFavoriteMutationVariables = Exact<{
+  data: FavoriteInput;
+}>;
+
+export type CreateFavoriteMutation = {
+  __typename?: "Mutation";
+  createFavorite?: {
+    __typename?: "FavoriteEntityResponse";
+    data?: {
+      __typename?: "FavoriteEntity";
+      id?: string | null;
+      attributes?: {
+        __typename?: "Favorite";
+        createdAt?: any | null;
+        user?: {
+          __typename?: "UsersPermissionsUserEntityResponse";
+          data?: {
+            __typename?: "UsersPermissionsUserEntity";
+            id?: string | null;
+            attributes?: {
+              __typename?: "UsersPermissionsUser";
+              username: string;
+              email: string;
+            } | null;
+          } | null;
+        } | null;
+      } | null;
+    } | null;
+  } | null;
+};
+
+export type FavoritesQueryVariables = Exact<{
+  filters?: InputMaybe<FavoriteFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<
+    Array<InputMaybe<Scalars["String"]>> | InputMaybe<Scalars["String"]>
+  >;
+}>;
+
+export type FavoritesQuery = {
+  __typename?: "Query";
+  favorites?: {
+    __typename?: "FavoriteEntityResponseCollection";
+    data: Array<{
+      __typename?: "FavoriteEntity";
+      id?: string | null;
+      attributes?: {
+        __typename?: "Favorite";
+        products?: {
+          __typename?: "ProductRelationResponseCollection";
+          data: Array<{
+            __typename?: "ProductEntity";
+            id?: string | null;
+            attributes?: {
+              __typename?: "Product";
+              productName: string;
+              description: string;
+              productPrice: number;
+              productSlug: string;
+              publishedAt?: any | null;
+              quantity: number;
+              category?: {
+                __typename?: "CategoryEntityResponse";
+                data?: {
+                  __typename?: "CategoryEntity";
+                  id?: string | null;
+                  attributes?: {
+                    __typename?: "Category";
+                    category?: string | null;
+                  } | null;
+                } | null;
+              } | null;
+              productImages: {
+                __typename?: "UploadFileRelationResponseCollection";
+                data: Array<{
+                  __typename?: "UploadFileEntity";
+                  id?: string | null;
+                  attributes?: {
+                    __typename?: "UploadFile";
+                    url: string;
+                    previewUrl?: string | null;
+                    mime: string;
+                    name: string;
+                  } | null;
+                }>;
+              };
+            } | null;
+          }>;
+        } | null;
+      } | null;
+    }>;
+  } | null;
+};
+
 export type ProductsQueryVariables = Exact<{
   filters?: InputMaybe<ProductFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
@@ -1991,6 +2182,173 @@ export type CategoryLazyQueryHookResult = ReturnType<
 export type CategoryQueryResult = Apollo.QueryResult<
   CategoryQuery,
   CategoryQueryVariables
+>;
+export const CreateFavoriteDocument = gql`
+  mutation createFavorite($data: FavoriteInput!) {
+    createFavorite(data: $data) {
+      data {
+        id
+        attributes {
+          createdAt
+          createdAt
+          user {
+            data {
+              id
+              attributes {
+                username
+                email
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+export type CreateFavoriteMutationFn = Apollo.MutationFunction<
+  CreateFavoriteMutation,
+  CreateFavoriteMutationVariables
+>;
+
+/**
+ * __useCreateFavoriteMutation__
+ *
+ * To run a mutation, you first call `useCreateFavoriteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateFavoriteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createFavoriteMutation, { data, loading, error }] = useCreateFavoriteMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateFavoriteMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateFavoriteMutation,
+    CreateFavoriteMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    CreateFavoriteMutation,
+    CreateFavoriteMutationVariables
+  >(CreateFavoriteDocument, options);
+}
+export type CreateFavoriteMutationHookResult = ReturnType<
+  typeof useCreateFavoriteMutation
+>;
+export type CreateFavoriteMutationResult =
+  Apollo.MutationResult<CreateFavoriteMutation>;
+export type CreateFavoriteMutationOptions = Apollo.BaseMutationOptions<
+  CreateFavoriteMutation,
+  CreateFavoriteMutationVariables
+>;
+export const FavoritesDocument = gql`
+  query favorites(
+    $filters: FavoriteFiltersInput
+    $pagination: PaginationArg = {}
+    $publicationState: PublicationState = LIVE
+    $sort: [String] = []
+  ) {
+    favorites(
+      filters: $filters
+      pagination: $pagination
+      publicationState: $publicationState
+      sort: $sort
+    ) {
+      data {
+        id
+        attributes {
+          products {
+            data {
+              id
+              attributes {
+                productName
+                description
+                productPrice
+                productSlug
+                publishedAt
+                quantity
+                category {
+                  data {
+                    id
+                    attributes {
+                      category
+                    }
+                  }
+                }
+                productImages {
+                  data {
+                    id
+                    attributes {
+                      url
+                      previewUrl
+                      mime
+                      name
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+/**
+ * __useFavoritesQuery__
+ *
+ * To run a query within a React component, call `useFavoritesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFavoritesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFavoritesQuery({
+ *   variables: {
+ *      filters: // value for 'filters'
+ *      pagination: // value for 'pagination'
+ *      publicationState: // value for 'publicationState'
+ *      sort: // value for 'sort'
+ *   },
+ * });
+ */
+export function useFavoritesQuery(
+  baseOptions?: Apollo.QueryHookOptions<FavoritesQuery, FavoritesQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<FavoritesQuery, FavoritesQueryVariables>(
+    FavoritesDocument,
+    options
+  );
+}
+export function useFavoritesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    FavoritesQuery,
+    FavoritesQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<FavoritesQuery, FavoritesQueryVariables>(
+    FavoritesDocument,
+    options
+  );
+}
+export type FavoritesQueryHookResult = ReturnType<typeof useFavoritesQuery>;
+export type FavoritesLazyQueryHookResult = ReturnType<
+  typeof useFavoritesLazyQuery
+>;
+export type FavoritesQueryResult = Apollo.QueryResult<
+  FavoritesQuery,
+  FavoritesQueryVariables
 >;
 export const ProductsDocument = gql`
   query products(

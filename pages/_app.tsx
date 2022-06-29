@@ -25,7 +25,7 @@ import { useRouter } from "next/router";
 function MyApp({ Component, pageProps }: AppProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [errorType, setErrorType] = useState(ErrorTypeGraphQl.Request);
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState({ username: "", email: "" });
   const [messagesError, setMessagesError] = useState([""]);
   const router = useRouter();
 
@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     if (pageProps.protected && !currentUser) {
       router.push("/Auth/Login");
     }
-  }, [router.pathname, currentUser]);
+  }, [router.pathname]);
 
   function closeModal() {
     setIsOpen(false);

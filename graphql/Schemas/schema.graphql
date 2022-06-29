@@ -73,7 +73,7 @@ type Favorite {
     products(filters: ProductFiltersInput, pagination: PaginationArg = {}, publicationState: PublicationState = LIVE, sort: [String] = []): ProductRelationResponseCollection
     publishedAt: DateTime
     updatedAt: DateTime
-    users_permissions_user: UsersPermissionsUserEntityResponse
+    user: UsersPermissionsUserEntityResponse
 }
 
 type FavoriteEntity {
@@ -535,13 +535,13 @@ input FavoriteFiltersInput {
     products: ProductFiltersInput
     publishedAt: DateTimeFilterInput
     updatedAt: DateTimeFilterInput
-    users_permissions_user: UsersPermissionsUserFiltersInput
+    user: UsersPermissionsUserFiltersInput
 }
 
 input FavoriteInput {
     products: [ID]
     publishedAt: DateTime
-    users_permissions_user: ID
+    user: ID
 }
 
 input FileInfoInput {
