@@ -1,3 +1,5 @@
+import { Button, Row } from "@nextui-org/react";
+
 interface DefaultButtonProps {
   textButton: string | undefined;
   onClickAction: () => void;
@@ -10,21 +12,27 @@ interface DefaultButtonProps {
 
 export default function DefaultButton(props: DefaultButtonProps) {
   return (
-    <button
-      className={`border-gray-800 ${props.customStyle} border-2 ${
-        props.isSmall ? "px-6 py-2" : "px-8 py-2 "
-      } text-sm rounded-sm transition-all duration-300  ${
-        props.isFilled
-          ? "bg-gray-800 text-white hover:bg-gray-900"
-          : "hover:bg-gray-800 hover:text-white"
-      }`}
+    <Button
+      css={{
+        borderRadius: "0",
+        borderColor: "$gray800",
+        color: "$accents7",
+        margin: props.customStyle,
+      }}
+      style={
+        props.isSmall
+          ? { padding: "1rem 2rem", transition: "all" }
+          : { padding: "1.5rem 3rem", transition: "all" }
+      }
+      bordered={true}
+      auto={true}
       type={props.buttonType}
       onClick={props.onClickAction}
     >
-      <div className={"flex items-center"}>
+      <Row justify={"space-between"} align={"center"}>
         {props.children}
         {props.textButton}
-      </div>
-    </button>
+      </Row>
+    </Button>
   );
 }
