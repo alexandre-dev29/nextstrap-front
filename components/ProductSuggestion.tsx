@@ -1,12 +1,10 @@
 import React from "react";
 import {
   ProductEntity,
-  useCategoriesQuery,
   useProductsQuery,
 } from "../graphql/generated/graphqlTypes";
-import DefaultButton from "./DefaultButton";
 import ProductCard from "./ProductCard";
-import { GetProductState } from "../Utils/UtilFunc";
+import { GetProductState } from "../utils/UtilFunc";
 import { useECommerceStore } from "../states/ProductStates";
 
 interface productSuggestionProps {

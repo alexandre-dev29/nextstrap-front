@@ -13,7 +13,7 @@ import { AiOutlineHeart, AiOutlineStar } from "react-icons/ai";
 import DefaultButton from "../../components/DefaultButton";
 import ProductSuggestion from "../../components/ProductSuggestion";
 import { useECommerceStore } from "../../states/ProductStates";
-import { getProductsFromFavorite, GetProductState } from "../../Utils/UtilFunc";
+import { getProductsFromFavorite, GetProductState } from "../../utils/UtilFunc";
 import { StateProduct } from "../../UiTypes/StateProduct";
 import Image from "next/image";
 import { toast } from "react-hot-toast";

@@ -1,85 +1,80 @@
 query banners($filters: BannerFiltersInput, $locale: I18NLocaleCode, $pagination: PaginationArg = {}, $publicationState: PublicationState = LIVE, $sort: [String] = []){
     banners(pagination: $pagination, filters: $filters, locale: $locale, publicationState: $publicationState, sort: $sort){
-        data {
-            id
-            attributes {
-                productName
-                description
-                smallText
-                bannerPrice
-                midText
-                largeText1
-                largeText2
-                buttonText
-                discount
-                saleTime
-                products{
-                    data {
-                        id
-                        attributes {
-                            productName
-                            productSlug
-                            productPrice
-                            description
-                            quantity
-                        }
-                    }
-                }
-                bannerImage {
-                    data {
-                        id
-                        attributes {
-                            name
-                            previewUrl
-                            url
-                            createdAt
-                            updatedAt
-                            mime
-                        }
-                    }
-                }
-                locale
-                createdAt
-                updatedAt
-
-            }
-        }
+        ...BannersFragment
     }
 }
 
 query banner($id: ID, $locale: I18NLocaleCode){
     banner(id: $id, locale: $locale){
-        data {
-            id
-            attributes {
-                productName
-                description
-                smallText
-                bannerPrice
-                midText
-                largeText1
-                largeText2
-                buttonText
-                discount
-                saleTime
-                bannerImage {
-                    data {
-                        id
-                        attributes {
-                            name
-                            previewUrl
-                            url
-                            createdAt
-                            updatedAt
-                            mime
-                        }
+        ...BannerFragment
+    }
+}
+
+fragment BannersFragment on BannerEntityResponseCollection{
+    data {
+        id
+        attributes {
+            productName
+            description
+            smallText
+            bannerPrice
+            midText
+            largeText1
+            largeText2
+            buttonText
+            discount
+            saleTime
+            bannerImage {
+                data {
+                    id
+                    attributes {
+                        name
+                        previewUrl
+                        url
+                        createdAt
+                        updatedAt
+                        mime
                     }
                 }
-                locale
-                createdAt
-                updatedAt
-
             }
+            locale
+            createdAt
+            updatedAt
+
+        }
+    }
+}
+fragment BannerFragment on BannerEntityResponse{
+    data {
+        id
+        attributes {
+            productName
+            description
+            smallText
+            bannerPrice
+            midText
+            largeText1
+            largeText2
+            buttonText
+            discount
+            saleTime
+            bannerImage {
+                data {
+                    id
+                    attributes {
+                        name
+                        previewUrl
+                        url
+                        createdAt
+                        updatedAt
+                        mime
+                    }
+                }
+            }
+            locale
+            createdAt
+            updatedAt
+
         }
     }
 }

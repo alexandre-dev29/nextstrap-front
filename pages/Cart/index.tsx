@@ -9,7 +9,7 @@ import {
   AiOutlinePlus,
 } from "react-icons/ai";
 import DefaultButton from "../../components/DefaultButton";
-import getStripe from "../../Utils/getStripe";
+import getStripe from "../../utils/getStripe";
 import toast from "react-hot-toast";
 
 const Index = () => {

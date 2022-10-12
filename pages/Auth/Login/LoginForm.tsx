@@ -5,6 +5,7 @@ import { Button, Loading } from "@nextui-org/react";
 import { LoginFormElement } from "../../../UiTypes/GlobalTypes";
 import { FooterRegister, HeadingLogin, LoginInputs } from "./UtilsLogin";
 import { useLoginMutation } from "../../../graphql/generated/graphqlTypes";
+import { defaultApolloClient } from "../../../graphql";
 
 type Props = {};
 
@@ -13,6 +14,7 @@ export default function LoginForm({}: Props) {
   const [loginMutation] = useLoginMutation({
     fetchPolicy: "network-only",
     errorPolicy: "all",
+    client: defaultApolloClient,
   });
   //handling submit event on the form
   const onSubmitLogin: SubmitHandler<LoginFormElement> = async ({

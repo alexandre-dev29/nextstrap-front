@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { UnAutorizedLayout } from "../../../components/UnAutorizedLayout";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { RegisterFormElement } from "../../../UiTypes/GlobalTypes";
+import { RegisterFormElement } from "../../../UiTypes";
 import { toast, Toaster } from "react-hot-toast";
 import { useRegisterMutation } from "../../../graphql/generated/graphqlTypes";
 import { Button, Loading, Text } from "@nextui-org/react";
 import InputComponent from "../../../components/input-component";
 import { FooterRegister } from "../Login/UtilsLogin";
+import { defaultApolloClient } from "../../../graphql";
 
 function Index() {
   const [loadingActive, setLoadingActive] = useState("none");
@@ -23,6 +24,7 @@ function Index() {
   const [registerMutation] = useRegisterMutation({
     errorPolicy: "all",
     fetchPolicy: "network-only",
+    client: defaultApolloClient,
   });
 
   const onSubmitLogin: SubmitHandler<RegisterFormElement> = async ({

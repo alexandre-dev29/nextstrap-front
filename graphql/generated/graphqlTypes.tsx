@@ -20,13 +20,9 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   DateTime: any;
-  /** A string used to identify an i18n locale */
   I18NLocaleCode: any;
-  /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
-  /** The `Upload` scalar type represents a file upload. */
   Upload: any;
 };
 
@@ -1360,21 +1356,6 @@ export type BannersQuery = {
         locale?: string | null;
         createdAt?: any | null;
         updatedAt?: any | null;
-        products?: {
-          __typename?: "ProductRelationResponseCollection";
-          data: Array<{
-            __typename?: "ProductEntity";
-            id?: string | null;
-            attributes?: {
-              __typename?: "Product";
-              productName: string;
-              productSlug: string;
-              productPrice: number;
-              description: string;
-              quantity: number;
-            } | null;
-          }>;
-        } | null;
         bannerImage: {
           __typename?: "UploadFileEntityResponse";
           data?: {
@@ -1444,6 +1425,86 @@ export type BannerQuery = {
   } | null;
 };
 
+export type BannersFragmentFragment = {
+  __typename?: "BannerEntityResponseCollection";
+  data: Array<{
+    __typename?: "BannerEntity";
+    id?: string | null;
+    attributes?: {
+      __typename?: "Banner";
+      productName: string;
+      description: string;
+      smallText: string;
+      bannerPrice?: number | null;
+      midText?: string | null;
+      largeText1?: string | null;
+      largeText2?: string | null;
+      buttonText: string;
+      discount?: string | null;
+      saleTime?: string | null;
+      locale?: string | null;
+      createdAt?: any | null;
+      updatedAt?: any | null;
+      bannerImage: {
+        __typename?: "UploadFileEntityResponse";
+        data?: {
+          __typename?: "UploadFileEntity";
+          id?: string | null;
+          attributes?: {
+            __typename?: "UploadFile";
+            name: string;
+            previewUrl?: string | null;
+            url: string;
+            createdAt?: any | null;
+            updatedAt?: any | null;
+            mime: string;
+          } | null;
+        } | null;
+      };
+    } | null;
+  }>;
+};
+
+export type BannerFragmentFragment = {
+  __typename?: "BannerEntityResponse";
+  data?: {
+    __typename?: "BannerEntity";
+    id?: string | null;
+    attributes?: {
+      __typename?: "Banner";
+      productName: string;
+      description: string;
+      smallText: string;
+      bannerPrice?: number | null;
+      midText?: string | null;
+      largeText1?: string | null;
+      largeText2?: string | null;
+      buttonText: string;
+      discount?: string | null;
+      saleTime?: string | null;
+      locale?: string | null;
+      createdAt?: any | null;
+      updatedAt?: any | null;
+      bannerImage: {
+        __typename?: "UploadFileEntityResponse";
+        data?: {
+          __typename?: "UploadFileEntity";
+          id?: string | null;
+          attributes?: {
+            __typename?: "UploadFile";
+            name: string;
+            previewUrl?: string | null;
+            url: string;
+            createdAt?: any | null;
+            updatedAt?: any | null;
+            mime: string;
+          } | null;
+        } | null;
+      };
+    } | null;
+  } | null;
+};
+
 export type CategoriesQueryVariables = Exact<{
   filters?: InputMaybe<CategoryFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
@@ -1489,6 +1550,34 @@ export type CategoryQuery = {
       } | null;
     } | null;
   } | null;
+};
+
+export type CategoryFragmentFragment = {
+  __typename?: "CategoryEntityResponse";
+  data?: {
+    __typename?: "CategoryEntity";
+    id?: string | null;
+    attributes?: {
+      __typename?: "Category";
+      category?: string | null;
+      createdAt?: any | null;
+      updatedAt?: any | null;
+    } | null;
+  } | null;
+};
+
+export type CategoriesFragmentFragment = {
+  __typename?: "CategoryEntityResponseCollection";
+  data: Array<{
+    __typename?: "CategoryEntity";
+    id?: string | null;
+    attributes?: {
+      __typename?: "Category";
+      category?: string | null;
+      createdAt?: any | null;
+      updatedAt?: any | null;
+    } | null;
+  }>;
 };
 
 export type CreateFavoriteMutationVariables = Exact<{
@@ -1643,6 +1732,133 @@ export type UpdateFavoriteMutation = {
         } | null;
       } | null;
     } | null;
+  } | null;
+};
+
+export type MainPageAllDataQueryVariables = Exact<{ [key: string]: never }>;
+
+export type MainPageAllDataQuery = {
+  __typename?: "Query";
+  banners?: {
+    __typename?: "BannerEntityResponseCollection";
+    data: Array<{
+      __typename?: "BannerEntity";
+      id?: string | null;
+      attributes?: {
+        __typename?: "Banner";
+        productName: string;
+        description: string;
+        smallText: string;
+        bannerPrice?: number | null;
+        midText?: string | null;
+        largeText1?: string | null;
+        largeText2?: string | null;
+        buttonText: string;
+        discount?: string | null;
+        saleTime?: string | null;
+        locale?: string | null;
+        createdAt?: any | null;
+        updatedAt?: any | null;
+        bannerImage: {
+          __typename?: "UploadFileEntityResponse";
+          data?: {
+            __typename?: "UploadFileEntity";
+            id?: string | null;
+            attributes?: {
+              __typename?: "UploadFile";
+              name: string;
+              previewUrl?: string | null;
+              url: string;
+              createdAt?: any | null;
+              updatedAt?: any | null;
+              mime: string;
+            } | null;
+          } | null;
+        };
+      } | null;
+    }>;
+  } | null;
+  categories?: {
+    __typename?: "CategoryEntityResponseCollection";
+    data: Array<{
+      __typename?: "CategoryEntity";
+      id?: string | null;
+      attributes?: {
+        __typename?: "Category";
+        category?: string | null;
+        createdAt?: any | null;
+        updatedAt?: any | null;
+      } | null;
+    }>;
+  } | null;
+  products?: {
+    __typename?: "ProductEntityResponseCollection";
+    data: Array<{
+      __typename?: "ProductEntity";
+      id?: string | null;
+      attributes?: {
+        __typename?: "Product";
+        productName: string;
+        description: string;
+        productPrice: number;
+        productSlug: string;
+        publishedAt?: any | null;
+        quantity: number;
+        updatedAt?: any | null;
+        createdAt?: any | null;
+        category?: {
+          __typename?: "CategoryEntityResponse";
+          data?: {
+            __typename?: "CategoryEntity";
+            id?: string | null;
+            attributes?: {
+              __typename?: "Category";
+              category?: string | null;
+            } | null;
+          } | null;
+        } | null;
+        productImages: {
+          __typename?: "UploadFileRelationResponseCollection";
+          data: Array<{
+            __typename?: "UploadFileEntity";
+            id?: string | null;
+            attributes?: {
+              __typename?: "UploadFile";
+              url: string;
+              previewUrl?: string | null;
+              mime: string;
+              name: string;
+            } | null;
+          }>;
+        };
+        reviews?: {
+          __typename?: "ReviewRelationResponseCollection";
+          data: Array<{
+            __typename?: "ReviewEntity";
+            id?: string | null;
+            attributes?: {
+              __typename?: "Review";
+              reviewText?: string | null;
+              rating: number;
+              createdAt?: any | null;
+              updatedAt?: any | null;
+              users_permissions_user?: {
+                __typename?: "UsersPermissionsUserEntityResponse";
+                data?: {
+                  __typename?: "UsersPermissionsUserEntity";
+                  id?: string | null;
+                  attributes?: {
+                    __typename?: "UsersPermissionsUser";
+                    username: string;
+                    email: string;
+                  } | null;
+                } | null;
+              } | null;
+            } | null;
+          }>;
+        } | null;
+      } | null;
+    }>;
   } | null;
 };
 
@@ -1805,6 +2021,352 @@ export type ProductQuery = {
   } | null;
 };
 
+export type ProductFragmentFragment = {
+  __typename?: "ProductEntityResponse";
+  data?: {
+    __typename?: "ProductEntity";
+    id?: string | null;
+    attributes?: {
+      __typename?: "Product";
+      productName: string;
+      description: string;
+      productPrice: number;
+      productSlug: string;
+      publishedAt?: any | null;
+      quantity: number;
+      updatedAt?: any | null;
+      createdAt?: any | null;
+      category?: {
+        __typename?: "CategoryEntityResponse";
+        data?: {
+          __typename?: "CategoryEntity";
+          id?: string | null;
+          attributes?: {
+            __typename?: "Category";
+            category?: string | null;
+          } | null;
+        } | null;
+      } | null;
+      productImages: {
+        __typename?: "UploadFileRelationResponseCollection";
+        data: Array<{
+          __typename?: "UploadFileEntity";
+          id?: string | null;
+          attributes?: {
+            __typename?: "UploadFile";
+            url: string;
+            previewUrl?: string | null;
+            mime: string;
+            name: string;
+          } | null;
+        }>;
+      };
+      reviews?: {
+        __typename?: "ReviewRelationResponseCollection";
+        data: Array<{
+          __typename?: "ReviewEntity";
+          id?: string | null;
+          attributes?: {
+            __typename?: "Review";
+            reviewText?: string | null;
+            rating: number;
+            createdAt?: any | null;
+            updatedAt?: any | null;
+            users_permissions_user?: {
+              __typename?: "UsersPermissionsUserEntityResponse";
+              data?: {
+                __typename?: "UsersPermissionsUserEntity";
+                id?: string | null;
+                attributes?: {
+                  __typename?: "UsersPermissionsUser";
+                  username: string;
+                  email: string;
+                } | null;
+              } | null;
+            } | null;
+          } | null;
+        }>;
+      } | null;
+    } | null;
+  } | null;
+};
+
+export type ProductsFragmentFragment = {
+  __typename?: "ProductEntityResponseCollection";
+  data: Array<{
+    __typename?: "ProductEntity";
+    id?: string | null;
+    attributes?: {
+      __typename?: "Product";
+      productName: string;
+      description: string;
+      productPrice: number;
+      productSlug: string;
+      publishedAt?: any | null;
+      quantity: number;
+      updatedAt?: any | null;
+      createdAt?: any | null;
+      category?: {
+        __typename?: "CategoryEntityResponse";
+        data?: {
+          __typename?: "CategoryEntity";
+          id?: string | null;
+          attributes?: {
+            __typename?: "Category";
+            category?: string | null;
+          } | null;
+        } | null;
+      } | null;
+      productImages: {
+        __typename?: "UploadFileRelationResponseCollection";
+        data: Array<{
+          __typename?: "UploadFileEntity";
+          id?: string | null;
+          attributes?: {
+            __typename?: "UploadFile";
+            url: string;
+            previewUrl?: string | null;
+            mime: string;
+            name: string;
+          } | null;
+        }>;
+      };
+      reviews?: {
+        __typename?: "ReviewRelationResponseCollection";
+        data: Array<{
+          __typename?: "ReviewEntity";
+          id?: string | null;
+          attributes?: {
+            __typename?: "Review";
+            reviewText?: string | null;
+            rating: number;
+            createdAt?: any | null;
+            updatedAt?: any | null;
+            users_permissions_user?: {
+              __typename?: "UsersPermissionsUserEntityResponse";
+              data?: {
+                __typename?: "UsersPermissionsUserEntity";
+                id?: string | null;
+                attributes?: {
+                  __typename?: "UsersPermissionsUser";
+                  username: string;
+                  email: string;
+                } | null;
+              } | null;
+            } | null;
+          } | null;
+        }>;
+      } | null;
+    } | null;
+  }>;
+};
+
+export const BannersFragmentFragmentDoc = gql`
+  fragment BannersFragment on BannerEntityResponseCollection {
+    data {
+      id
+      attributes {
+        productName
+        description
+        smallText
+        bannerPrice
+        midText
+        largeText1
+        largeText2
+        buttonText
+        discount
+        saleTime
+        bannerImage {
+          data {
+            id
+            attributes {
+              name
+              previewUrl
+              url
+              createdAt
+              updatedAt
+              mime
+            }
+          }
+        }
+        locale
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const BannerFragmentFragmentDoc = gql`
+  fragment BannerFragment on BannerEntityResponse {
+    data {
+      id
+      attributes {
+        productName
+        description
+        smallText
+        bannerPrice
+        midText
+        largeText1
+        largeText2
+        buttonText
+        discount
+        saleTime
+        bannerImage {
+          data {
+            id
+            attributes {
+              name
+              previewUrl
+              url
+              createdAt
+              updatedAt
+              mime
+            }
+          }
+        }
+        locale
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const CategoryFragmentFragmentDoc = gql`
+  fragment CategoryFragment on CategoryEntityResponse {
+    data {
+      id
+      attributes {
+        category
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const CategoriesFragmentFragmentDoc = gql`
+  fragment CategoriesFragment on CategoryEntityResponseCollection {
+    data {
+      id
+      attributes {
+        category
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+export const ProductFragmentFragmentDoc = gql`
+  fragment ProductFragment on ProductEntityResponse {
+    data {
+      id
+      attributes {
+        productName
+        description
+        productPrice
+        productSlug
+        publishedAt
+        quantity
+        category {
+          data {
+            id
+            attributes {
+              category
+            }
+          }
+        }
+        productImages {
+          data {
+            id
+            attributes {
+              url
+              previewUrl
+              mime
+              name
+            }
+          }
+        }
+        reviews {
+          data {
+            id
+            attributes {
+              reviewText
+              rating
+              createdAt
+              updatedAt
+              users_permissions_user {
+                data {
+                  id
+                  attributes {
+                    username
+                    email
+                  }
+                }
+              }
+            }
+          }
+        }
+        updatedAt
+        createdAt
+      }
+    }
+  }
+`;
+export const ProductsFragmentFragmentDoc = gql`
+  fragment ProductsFragment on ProductEntityResponseCollection {
+    data {
+      id
+      attributes {
+        productName
+        description
+        productPrice
+        productSlug
+        publishedAt
+        quantity
+        category {
+          data {
+            id
+            attributes {
+              category
+            }
+          }
+        }
+        productImages {
+          data {
+            id
+            attributes {
+              url
+              previewUrl
+              mime
+              name
+            }
+          }
+        }
+        reviews {
+          data {
+            id
+            attributes {
+              reviewText
+              rating
+              createdAt
+              updatedAt
+              users_permissions_user {
+                data {
+                  id
+                  attributes {
+                    username
+                    email
+                  }
+                }
+              }
+            }
+          }
+        }
+        updatedAt
+        createdAt
+      }
+    }
+  }
+`;
 export const LoginDocument = gql`
   mutation login($input: UsersPermissionsLoginInput!) {
     login(input: $input) {
@@ -1937,51 +2499,10 @@ export const BannersDocument = gql`
       publicationState: $publicationState
       sort: $sort
     ) {
-      data {
-        id
-        attributes {
-          productName
-          description
-          smallText
-          bannerPrice
-          midText
-          largeText1
-          largeText2
-          buttonText
-          discount
-          saleTime
-          products {
-            data {
-              id
-              attributes {
-                productName
-                productSlug
-                productPrice
-                description
-                quantity
-              }
-            }
-          }
-          bannerImage {
-            data {
-              id
-              attributes {
-                name
-                previewUrl
-                url
-                createdAt
-                updatedAt
-                mime
-              }
-            }
-          }
-          locale
-          createdAt
-          updatedAt
-        }
-      }
+      ...BannersFragment
     }
   }
+  ${BannersFragmentFragmentDoc}
 `;
 
 /**
@@ -2031,39 +2552,10 @@ export type BannersQueryResult = Apollo.QueryResult<
 export const BannerDocument = gql`
   query banner($id: ID, $locale: I18NLocaleCode) {
     banner(id: $id, locale: $locale) {
-      data {
-        id
-        attributes {
-          productName
-          description
-          smallText
-          bannerPrice
-          midText
-          largeText1
-          largeText2
-          buttonText
-          discount
-          saleTime
-          bannerImage {
-            data {
-              id
-              attributes {
-                name
-                previewUrl
-                url
-                createdAt
-                updatedAt
-                mime
-              }
-            }
-          }
-          locale
-          createdAt
-          updatedAt
-        }
-      }
+      ...BannerFragment
     }
   }
+  ${BannerFragmentFragmentDoc}
 `;
 
 /**
@@ -2120,16 +2612,10 @@ export const CategoriesDocument = gql`
       filters: $filters
       pagination: $pagination
     ) {
-      data {
-        id
-        attributes {
-          category
-          createdAt
-          updatedAt
-        }
-      }
+      ...CategoriesFragment
     }
   }
+  ${CategoriesFragmentFragmentDoc}
 `;
 
 /**
@@ -2186,16 +2672,10 @@ export type CategoriesQueryResult = Apollo.QueryResult<
 export const CategoryDocument = gql`
   query category($id: ID) {
     category(id: $id) {
-      data {
-        id
-        attributes {
-          category
-          createdAt
-          updatedAt
-        }
-      }
+      ...CategoryFragment
     }
   }
+  ${CategoryFragmentFragmentDoc}
 `;
 
 /**
@@ -2488,6 +2968,7 @@ export function useUpdateFavoriteMutation(
     UpdateFavoriteMutationVariables
   >(UpdateFavoriteDocument, options);
 }
+
 export type UpdateFavoriteMutationHookResult = ReturnType<
   typeof useUpdateFavoriteMutation
 >;
@@ -2496,6 +2977,74 @@ export type UpdateFavoriteMutationResult =
 export type UpdateFavoriteMutationOptions = Apollo.BaseMutationOptions<
   UpdateFavoriteMutation,
   UpdateFavoriteMutationVariables
+>;
+export const MainPageAllDataDocument = gql`
+  query mainPageAllData {
+    banners {
+      ...BannersFragment
+    }
+    categories {
+      ...CategoriesFragment
+    }
+    products {
+      ...ProductsFragment
+    }
+  }
+  ${BannersFragmentFragmentDoc}
+  ${CategoriesFragmentFragmentDoc}
+  ${ProductsFragmentFragmentDoc}
+`;
+
+/**
+ * __useMainPageAllDataQuery__
+ *
+ * To run a query within a React component, call `useMainPageAllDataQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMainPageAllDataQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMainPageAllDataQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMainPageAllDataQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    MainPageAllDataQuery,
+    MainPageAllDataQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<MainPageAllDataQuery, MainPageAllDataQueryVariables>(
+    MainPageAllDataDocument,
+    options
+  );
+}
+
+export function useMainPageAllDataLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    MainPageAllDataQuery,
+    MainPageAllDataQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<
+    MainPageAllDataQuery,
+    MainPageAllDataQueryVariables
+  >(MainPageAllDataDocument, options);
+}
+
+export type MainPageAllDataQueryHookResult = ReturnType<
+  typeof useMainPageAllDataQuery
+>;
+export type MainPageAllDataLazyQueryHookResult = ReturnType<
+  typeof useMainPageAllDataLazyQuery
+>;
+export type MainPageAllDataQueryResult = Apollo.QueryResult<
+  MainPageAllDataQuery,
+  MainPageAllDataQueryVariables
 >;
 export const ProductsDocument = gql`
   query products(
@@ -2510,60 +3059,10 @@ export const ProductsDocument = gql`
       publicationState: $publicationState
       sort: $sort
     ) {
-      data {
-        id
-        attributes {
-          productName
-          description
-          productPrice
-          productSlug
-          publishedAt
-          quantity
-          category {
-            data {
-              id
-              attributes {
-                category
-              }
-            }
-          }
-          productImages {
-            data {
-              id
-              attributes {
-                url
-                previewUrl
-                mime
-                name
-              }
-            }
-          }
-          reviews {
-            data {
-              id
-              attributes {
-                reviewText
-                rating
-                createdAt
-                updatedAt
-                users_permissions_user {
-                  data {
-                    id
-                    attributes {
-                      username
-                      email
-                    }
-                  }
-                }
-              }
-            }
-          }
-          updatedAt
-          createdAt
-        }
-      }
+      ...ProductsFragment
     }
   }
+  ${ProductsFragmentFragmentDoc}
 `;
 
 /**
@@ -2617,60 +3116,10 @@ export type ProductsQueryResult = Apollo.QueryResult<
 export const ProductDocument = gql`
   query product($id: ID) {
     product(id: $id) {
-      data {
-        id
-        attributes {
-          productName
-          description
-          productPrice
-          productSlug
-          publishedAt
-          quantity
-          category {
-            data {
-              id
-              attributes {
-                category
-              }
-            }
-          }
-          productImages {
-            data {
-              id
-              attributes {
-                url
-                previewUrl
-                mime
-                name
-              }
-            }
-          }
-          reviews {
-            data {
-              id
-              attributes {
-                reviewText
-                rating
-                createdAt
-                updatedAt
-                users_permissions_user {
-                  data {
-                    id
-                    attributes {
-                      username
-                      email
-                    }
-                  }
-                }
-              }
-            }
-          }
-          updatedAt
-          createdAt
-        }
-      }
+      ...ProductFragment
     }
   }
+  ${ProductFragmentFragmentDoc}
 `;
 
 /**

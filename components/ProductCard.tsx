@@ -21,7 +21,7 @@ const ProductCard = ({
   onClickButton,
 }: ProductCardProps) => {
   return (
-    <Card cover key={productId}>
+    <Card key={productId}>
       <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
         <Col>
           <Text size={12} weight="bold" transform="uppercase" color="#000">
@@ -43,7 +43,6 @@ const ProductCard = ({
         </Link>
       </Card.Body>
       <Card.Footer
-        blur
         css={{
           position: "absolute",
           bgBlur: "#ffffff",

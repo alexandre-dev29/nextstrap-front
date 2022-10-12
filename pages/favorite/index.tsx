@@ -5,7 +5,7 @@ import {
   useFavoritesQuery,
 } from "../../graphql/generated/graphqlTypes";
 import ProductCard from "../../components/ProductCard";
-import { getProductsFromFavorite, GetProductState } from "../../Utils/UtilFunc";
+import { getProductsFromFavorite, GetProductState } from "../../utils/UtilFunc";
 import { useECommerceStore } from "../../states/ProductStates";
 
 const Index = () => {

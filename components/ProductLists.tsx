@@ -1,23 +1,21 @@
 import React from "react";
 import DefaultButton from "./DefaultButton";
 import {
-  useCategoriesQuery,
-  useProductsQuery,
+  CategoryEntity,
+  CategoryEntityResponseCollection,
+  ProductEntity,
+  ProductEntityResponseCollection,
 } from "../graphql/generated/graphqlTypes";
 import ProductCard from "./ProductCard";
-import { GetProductState } from "../Utils/UtilFunc";
+import { GetProductState } from "../utils/UtilFunc";
 import { useECommerceStore } from "../states/ProductStates";
 
-interface ProductListsProps {}
-const ProductLists = (props: ProductListsProps) => {
-  const { data } = useCategoriesQuery({
-    fetchPolicy: "cache-and-network",
-    errorPolicy: "all",
-  });
-  const { data: productData } = useProductsQuery({
-    fetchPolicy: "cache-and-network",
-    errorPolicy: "all",
-  });
+interface ProductListsProps {
+  categoriesData: CategoryEntityResponseCollection | any;
+  productsData: ProductEntityResponseCollection | any;
+}
+
+const ProductLists = ({ productsData, categoriesData }: ProductListsProps) => {
   const { onAdd } = useECommerceStore();
   return (
     <>
@@ -33,7 +31,7 @@ const ProductLists = (props: ProductListsProps) => {
                 isSmall={true}
               />
             </li>
-            {data?.categories?.data.map((category) => (
+            {categoriesData.data.map((category: CategoryEntity) => (
               <li key={category.id}>
                 <DefaultButton
                   textButton={category.attributes?.category ?? ""}
@@ -52,7 +50,7 @@ const ProductLists = (props: ProductListsProps) => {
             "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-10/12 gap-5"
           }
         >
-          {productData?.products?.data.map((product) => (
+          {productsData.data.map((product: ProductEntity) => (
             <ProductCard
               productName={product.attributes?.productName}
               productPrice={product.attributes?.productPrice}
