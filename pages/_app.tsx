@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <title>Welcome to NextStrap ECommerce</title>
       </Head>
       <NextThemesProvider
-        defaultTheme={"system"}
+        defaultTheme={"light"}
         attribute={"class"}
         value={{ light: LightTheme.className, dark: DarkTheme.className }}
       >
