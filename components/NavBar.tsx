@@ -1,27 +1,14 @@
-import {
-  AiOutlineLogout,
-  AiOutlineShopping,
-  AiOutlineShoppingCart,
-  AiOutlineUser,
-} from "react-icons/ai";
-import DefaultButton from "./DefaultButton";
+import { AiOutlineLogout, AiOutlineShopping, AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
 import Link from "next/link";
 import { useECommerceStore } from "../states";
-import {
-  Button,
-  Input,
-  Navbar,
-  Popover,
-  Switch,
-  Text,
-  useTheme,
-} from "@nextui-org/react";
+import { Button, Input, Navbar, Popover, Switch, Text, useTheme } from "@nextui-org/react";
 import React, { useEffect, useState } from "react";
-import CardItem from "./CardItem";
 import { useRouter } from "next/router";
 import { useUser } from "../config";
 import { useTheme as useNextTheme } from "next-themes";
 import { HalfMoon, Search, SunLight } from "iconoir-react";
+import CardItem from "./CardItem";
+import DefaultButton from "./DefaultButton";
 
 export default function NavBarComponent() {
   const { setTheme } = useNextTheme();
@@ -41,7 +28,7 @@ export default function NavBarComponent() {
   };
 
   return (
-    <Navbar isBordered variant="sticky" shouldHideOnScroll={false}>
+    <Navbar isBordered variant="static" shouldHideOnScroll={false}>
       <Navbar.Brand css={{ mr: "$4" }}>
         <Link href={"/"}>
           <Text
@@ -91,18 +78,10 @@ export default function NavBarComponent() {
         <Navbar.Item aria-valuetext={"testing"}>
           <Popover>
             <Popover.Trigger>
-              <Button
-                animated={true}
-                auto
-                flat
-                color={"warning"}
-                className={"m-0 relative"}
-              >
+              <Button animated={true} auto flat color={"warning"} className={"m-0 relative"}>
                 <AiOutlineShopping size={24} />
                 <p
-                  className={
-                    "absolute  top-1 right-1 bg-orange-500 rounded-full px-[5px] text-sm text-white"
-                  }
+                  className={"absolute  top-1 right-1 bg-orange-500 rounded-full px-[5px] text-sm text-white"}
                 >
                   {!isSSR && totalQuantities}
                 </p>
@@ -127,9 +106,7 @@ export default function NavBarComponent() {
                 </div>
                 <div className={"bg-gray-900 flex justify-center z-50"}>
                   <button
-                    className={
-                      "p-2 w-full text-white flex items-center justify-center"
-                    }
+                    className={"p-2 w-full text-white flex items-center justify-center"}
                     onClick={async () => {
                       await router.push("/Cart");
                     }}
@@ -155,13 +132,7 @@ export default function NavBarComponent() {
           ) : (
             <Popover>
               <Popover.Trigger>
-                <Button
-                  animated={true}
-                  auto
-                  flat
-                  color={"warning"}
-                  className={"m-0 relative"}
-                >
+                <Button animated={true} auto flat color={"warning"} className={"m-0 relative"}>
                   <AiOutlineUser size={24} />
                   <p>{currentUser.username}</p>
                 </Button>

@@ -1,75 +1,72 @@
 import React from "react";
-import DefaultButton from "./DefaultButton";
 import {
   CategoryEntity,
   CategoryEntityResponseCollection,
   ProductEntity,
   ProductEntityResponseCollection,
 } from "../graphql/generated/graphqlTypes";
+import { GetProductState } from "../utils";
+import { useECommerceStore } from "../states";
+import { Container, Grid, Text } from "@nextui-org/react";
 import ProductCard from "./ProductCard";
-import { GetProductState } from "../utils/UtilFunc";
-import { useECommerceStore } from "../states/ProductStates";
+import DefaultButton from "./DefaultButton";
 
 interface ProductListsProps {
   categoriesData: CategoryEntityResponseCollection | any;
   productsData: ProductEntityResponseCollection | any;
 }
 
-const ProductLists = ({ productsData, categoriesData }: ProductListsProps) => {
+export default function ProductLists({ productsData, categoriesData }: ProductListsProps) {
   const { onAdd } = useECommerceStore();
   return (
     <>
-      <div className={"mx-auto flex items-center flex-col p-16"}>
-        <h3 className={"font-medium text-4xl"}>Product List</h3>
+      <Container
+        style={{ margin: "0 auto", padding: "4rem" }}
+        display={"flex"}
+        alignItems={"center"}
+        direction={"column"}
+      >
+        <Text h2 size={"$4xl"} css={{ fontWeight: "$semibold" }}>
+          Product List
+        </Text>
         <div className={""}>
-          <ul className={"flex items-start"}>
+          <ul style={{ display: "flex", justifyItems: "center" }}>
             <li key="all">
-              <DefaultButton
-                textButton={"All"}
-                onClickAction={() => {}}
-                isFilled={false}
-                isSmall={true}
-              />
+              <DefaultButton textButton={"All"} onClickAction={() => {}} isFilled={false} isSmall={true} />
             </li>
             {categoriesData.data.map((category: CategoryEntity) => (
               <li key={category.id}>
                 <DefaultButton
-                  textButton={category.attributes?.category ?? ""}
+                  textButton={`${category.attributes?.category}`}
                   onClickAction={() => {}}
                   isFilled={false}
                   isSmall={true}
-                  customStyle={"ml-3"}
+                  customStyle={"0 1rem"}
                 />
               </li>
             ))}
           </ul>
         </div>
 
-        <div
-          className={
-            "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-10/12 gap-5"
-          }
-        >
+        <Grid.Container justify={"flex-start"} gap={5}>
           {productsData.data.map((product: ProductEntity) => (
-            <ProductCard
-              productName={product.attributes?.productName}
-              productPrice={product.attributes?.productPrice}
-              productImage={
-                product.attributes?.productImages?.data[0]?.attributes
-              }
-              key={product.id}
-              productSlug={product.attributes?.productSlug}
-              productId={product.id ?? "0"}
-              buttonText={"Add To Card"}
-              onClickButton={() => {
-                onAdd(GetProductState(product), 1);
-              }}
-            />
+            <Grid xs={12} sm={6} md={3} key={product.id}>
+              <ProductCard
+                productName={product.attributes?.productName}
+                productPrice={product.attributes?.productPrice}
+                productImage={product.attributes?.productImages?.data[0]?.attributes}
+                key={product.id}
+                productSlug={`${product.attributes?.productSlug}`}
+                productId={product.id ?? "0"}
+                buttonText={"Add To Card"}
+                onClickButton={() => {
+                  onAdd(GetProductState(product), 1);
+                }}
+              />
+            </Grid>
           ))}
-        </div>
-      </div>
+        </Grid.Container>
+      </Container>
     </>
   );
-};
-
-export default ProductLists;
+}

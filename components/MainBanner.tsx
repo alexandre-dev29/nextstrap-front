@@ -1,5 +1,4 @@
 import { BannerEntityResponseCollection } from "../graphql/generated/graphqlTypes";
-import DefaultButton from "./DefaultButton";
 import Image from "next/image";
 import { useECommerceStore } from "../states";
 import { GetProductState } from "../utils";
@@ -7,12 +6,13 @@ import { StateProduct } from "../UiTypes";
 import { useRouter } from "next/router";
 import { Col, Container, Row, Text } from "@nextui-org/react";
 import { CartAlt } from "iconoir-react";
+import DefaultButton from "./DefaultButton";
 
 interface mainBannerProps {
   mainBannersData: BannerEntityResponseCollection | any;
 }
 
-const MainBanner = ({ mainBannersData }: mainBannerProps) => {
+export default function MainBanner({ mainBannersData }: mainBannerProps) {
   const { onAdd } = useECommerceStore();
   const router = useRouter();
 
@@ -102,5 +102,4 @@ const MainBanner = ({ mainBannersData }: mainBannerProps) => {
       </Row>
     </Container>
   );
-};
-export default MainBanner;
+}

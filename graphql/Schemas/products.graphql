@@ -4,6 +4,18 @@ query products($filters: ProductFiltersInput, $pagination: PaginationArg = {}, $
     }
 }
 
+
+query productBySlug($slugValue: StringFilterInput){
+    products(filters: {productSlug: $slugValue}){
+        data {
+            ...ProductEntityFragment
+        }
+    }
+    allOtherProducts: products(filters: {productSlug: {not: $slugValue}}){
+        ...ProductsFragment
+    }
+
+}
 query product($id: ID){
     product(id: $id){
         ...ProductFragment
@@ -116,5 +128,64 @@ fragment ProductsFragment on ProductEntityResponseCollection{
             updatedAt
             createdAt
         }
+    }
+}
+
+fragment ProductEntityFragment on ProductEntity{
+    id
+    attributes {
+        productName
+        description
+        productPrice
+        productSlug
+        publishedAt
+        quantity
+        category {
+            data {
+                id
+                attributes {
+                    category
+                }
+            }
+        }
+        productImages{
+            data {
+                id
+                attributes {
+                    url
+                    previewUrl
+                    mime
+                    name
+                }
+            }
+        }
+        reviews{
+            data {
+                id
+                attributes {
+                    reviewText
+                    rating
+                    createdAt
+                    updatedAt
+                    users_permissions_user {
+                        data {
+                            id
+                            attributes {
+                                username
+                                email
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        updatedAt
+        createdAt
+    }
+}
+
+fragment ProductRelationFragment on ProductRelationResponseCollection{
+    data {
+        ...ProductEntityFragment
     }
 }

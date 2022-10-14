@@ -3,15 +3,9 @@ import { gql } from "@apollo/client";
 
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -1329,9 +1323,7 @@ export type BannersQueryVariables = Exact<{
   locale?: InputMaybe<Scalars["I18NLocaleCode"]>;
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<
-    Array<InputMaybe<Scalars["String"]>> | InputMaybe<Scalars["String"]>
-  >;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>> | InputMaybe<Scalars["String"]>>;
 }>;
 
 export type BannersQuery = {
@@ -1372,6 +1364,72 @@ export type BannersQuery = {
             } | null;
           } | null;
         };
+        products?: {
+          __typename?: "ProductRelationResponseCollection";
+          data: Array<{
+            __typename?: "ProductEntity";
+            id?: string | null;
+            attributes?: {
+              __typename?: "Product";
+              productName: string;
+              description: string;
+              productPrice: number;
+              productSlug: string;
+              publishedAt?: any | null;
+              quantity: number;
+              updatedAt?: any | null;
+              createdAt?: any | null;
+              category?: {
+                __typename?: "CategoryEntityResponse";
+                data?: {
+                  __typename?: "CategoryEntity";
+                  id?: string | null;
+                  attributes?: { __typename?: "Category"; category?: string | null } | null;
+                } | null;
+              } | null;
+              productImages: {
+                __typename?: "UploadFileRelationResponseCollection";
+                data: Array<{
+                  __typename?: "UploadFileEntity";
+                  id?: string | null;
+                  attributes?: {
+                    __typename?: "UploadFile";
+                    url: string;
+                    previewUrl?: string | null;
+                    mime: string;
+                    name: string;
+                  } | null;
+                }>;
+              };
+              reviews?: {
+                __typename?: "ReviewRelationResponseCollection";
+                data: Array<{
+                  __typename?: "ReviewEntity";
+                  id?: string | null;
+                  attributes?: {
+                    __typename?: "Review";
+                    reviewText?: string | null;
+                    rating: number;
+                    createdAt?: any | null;
+                    updatedAt?: any | null;
+                    users_permissions_user?: {
+                      __typename?: "UsersPermissionsUserEntityResponse";
+                      data?: {
+                        __typename?: "UsersPermissionsUserEntity";
+                        id?: string | null;
+                        attributes?: {
+                          __typename?: "UsersPermissionsUser";
+                          username: string;
+                          email: string;
+                        } | null;
+                      } | null;
+                    } | null;
+                  } | null;
+                }>;
+              } | null;
+            } | null;
+          }>;
+        } | null;
       } | null;
     }>;
   } | null;
@@ -1420,6 +1478,72 @@ export type BannerQuery = {
             } | null;
           } | null;
         };
+        products?: {
+          __typename?: "ProductRelationResponseCollection";
+          data: Array<{
+            __typename?: "ProductEntity";
+            id?: string | null;
+            attributes?: {
+              __typename?: "Product";
+              productName: string;
+              description: string;
+              productPrice: number;
+              productSlug: string;
+              publishedAt?: any | null;
+              quantity: number;
+              updatedAt?: any | null;
+              createdAt?: any | null;
+              category?: {
+                __typename?: "CategoryEntityResponse";
+                data?: {
+                  __typename?: "CategoryEntity";
+                  id?: string | null;
+                  attributes?: { __typename?: "Category"; category?: string | null } | null;
+                } | null;
+              } | null;
+              productImages: {
+                __typename?: "UploadFileRelationResponseCollection";
+                data: Array<{
+                  __typename?: "UploadFileEntity";
+                  id?: string | null;
+                  attributes?: {
+                    __typename?: "UploadFile";
+                    url: string;
+                    previewUrl?: string | null;
+                    mime: string;
+                    name: string;
+                  } | null;
+                }>;
+              };
+              reviews?: {
+                __typename?: "ReviewRelationResponseCollection";
+                data: Array<{
+                  __typename?: "ReviewEntity";
+                  id?: string | null;
+                  attributes?: {
+                    __typename?: "Review";
+                    reviewText?: string | null;
+                    rating: number;
+                    createdAt?: any | null;
+                    updatedAt?: any | null;
+                    users_permissions_user?: {
+                      __typename?: "UsersPermissionsUserEntityResponse";
+                      data?: {
+                        __typename?: "UsersPermissionsUserEntity";
+                        id?: string | null;
+                        attributes?: {
+                          __typename?: "UsersPermissionsUser";
+                          username: string;
+                          email: string;
+                        } | null;
+                      } | null;
+                    } | null;
+                  } | null;
+                }>;
+              } | null;
+            } | null;
+          }>;
+        } | null;
       } | null;
     } | null;
   } | null;
@@ -1461,6 +1585,72 @@ export type BannersFragmentFragment = {
           } | null;
         } | null;
       };
+      products?: {
+        __typename?: "ProductRelationResponseCollection";
+        data: Array<{
+          __typename?: "ProductEntity";
+          id?: string | null;
+          attributes?: {
+            __typename?: "Product";
+            productName: string;
+            description: string;
+            productPrice: number;
+            productSlug: string;
+            publishedAt?: any | null;
+            quantity: number;
+            updatedAt?: any | null;
+            createdAt?: any | null;
+            category?: {
+              __typename?: "CategoryEntityResponse";
+              data?: {
+                __typename?: "CategoryEntity";
+                id?: string | null;
+                attributes?: { __typename?: "Category"; category?: string | null } | null;
+              } | null;
+            } | null;
+            productImages: {
+              __typename?: "UploadFileRelationResponseCollection";
+              data: Array<{
+                __typename?: "UploadFileEntity";
+                id?: string | null;
+                attributes?: {
+                  __typename?: "UploadFile";
+                  url: string;
+                  previewUrl?: string | null;
+                  mime: string;
+                  name: string;
+                } | null;
+              }>;
+            };
+            reviews?: {
+              __typename?: "ReviewRelationResponseCollection";
+              data: Array<{
+                __typename?: "ReviewEntity";
+                id?: string | null;
+                attributes?: {
+                  __typename?: "Review";
+                  reviewText?: string | null;
+                  rating: number;
+                  createdAt?: any | null;
+                  updatedAt?: any | null;
+                  users_permissions_user?: {
+                    __typename?: "UsersPermissionsUserEntityResponse";
+                    data?: {
+                      __typename?: "UsersPermissionsUserEntity";
+                      id?: string | null;
+                      attributes?: {
+                        __typename?: "UsersPermissionsUser";
+                        username: string;
+                        email: string;
+                      } | null;
+                    } | null;
+                  } | null;
+                } | null;
+              }>;
+            } | null;
+          } | null;
+        }>;
+      } | null;
     } | null;
   }>;
 };
@@ -1501,6 +1691,72 @@ export type BannerFragmentFragment = {
           } | null;
         } | null;
       };
+      products?: {
+        __typename?: "ProductRelationResponseCollection";
+        data: Array<{
+          __typename?: "ProductEntity";
+          id?: string | null;
+          attributes?: {
+            __typename?: "Product";
+            productName: string;
+            description: string;
+            productPrice: number;
+            productSlug: string;
+            publishedAt?: any | null;
+            quantity: number;
+            updatedAt?: any | null;
+            createdAt?: any | null;
+            category?: {
+              __typename?: "CategoryEntityResponse";
+              data?: {
+                __typename?: "CategoryEntity";
+                id?: string | null;
+                attributes?: { __typename?: "Category"; category?: string | null } | null;
+              } | null;
+            } | null;
+            productImages: {
+              __typename?: "UploadFileRelationResponseCollection";
+              data: Array<{
+                __typename?: "UploadFileEntity";
+                id?: string | null;
+                attributes?: {
+                  __typename?: "UploadFile";
+                  url: string;
+                  previewUrl?: string | null;
+                  mime: string;
+                  name: string;
+                } | null;
+              }>;
+            };
+            reviews?: {
+              __typename?: "ReviewRelationResponseCollection";
+              data: Array<{
+                __typename?: "ReviewEntity";
+                id?: string | null;
+                attributes?: {
+                  __typename?: "Review";
+                  reviewText?: string | null;
+                  rating: number;
+                  createdAt?: any | null;
+                  updatedAt?: any | null;
+                  users_permissions_user?: {
+                    __typename?: "UsersPermissionsUserEntityResponse";
+                    data?: {
+                      __typename?: "UsersPermissionsUserEntity";
+                      id?: string | null;
+                      attributes?: {
+                        __typename?: "UsersPermissionsUser";
+                        username: string;
+                        email: string;
+                      } | null;
+                    } | null;
+                  } | null;
+                } | null;
+              }>;
+            } | null;
+          } | null;
+        }>;
+      } | null;
     } | null;
   } | null;
 };
@@ -1509,9 +1765,7 @@ export type CategoriesQueryVariables = Exact<{
   filters?: InputMaybe<CategoryFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<
-    Array<InputMaybe<Scalars["String"]>> | InputMaybe<Scalars["String"]>
-  >;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>> | InputMaybe<Scalars["String"]>>;
 }>;
 
 export type CategoriesQuery = {
@@ -1599,11 +1853,7 @@ export type CreateFavoriteMutation = {
           data?: {
             __typename?: "UsersPermissionsUserEntity";
             id?: string | null;
-            attributes?: {
-              __typename?: "UsersPermissionsUser";
-              username: string;
-              email: string;
-            } | null;
+            attributes?: { __typename?: "UsersPermissionsUser"; username: string; email: string } | null;
           } | null;
         } | null;
       } | null;
@@ -1615,9 +1865,7 @@ export type FavoritesQueryVariables = Exact<{
   filters?: InputMaybe<FavoriteFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<
-    Array<InputMaybe<Scalars["String"]>> | InputMaybe<Scalars["String"]>
-  >;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>> | InputMaybe<Scalars["String"]>>;
 }>;
 
 export type FavoritesQuery = {
@@ -1647,10 +1895,7 @@ export type FavoritesQuery = {
                 data?: {
                   __typename?: "CategoryEntity";
                   id?: string | null;
-                  attributes?: {
-                    __typename?: "Category";
-                    category?: string | null;
-                  } | null;
+                  attributes?: { __typename?: "Category"; category?: string | null } | null;
                 } | null;
               } | null;
               productImages: {
@@ -1707,10 +1952,7 @@ export type UpdateFavoriteMutation = {
                 data?: {
                   __typename?: "CategoryEntity";
                   id?: string | null;
-                  attributes?: {
-                    __typename?: "Category";
-                    category?: string | null;
-                  } | null;
+                  attributes?: { __typename?: "Category"; category?: string | null } | null;
                 } | null;
               } | null;
               productImages: {
@@ -1775,6 +2017,72 @@ export type MainPageAllDataQuery = {
             } | null;
           } | null;
         };
+        products?: {
+          __typename?: "ProductRelationResponseCollection";
+          data: Array<{
+            __typename?: "ProductEntity";
+            id?: string | null;
+            attributes?: {
+              __typename?: "Product";
+              productName: string;
+              description: string;
+              productPrice: number;
+              productSlug: string;
+              publishedAt?: any | null;
+              quantity: number;
+              updatedAt?: any | null;
+              createdAt?: any | null;
+              category?: {
+                __typename?: "CategoryEntityResponse";
+                data?: {
+                  __typename?: "CategoryEntity";
+                  id?: string | null;
+                  attributes?: { __typename?: "Category"; category?: string | null } | null;
+                } | null;
+              } | null;
+              productImages: {
+                __typename?: "UploadFileRelationResponseCollection";
+                data: Array<{
+                  __typename?: "UploadFileEntity";
+                  id?: string | null;
+                  attributes?: {
+                    __typename?: "UploadFile";
+                    url: string;
+                    previewUrl?: string | null;
+                    mime: string;
+                    name: string;
+                  } | null;
+                }>;
+              };
+              reviews?: {
+                __typename?: "ReviewRelationResponseCollection";
+                data: Array<{
+                  __typename?: "ReviewEntity";
+                  id?: string | null;
+                  attributes?: {
+                    __typename?: "Review";
+                    reviewText?: string | null;
+                    rating: number;
+                    createdAt?: any | null;
+                    updatedAt?: any | null;
+                    users_permissions_user?: {
+                      __typename?: "UsersPermissionsUserEntityResponse";
+                      data?: {
+                        __typename?: "UsersPermissionsUserEntity";
+                        id?: string | null;
+                        attributes?: {
+                          __typename?: "UsersPermissionsUser";
+                          username: string;
+                          email: string;
+                        } | null;
+                      } | null;
+                    } | null;
+                  } | null;
+                }>;
+              } | null;
+            } | null;
+          }>;
+        } | null;
       } | null;
     }>;
   } | null;
@@ -1811,10 +2119,7 @@ export type MainPageAllDataQuery = {
           data?: {
             __typename?: "CategoryEntity";
             id?: string | null;
-            attributes?: {
-              __typename?: "Category";
-              category?: string | null;
-            } | null;
+            attributes?: { __typename?: "Category"; category?: string | null } | null;
           } | null;
         } | null;
         productImages: {
@@ -1866,9 +2171,7 @@ export type ProductsQueryVariables = Exact<{
   filters?: InputMaybe<ProductFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<
-    Array<InputMaybe<Scalars["String"]>> | InputMaybe<Scalars["String"]>
-  >;
+  sort?: InputMaybe<Array<InputMaybe<Scalars["String"]>> | InputMaybe<Scalars["String"]>>;
 }>;
 
 export type ProductsQuery = {
@@ -1893,10 +2196,147 @@ export type ProductsQuery = {
           data?: {
             __typename?: "CategoryEntity";
             id?: string | null;
+            attributes?: { __typename?: "Category"; category?: string | null } | null;
+          } | null;
+        } | null;
+        productImages: {
+          __typename?: "UploadFileRelationResponseCollection";
+          data: Array<{
+            __typename?: "UploadFileEntity";
+            id?: string | null;
             attributes?: {
-              __typename?: "Category";
-              category?: string | null;
+              __typename?: "UploadFile";
+              url: string;
+              previewUrl?: string | null;
+              mime: string;
+              name: string;
             } | null;
+          }>;
+        };
+        reviews?: {
+          __typename?: "ReviewRelationResponseCollection";
+          data: Array<{
+            __typename?: "ReviewEntity";
+            id?: string | null;
+            attributes?: {
+              __typename?: "Review";
+              reviewText?: string | null;
+              rating: number;
+              createdAt?: any | null;
+              updatedAt?: any | null;
+              users_permissions_user?: {
+                __typename?: "UsersPermissionsUserEntityResponse";
+                data?: {
+                  __typename?: "UsersPermissionsUserEntity";
+                  id?: string | null;
+                  attributes?: {
+                    __typename?: "UsersPermissionsUser";
+                    username: string;
+                    email: string;
+                  } | null;
+                } | null;
+              } | null;
+            } | null;
+          }>;
+        } | null;
+      } | null;
+    }>;
+  } | null;
+};
+
+export type ProductBySlugQueryVariables = Exact<{
+  slugValue?: InputMaybe<StringFilterInput>;
+}>;
+
+export type ProductBySlugQuery = {
+  __typename?: "Query";
+  products?: {
+    __typename?: "ProductEntityResponseCollection";
+    data: Array<{
+      __typename?: "ProductEntity";
+      id?: string | null;
+      attributes?: {
+        __typename?: "Product";
+        productName: string;
+        description: string;
+        productPrice: number;
+        productSlug: string;
+        publishedAt?: any | null;
+        quantity: number;
+        updatedAt?: any | null;
+        createdAt?: any | null;
+        category?: {
+          __typename?: "CategoryEntityResponse";
+          data?: {
+            __typename?: "CategoryEntity";
+            id?: string | null;
+            attributes?: { __typename?: "Category"; category?: string | null } | null;
+          } | null;
+        } | null;
+        productImages: {
+          __typename?: "UploadFileRelationResponseCollection";
+          data: Array<{
+            __typename?: "UploadFileEntity";
+            id?: string | null;
+            attributes?: {
+              __typename?: "UploadFile";
+              url: string;
+              previewUrl?: string | null;
+              mime: string;
+              name: string;
+            } | null;
+          }>;
+        };
+        reviews?: {
+          __typename?: "ReviewRelationResponseCollection";
+          data: Array<{
+            __typename?: "ReviewEntity";
+            id?: string | null;
+            attributes?: {
+              __typename?: "Review";
+              reviewText?: string | null;
+              rating: number;
+              createdAt?: any | null;
+              updatedAt?: any | null;
+              users_permissions_user?: {
+                __typename?: "UsersPermissionsUserEntityResponse";
+                data?: {
+                  __typename?: "UsersPermissionsUserEntity";
+                  id?: string | null;
+                  attributes?: {
+                    __typename?: "UsersPermissionsUser";
+                    username: string;
+                    email: string;
+                  } | null;
+                } | null;
+              } | null;
+            } | null;
+          }>;
+        } | null;
+      } | null;
+    }>;
+  } | null;
+  allOtherProducts?: {
+    __typename?: "ProductEntityResponseCollection";
+    data: Array<{
+      __typename?: "ProductEntity";
+      id?: string | null;
+      attributes?: {
+        __typename?: "Product";
+        productName: string;
+        description: string;
+        productPrice: number;
+        productSlug: string;
+        publishedAt?: any | null;
+        quantity: number;
+        updatedAt?: any | null;
+        createdAt?: any | null;
+        category?: {
+          __typename?: "CategoryEntityResponse";
+          data?: {
+            __typename?: "CategoryEntity";
+            id?: string | null;
+            attributes?: { __typename?: "Category"; category?: string | null } | null;
           } | null;
         } | null;
         productImages: {
@@ -1970,10 +2410,7 @@ export type ProductQuery = {
           data?: {
             __typename?: "CategoryEntity";
             id?: string | null;
-            attributes?: {
-              __typename?: "Category";
-              category?: string | null;
-            } | null;
+            attributes?: { __typename?: "Category"; category?: string | null } | null;
           } | null;
         } | null;
         productImages: {
@@ -2041,10 +2478,7 @@ export type ProductFragmentFragment = {
         data?: {
           __typename?: "CategoryEntity";
           id?: string | null;
-          attributes?: {
-            __typename?: "Category";
-            category?: string | null;
-          } | null;
+          attributes?: { __typename?: "Category"; category?: string | null } | null;
         } | null;
       } | null;
       productImages: {
@@ -2077,11 +2511,7 @@ export type ProductFragmentFragment = {
               data?: {
                 __typename?: "UsersPermissionsUserEntity";
                 id?: string | null;
-                attributes?: {
-                  __typename?: "UsersPermissionsUser";
-                  username: string;
-                  email: string;
-                } | null;
+                attributes?: { __typename?: "UsersPermissionsUser"; username: string; email: string } | null;
               } | null;
             } | null;
           } | null;
@@ -2111,10 +2541,7 @@ export type ProductsFragmentFragment = {
         data?: {
           __typename?: "CategoryEntity";
           id?: string | null;
-          attributes?: {
-            __typename?: "Category";
-            category?: string | null;
-          } | null;
+          attributes?: { __typename?: "Category"; category?: string | null } | null;
         } | null;
       } | null;
       productImages: {
@@ -2147,11 +2574,7 @@ export type ProductsFragmentFragment = {
               data?: {
                 __typename?: "UsersPermissionsUserEntity";
                 id?: string | null;
-                attributes?: {
-                  __typename?: "UsersPermissionsUser";
-                  username: string;
-                  email: string;
-                } | null;
+                attributes?: { __typename?: "UsersPermissionsUser"; username: string; email: string } | null;
               } | null;
             } | null;
           } | null;
@@ -2161,6 +2584,191 @@ export type ProductsFragmentFragment = {
   }>;
 };
 
+export type ProductEntityFragmentFragment = {
+  __typename?: "ProductEntity";
+  id?: string | null;
+  attributes?: {
+    __typename?: "Product";
+    productName: string;
+    description: string;
+    productPrice: number;
+    productSlug: string;
+    publishedAt?: any | null;
+    quantity: number;
+    updatedAt?: any | null;
+    createdAt?: any | null;
+    category?: {
+      __typename?: "CategoryEntityResponse";
+      data?: {
+        __typename?: "CategoryEntity";
+        id?: string | null;
+        attributes?: { __typename?: "Category"; category?: string | null } | null;
+      } | null;
+    } | null;
+    productImages: {
+      __typename?: "UploadFileRelationResponseCollection";
+      data: Array<{
+        __typename?: "UploadFileEntity";
+        id?: string | null;
+        attributes?: {
+          __typename?: "UploadFile";
+          url: string;
+          previewUrl?: string | null;
+          mime: string;
+          name: string;
+        } | null;
+      }>;
+    };
+    reviews?: {
+      __typename?: "ReviewRelationResponseCollection";
+      data: Array<{
+        __typename?: "ReviewEntity";
+        id?: string | null;
+        attributes?: {
+          __typename?: "Review";
+          reviewText?: string | null;
+          rating: number;
+          createdAt?: any | null;
+          updatedAt?: any | null;
+          users_permissions_user?: {
+            __typename?: "UsersPermissionsUserEntityResponse";
+            data?: {
+              __typename?: "UsersPermissionsUserEntity";
+              id?: string | null;
+              attributes?: { __typename?: "UsersPermissionsUser"; username: string; email: string } | null;
+            } | null;
+          } | null;
+        } | null;
+      }>;
+    } | null;
+  } | null;
+};
+
+export type ProductRelationFragmentFragment = {
+  __typename?: "ProductRelationResponseCollection";
+  data: Array<{
+    __typename?: "ProductEntity";
+    id?: string | null;
+    attributes?: {
+      __typename?: "Product";
+      productName: string;
+      description: string;
+      productPrice: number;
+      productSlug: string;
+      publishedAt?: any | null;
+      quantity: number;
+      updatedAt?: any | null;
+      createdAt?: any | null;
+      category?: {
+        __typename?: "CategoryEntityResponse";
+        data?: {
+          __typename?: "CategoryEntity";
+          id?: string | null;
+          attributes?: { __typename?: "Category"; category?: string | null } | null;
+        } | null;
+      } | null;
+      productImages: {
+        __typename?: "UploadFileRelationResponseCollection";
+        data: Array<{
+          __typename?: "UploadFileEntity";
+          id?: string | null;
+          attributes?: {
+            __typename?: "UploadFile";
+            url: string;
+            previewUrl?: string | null;
+            mime: string;
+            name: string;
+          } | null;
+        }>;
+      };
+      reviews?: {
+        __typename?: "ReviewRelationResponseCollection";
+        data: Array<{
+          __typename?: "ReviewEntity";
+          id?: string | null;
+          attributes?: {
+            __typename?: "Review";
+            reviewText?: string | null;
+            rating: number;
+            createdAt?: any | null;
+            updatedAt?: any | null;
+            users_permissions_user?: {
+              __typename?: "UsersPermissionsUserEntityResponse";
+              data?: {
+                __typename?: "UsersPermissionsUserEntity";
+                id?: string | null;
+                attributes?: { __typename?: "UsersPermissionsUser"; username: string; email: string } | null;
+              } | null;
+            } | null;
+          } | null;
+        }>;
+      } | null;
+    } | null;
+  }>;
+};
+
+export const ProductEntityFragmentFragmentDoc = gql`
+  fragment ProductEntityFragment on ProductEntity {
+    id
+    attributes {
+      productName
+      description
+      productPrice
+      productSlug
+      publishedAt
+      quantity
+      category {
+        data {
+          id
+          attributes {
+            category
+          }
+        }
+      }
+      productImages {
+        data {
+          id
+          attributes {
+            url
+            previewUrl
+            mime
+            name
+          }
+        }
+      }
+      reviews {
+        data {
+          id
+          attributes {
+            reviewText
+            rating
+            createdAt
+            updatedAt
+            users_permissions_user {
+              data {
+                id
+                attributes {
+                  username
+                  email
+                }
+              }
+            }
+          }
+        }
+      }
+      updatedAt
+      createdAt
+    }
+  }
+`;
+export const ProductRelationFragmentFragmentDoc = gql`
+  fragment ProductRelationFragment on ProductRelationResponseCollection {
+    data {
+      ...ProductEntityFragment
+    }
+  }
+  ${ProductEntityFragmentFragmentDoc}
+`;
 export const BannersFragmentFragmentDoc = gql`
   fragment BannersFragment on BannerEntityResponseCollection {
     data {
@@ -2192,9 +2800,13 @@ export const BannersFragmentFragmentDoc = gql`
         locale
         createdAt
         updatedAt
+        products {
+          ...ProductRelationFragment
+        }
       }
     }
   }
+  ${ProductRelationFragmentFragmentDoc}
 `;
 export const BannerFragmentFragmentDoc = gql`
   fragment BannerFragment on BannerEntityResponse {
@@ -2227,9 +2839,13 @@ export const BannerFragmentFragmentDoc = gql`
         locale
         createdAt
         updatedAt
+        products {
+          ...ProductRelationFragment
+        }
       }
     }
   }
+  ${ProductRelationFragmentFragmentDoc}
 `;
 export const CategoryFragmentFragmentDoc = gql`
   fragment CategoryFragment on CategoryEntityResponse {
@@ -2385,10 +3001,7 @@ export const LoginDocument = gql`
     }
   }
 `;
-export type LoginMutationFn = Apollo.MutationFunction<
-  LoginMutation,
-  LoginMutationVariables
->;
+export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>;
 
 /**
  * __useLoginMutation__
@@ -2408,23 +3021,15 @@ export type LoginMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useLoginMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    LoginMutation,
-    LoginMutationVariables
-  >
+  baseOptions?: Apollo.MutationHookOptions<LoginMutation, LoginMutationVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<LoginMutation, LoginMutationVariables>(
-    LoginDocument,
-    options
-  );
+  return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, options);
 }
+
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
-export type LoginMutationOptions = Apollo.BaseMutationOptions<
-  LoginMutation,
-  LoginMutationVariables
->;
+export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
 export const RegisterDocument = gql`
   mutation register($input: UsersPermissionsRegisterInput!) {
     register(input: $input) {
@@ -2444,10 +3049,7 @@ export const RegisterDocument = gql`
     }
   }
 `;
-export type RegisterMutationFn = Apollo.MutationFunction<
-  RegisterMutation,
-  RegisterMutationVariables
->;
+export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, RegisterMutationVariables>;
 
 /**
  * __useRegisterMutation__
@@ -2467,23 +3069,14 @@ export type RegisterMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useRegisterMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    RegisterMutation,
-    RegisterMutationVariables
-  >
+  baseOptions?: Apollo.MutationHookOptions<RegisterMutation, RegisterMutationVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(
-    RegisterDocument,
-    options
-  );
+  return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, options);
 }
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
-export type RegisterMutationOptions = Apollo.BaseMutationOptions<
-  RegisterMutation,
-  RegisterMutationVariables
->;
+export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
 export const BannersDocument = gql`
   query banners(
     $filters: BannerFiltersInput
@@ -2525,30 +3118,21 @@ export const BannersDocument = gql`
  *   },
  * });
  */
-export function useBannersQuery(
-  baseOptions?: Apollo.QueryHookOptions<BannersQuery, BannersQueryVariables>
-) {
+export function useBannersQuery(baseOptions?: Apollo.QueryHookOptions<BannersQuery, BannersQueryVariables>) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<BannersQuery, BannersQueryVariables>(
-    BannersDocument,
-    options
-  );
+  return Apollo.useQuery<BannersQuery, BannersQueryVariables>(BannersDocument, options);
 }
+
 export function useBannersLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<BannersQuery, BannersQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<BannersQuery, BannersQueryVariables>(
-    BannersDocument,
-    options
-  );
+  return Apollo.useLazyQuery<BannersQuery, BannersQueryVariables>(BannersDocument, options);
 }
+
 export type BannersQueryHookResult = ReturnType<typeof useBannersQuery>;
 export type BannersLazyQueryHookResult = ReturnType<typeof useBannersLazyQuery>;
-export type BannersQueryResult = Apollo.QueryResult<
-  BannersQuery,
-  BannersQueryVariables
->;
+export type BannersQueryResult = Apollo.QueryResult<BannersQuery, BannersQueryVariables>;
 export const BannerDocument = gql`
   query banner($id: ID, $locale: I18NLocaleCode) {
     banner(id: $id, locale: $locale) {
@@ -2575,30 +3159,21 @@ export const BannerDocument = gql`
  *   },
  * });
  */
-export function useBannerQuery(
-  baseOptions?: Apollo.QueryHookOptions<BannerQuery, BannerQueryVariables>
-) {
+export function useBannerQuery(baseOptions?: Apollo.QueryHookOptions<BannerQuery, BannerQueryVariables>) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<BannerQuery, BannerQueryVariables>(
-    BannerDocument,
-    options
-  );
+  return Apollo.useQuery<BannerQuery, BannerQueryVariables>(BannerDocument, options);
 }
+
 export function useBannerLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<BannerQuery, BannerQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<BannerQuery, BannerQueryVariables>(
-    BannerDocument,
-    options
-  );
+  return Apollo.useLazyQuery<BannerQuery, BannerQueryVariables>(BannerDocument, options);
 }
+
 export type BannerQueryHookResult = ReturnType<typeof useBannerQuery>;
 export type BannerLazyQueryHookResult = ReturnType<typeof useBannerLazyQuery>;
-export type BannerQueryResult = Apollo.QueryResult<
-  BannerQuery,
-  BannerQueryVariables
->;
+export type BannerQueryResult = Apollo.QueryResult<BannerQuery, BannerQueryVariables>;
 export const CategoriesDocument = gql`
   query categories(
     $filters: CategoryFiltersInput
@@ -2606,12 +3181,7 @@ export const CategoriesDocument = gql`
     $publicationState: PublicationState = LIVE
     $sort: [String] = []
   ) {
-    categories(
-      sort: $sort
-      publicationState: $publicationState
-      filters: $filters
-      pagination: $pagination
-    ) {
+    categories(sort: $sort, publicationState: $publicationState, filters: $filters, pagination: $pagination) {
       ...CategoriesFragment
     }
   }
@@ -2638,37 +3208,22 @@ export const CategoriesDocument = gql`
  * });
  */
 export function useCategoriesQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    CategoriesQuery,
-    CategoriesQueryVariables
-  >
+  baseOptions?: Apollo.QueryHookOptions<CategoriesQuery, CategoriesQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<CategoriesQuery, CategoriesQueryVariables>(
-    CategoriesDocument,
-    options
-  );
+  return Apollo.useQuery<CategoriesQuery, CategoriesQueryVariables>(CategoriesDocument, options);
 }
+
 export function useCategoriesLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    CategoriesQuery,
-    CategoriesQueryVariables
-  >
+  baseOptions?: Apollo.LazyQueryHookOptions<CategoriesQuery, CategoriesQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<CategoriesQuery, CategoriesQueryVariables>(
-    CategoriesDocument,
-    options
-  );
+  return Apollo.useLazyQuery<CategoriesQuery, CategoriesQueryVariables>(CategoriesDocument, options);
 }
+
 export type CategoriesQueryHookResult = ReturnType<typeof useCategoriesQuery>;
-export type CategoriesLazyQueryHookResult = ReturnType<
-  typeof useCategoriesLazyQuery
->;
-export type CategoriesQueryResult = Apollo.QueryResult<
-  CategoriesQuery,
-  CategoriesQueryVariables
->;
+export type CategoriesLazyQueryHookResult = ReturnType<typeof useCategoriesLazyQuery>;
+export type CategoriesQueryResult = Apollo.QueryResult<CategoriesQuery, CategoriesQueryVariables>;
 export const CategoryDocument = gql`
   query category($id: ID) {
     category(id: $id) {
@@ -2698,31 +3253,19 @@ export function useCategoryQuery(
   baseOptions?: Apollo.QueryHookOptions<CategoryQuery, CategoryQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<CategoryQuery, CategoryQueryVariables>(
-    CategoryDocument,
-    options
-  );
+  return Apollo.useQuery<CategoryQuery, CategoryQueryVariables>(CategoryDocument, options);
 }
+
 export function useCategoryLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    CategoryQuery,
-    CategoryQueryVariables
-  >
+  baseOptions?: Apollo.LazyQueryHookOptions<CategoryQuery, CategoryQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<CategoryQuery, CategoryQueryVariables>(
-    CategoryDocument,
-    options
-  );
+  return Apollo.useLazyQuery<CategoryQuery, CategoryQueryVariables>(CategoryDocument, options);
 }
+
 export type CategoryQueryHookResult = ReturnType<typeof useCategoryQuery>;
-export type CategoryLazyQueryHookResult = ReturnType<
-  typeof useCategoryLazyQuery
->;
-export type CategoryQueryResult = Apollo.QueryResult<
-  CategoryQuery,
-  CategoryQueryVariables
->;
+export type CategoryLazyQueryHookResult = ReturnType<typeof useCategoryLazyQuery>;
+export type CategoryQueryResult = Apollo.QueryResult<CategoryQuery, CategoryQueryVariables>;
 export const CreateFavoriteDocument = gql`
   mutation createFavorite($data: FavoriteInput!) {
     createFavorite(data: $data) {
@@ -2768,22 +3311,17 @@ export type CreateFavoriteMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useCreateFavoriteMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    CreateFavoriteMutation,
-    CreateFavoriteMutationVariables
-  >
+  baseOptions?: Apollo.MutationHookOptions<CreateFavoriteMutation, CreateFavoriteMutationVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<
-    CreateFavoriteMutation,
-    CreateFavoriteMutationVariables
-  >(CreateFavoriteDocument, options);
+  return Apollo.useMutation<CreateFavoriteMutation, CreateFavoriteMutationVariables>(
+    CreateFavoriteDocument,
+    options
+  );
 }
-export type CreateFavoriteMutationHookResult = ReturnType<
-  typeof useCreateFavoriteMutation
->;
-export type CreateFavoriteMutationResult =
-  Apollo.MutationResult<CreateFavoriteMutation>;
+
+export type CreateFavoriteMutationHookResult = ReturnType<typeof useCreateFavoriteMutation>;
+export type CreateFavoriteMutationResult = Apollo.MutationResult<CreateFavoriteMutation>;
 export type CreateFavoriteMutationOptions = Apollo.BaseMutationOptions<
   CreateFavoriteMutation,
   CreateFavoriteMutationVariables
@@ -2795,12 +3333,7 @@ export const FavoritesDocument = gql`
     $publicationState: PublicationState = LIVE
     $sort: [String] = []
   ) {
-    favorites(
-      filters: $filters
-      pagination: $pagination
-      publicationState: $publicationState
-      sort: $sort
-    ) {
+    favorites(filters: $filters, pagination: $pagination, publicationState: $publicationState, sort: $sort) {
       data {
         id
         attributes {
@@ -2865,31 +3398,19 @@ export function useFavoritesQuery(
   baseOptions?: Apollo.QueryHookOptions<FavoritesQuery, FavoritesQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<FavoritesQuery, FavoritesQueryVariables>(
-    FavoritesDocument,
-    options
-  );
+  return Apollo.useQuery<FavoritesQuery, FavoritesQueryVariables>(FavoritesDocument, options);
 }
+
 export function useFavoritesLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    FavoritesQuery,
-    FavoritesQueryVariables
-  >
+  baseOptions?: Apollo.LazyQueryHookOptions<FavoritesQuery, FavoritesQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<FavoritesQuery, FavoritesQueryVariables>(
-    FavoritesDocument,
-    options
-  );
+  return Apollo.useLazyQuery<FavoritesQuery, FavoritesQueryVariables>(FavoritesDocument, options);
 }
+
 export type FavoritesQueryHookResult = ReturnType<typeof useFavoritesQuery>;
-export type FavoritesLazyQueryHookResult = ReturnType<
-  typeof useFavoritesLazyQuery
->;
-export type FavoritesQueryResult = Apollo.QueryResult<
-  FavoritesQuery,
-  FavoritesQueryVariables
->;
+export type FavoritesLazyQueryHookResult = ReturnType<typeof useFavoritesLazyQuery>;
+export type FavoritesQueryResult = Apollo.QueryResult<FavoritesQuery, FavoritesQueryVariables>;
 export const UpdateFavoriteDocument = gql`
   mutation updateFavorite($data: FavoriteInput!, $id: ID!) {
     updateFavorite(id: $id, data: $data) {
@@ -2957,23 +3478,17 @@ export type UpdateFavoriteMutationFn = Apollo.MutationFunction<
  * });
  */
 export function useUpdateFavoriteMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    UpdateFavoriteMutation,
-    UpdateFavoriteMutationVariables
-  >
+  baseOptions?: Apollo.MutationHookOptions<UpdateFavoriteMutation, UpdateFavoriteMutationVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<
-    UpdateFavoriteMutation,
-    UpdateFavoriteMutationVariables
-  >(UpdateFavoriteDocument, options);
+  return Apollo.useMutation<UpdateFavoriteMutation, UpdateFavoriteMutationVariables>(
+    UpdateFavoriteDocument,
+    options
+  );
 }
 
-export type UpdateFavoriteMutationHookResult = ReturnType<
-  typeof useUpdateFavoriteMutation
->;
-export type UpdateFavoriteMutationResult =
-  Apollo.MutationResult<UpdateFavoriteMutation>;
+export type UpdateFavoriteMutationHookResult = ReturnType<typeof useUpdateFavoriteMutation>;
+export type UpdateFavoriteMutationResult = Apollo.MutationResult<UpdateFavoriteMutation>;
 export type UpdateFavoriteMutationOptions = Apollo.BaseMutationOptions<
   UpdateFavoriteMutation,
   UpdateFavoriteMutationVariables
@@ -3011,10 +3526,7 @@ export const MainPageAllDataDocument = gql`
  * });
  */
 export function useMainPageAllDataQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    MainPageAllDataQuery,
-    MainPageAllDataQueryVariables
-  >
+  baseOptions?: Apollo.QueryHookOptions<MainPageAllDataQuery, MainPageAllDataQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<MainPageAllDataQuery, MainPageAllDataQueryVariables>(
@@ -3024,24 +3536,17 @@ export function useMainPageAllDataQuery(
 }
 
 export function useMainPageAllDataLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    MainPageAllDataQuery,
-    MainPageAllDataQueryVariables
-  >
+  baseOptions?: Apollo.LazyQueryHookOptions<MainPageAllDataQuery, MainPageAllDataQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<
-    MainPageAllDataQuery,
-    MainPageAllDataQueryVariables
-  >(MainPageAllDataDocument, options);
+  return Apollo.useLazyQuery<MainPageAllDataQuery, MainPageAllDataQueryVariables>(
+    MainPageAllDataDocument,
+    options
+  );
 }
 
-export type MainPageAllDataQueryHookResult = ReturnType<
-  typeof useMainPageAllDataQuery
->;
-export type MainPageAllDataLazyQueryHookResult = ReturnType<
-  typeof useMainPageAllDataLazyQuery
->;
+export type MainPageAllDataQueryHookResult = ReturnType<typeof useMainPageAllDataQuery>;
+export type MainPageAllDataLazyQueryHookResult = ReturnType<typeof useMainPageAllDataLazyQuery>;
 export type MainPageAllDataQueryResult = Apollo.QueryResult<
   MainPageAllDataQuery,
   MainPageAllDataQueryVariables
@@ -3053,12 +3558,7 @@ export const ProductsDocument = gql`
     $publicationState: PublicationState = LIVE
     $sort: [String] = []
   ) {
-    products(
-      filters: $filters
-      pagination: $pagination
-      publicationState: $publicationState
-      sort: $sort
-    ) {
+    products(filters: $filters, pagination: $pagination, publicationState: $publicationState, sort: $sort) {
       ...ProductsFragment
     }
   }
@@ -3088,31 +3588,67 @@ export function useProductsQuery(
   baseOptions?: Apollo.QueryHookOptions<ProductsQuery, ProductsQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<ProductsQuery, ProductsQueryVariables>(
-    ProductsDocument,
-    options
-  );
+  return Apollo.useQuery<ProductsQuery, ProductsQueryVariables>(ProductsDocument, options);
 }
+
 export function useProductsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    ProductsQuery,
-    ProductsQueryVariables
-  >
+  baseOptions?: Apollo.LazyQueryHookOptions<ProductsQuery, ProductsQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<ProductsQuery, ProductsQueryVariables>(
-    ProductsDocument,
-    options
-  );
+  return Apollo.useLazyQuery<ProductsQuery, ProductsQueryVariables>(ProductsDocument, options);
 }
+
 export type ProductsQueryHookResult = ReturnType<typeof useProductsQuery>;
-export type ProductsLazyQueryHookResult = ReturnType<
-  typeof useProductsLazyQuery
->;
-export type ProductsQueryResult = Apollo.QueryResult<
-  ProductsQuery,
-  ProductsQueryVariables
->;
+export type ProductsLazyQueryHookResult = ReturnType<typeof useProductsLazyQuery>;
+export type ProductsQueryResult = Apollo.QueryResult<ProductsQuery, ProductsQueryVariables>;
+export const ProductBySlugDocument = gql`
+  query productBySlug($slugValue: StringFilterInput) {
+    products(filters: { productSlug: $slugValue }) {
+      data {
+        ...ProductEntityFragment
+      }
+    }
+    allOtherProducts: products(filters: { productSlug: { not: $slugValue } }) {
+      ...ProductsFragment
+    }
+  }
+  ${ProductEntityFragmentFragmentDoc}
+  ${ProductsFragmentFragmentDoc}
+`;
+
+/**
+ * __useProductBySlugQuery__
+ *
+ * To run a query within a React component, call `useProductBySlugQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProductBySlugQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProductBySlugQuery({
+ *   variables: {
+ *      slugValue: // value for 'slugValue'
+ *   },
+ * });
+ */
+export function useProductBySlugQuery(
+  baseOptions?: Apollo.QueryHookOptions<ProductBySlugQuery, ProductBySlugQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<ProductBySlugQuery, ProductBySlugQueryVariables>(ProductBySlugDocument, options);
+}
+
+export function useProductBySlugLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<ProductBySlugQuery, ProductBySlugQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<ProductBySlugQuery, ProductBySlugQueryVariables>(ProductBySlugDocument, options);
+}
+
+export type ProductBySlugQueryHookResult = ReturnType<typeof useProductBySlugQuery>;
+export type ProductBySlugLazyQueryHookResult = ReturnType<typeof useProductBySlugLazyQuery>;
+export type ProductBySlugQueryResult = Apollo.QueryResult<ProductBySlugQuery, ProductBySlugQueryVariables>;
 export const ProductDocument = gql`
   query product($id: ID) {
     product(id: $id) {
@@ -3138,27 +3674,18 @@ export const ProductDocument = gql`
  *   },
  * });
  */
-export function useProductQuery(
-  baseOptions?: Apollo.QueryHookOptions<ProductQuery, ProductQueryVariables>
-) {
+export function useProductQuery(baseOptions?: Apollo.QueryHookOptions<ProductQuery, ProductQueryVariables>) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<ProductQuery, ProductQueryVariables>(
-    ProductDocument,
-    options
-  );
+  return Apollo.useQuery<ProductQuery, ProductQueryVariables>(ProductDocument, options);
 }
+
 export function useProductLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<ProductQuery, ProductQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<ProductQuery, ProductQueryVariables>(
-    ProductDocument,
-    options
-  );
+  return Apollo.useLazyQuery<ProductQuery, ProductQueryVariables>(ProductDocument, options);
 }
+
 export type ProductQueryHookResult = ReturnType<typeof useProductQuery>;
 export type ProductLazyQueryHookResult = ReturnType<typeof useProductLazyQuery>;
-export type ProductQueryResult = Apollo.QueryResult<
-  ProductQuery,
-  ProductQueryVariables
->;
+export type ProductQueryResult = Apollo.QueryResult<ProductQuery, ProductQueryVariables>;

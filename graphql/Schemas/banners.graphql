@@ -40,7 +40,9 @@ fragment BannersFragment on BannerEntityResponseCollection{
             locale
             createdAt
             updatedAt
-
+            products{
+                ...ProductRelationFragment
+            }
         }
     }
 }
@@ -75,6 +77,9 @@ fragment BannerFragment on BannerEntityResponse{
             createdAt
             updatedAt
 
+            products{
+                ...ProductRelationFragment
+            }
         }
     }
 }

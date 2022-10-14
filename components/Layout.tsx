@@ -1,13 +1,13 @@
-import NavBarComponent from "./NavBar";
 import { HalfMoon, SunLight } from "iconoir-react";
 import { useTheme as useNextTheme } from "next-themes";
 import { Switch, useTheme } from "@nextui-org/react";
+import NavBarComponent from "./NavBar";
 
 export interface LayoutProps {
   children: any;
 }
 
-export function LayoutElement({ children }: LayoutProps) {
+export default function LayoutElement({ children }: LayoutProps) {
   const { setTheme } = useNextTheme();
   const { isDark, type } = useTheme();
   return (

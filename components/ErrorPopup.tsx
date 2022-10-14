@@ -1,4 +1,4 @@
-import { Button, Col, Modal, Row, Text } from "@nextui-org/react";
+import { Col, Modal, Row, Text } from "@nextui-org/react";
 import { ErrorTypeGraphQl } from "../graphql/ConfigTypes";
 import DefaultButton from "./DefaultButton";
 
@@ -10,22 +10,14 @@ export interface ErrorPopupProps {
   openStatus: boolean;
 }
 
-export function ErrorPopup(props: ErrorPopupProps) {
+export default function ErrorPopup(props: ErrorPopupProps) {
   return (
     <div>
-      <Modal
-        closeButton
-        aria-labelledby="modal-title"
-        open={props.openStatus}
-        onClose={props.onCloseEvent}
-      >
+      <Modal closeButton aria-labelledby="modal-title" open={props.openStatus} onClose={props.onCloseEvent}>
         <Modal.Header>
           <Text id="modal-title" size={18}>
             <Text b size={18}>
-              There was a
-              {props.errorType === ErrorTypeGraphQl.Network
-                ? " Network Error"
-                : " Request Error"}
+              There was a{props.errorType === ErrorTypeGraphQl.Network ? " Network Error" : " Request Error"}
             </Text>
           </Text>
         </Modal.Header>
@@ -33,10 +25,7 @@ export function ErrorPopup(props: ErrorPopupProps) {
           <Col>
             {props.messages.map((currentMessage, index) => (
               <Row key={index} justify={"center"}>
-                <p className={"text-center font-semibold "}>
-                  {" "}
-                  {currentMessage}
-                </p>
+                <p className={"text-center font-semibold "}> {currentMessage}</p>
               </Row>
             ))}
           </Col>
@@ -53,5 +42,3 @@ export function ErrorPopup(props: ErrorPopupProps) {
     </div>
   );
 }
-
-export default ErrorPopup;

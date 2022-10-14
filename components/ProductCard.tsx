@@ -9,35 +9,31 @@ interface ProductCardProps {
   productPrice?: number;
   buttonText?: string;
   productImage: any;
-  productSlug?: string;
+  productSlug: string;
   onClickButton: () => void;
 }
-const ProductCard = ({
+
+export default function ProductCard({
   productId,
   productImage,
   productPrice,
   productName,
   buttonText,
   onClickButton,
-}: ProductCardProps) => {
+  productSlug,
+}: ProductCardProps) {
   return (
     <Card key={productId}>
-      <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }}>
-        <Col>
-          <Text size={12} weight="bold" transform="uppercase" color="#000">
-            New
-          </Text>
-        </Col>
-      </Card.Header>
-      <Card.Body>
-        <Link href={`/product/${productId}`} className={"cursor-pointer"}>
+      <Card.Body css={{ padding: "0" }}>
+        <Link href={`/product/${productSlug}`} className={"cursor-pointer"}>
           <a>
             <Image
-              src={`${productImage.url}` || ""}
+              src={`${productImage.url}`}
+              objectFit={"cover"}
+              layout={"responsive"}
               height={400}
               width={400}
               alt={"headphones"}
-              className={"absolute -top-12 -left-14 cursor-pointer"}
             />
           </a>
         </Link>
@@ -62,19 +58,8 @@ const ProductCard = ({
           </Col>
           <Col>
             <Row justify="flex-end">
-              <Button
-                flat
-                auto
-                css={{ borderRadius: "5px" }}
-                color="success"
-                onClick={onClickButton}
-              >
-                <Text
-                  css={{ color: "black" }}
-                  size={12}
-                  weight="bold"
-                  transform="uppercase"
-                >
+              <Button flat auto css={{ borderRadius: "5px" }} color="success" onClick={onClickButton}>
+                <Text css={{ color: "black" }} size={12} weight="bold" transform="uppercase">
                   {buttonText}
                 </Text>
               </Button>
@@ -84,6 +69,4 @@ const ProductCard = ({
       </Card.Footer>
     </Card>
   );
-};
-
-export default ProductCard;
+}

@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { LayoutElement } from "../../components/Layout";
-import { useECommerceStore } from "../../states/ProductStates";
+import { useECommerceStore } from "../../states";
 import Image from "next/image";
-import {
-  AiOutlineCreditCard,
-  AiOutlineDelete,
-  AiOutlineMinus,
-  AiOutlinePlus,
-} from "react-icons/ai";
-import DefaultButton from "../../components/DefaultButton";
-import getStripe from "../../utils/getStripe";
+import { AiOutlineCreditCard, AiOutlineDelete, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { getStripe } from "../../utils";
 import toast from "react-hot-toast";
+import LayoutElement from "../../components/Layout";
+import DefaultButton from "../../components/DefaultButton";
 
 const Index = () => {
-  const { cardItems, totalPrice, toggleCartItemQuantity, onRemove } =
-    useECommerceStore();
+  const { cardItems, totalPrice, toggleCartItemQuantity, onRemove } = useECommerceStore();
   const [isSSR, setIsSSR] = useState(true);
   useEffect(() => {
     setIsSSR(false);
@@ -60,9 +54,7 @@ const Index = () => {
                 />
                 <div className={"flex flex-col ml-3 "}>
                   <p className={"m-0 font-bold"}>{product.productName}</p>
-                  <p
-                    className={"m-0 font-semibold"}
-                  >{`$ ${product.productPrice}`}</p>
+                  <p className={"m-0 font-semibold"}>{`$ ${product.productPrice}`}</p>
                 </div>
               </div>
               <div className={"flex justify-between w-1/2"}>
@@ -75,9 +67,7 @@ const Index = () => {
                       }}
                     />
                   </span>
-                  <span className={"bg-gray-300 p-4 rounded-md"}>
-                    {product.quantity}
-                  </span>
+                  <span className={"bg-gray-300 p-4 rounded-md"}>{product.quantity}</span>
                   <span>
                     <AiOutlinePlus
                       className={"ml-2 cursor-pointer"}
@@ -88,9 +78,7 @@ const Index = () => {
                   </span>
                 </div>
                 <div>
-                  <p className={"text-lg font-bold"}>
-                    $ {product.productPrice * product.quantity}
-                  </p>
+                  <p className={"text-lg font-bold"}>$ {product.productPrice * product.quantity}</p>
                 </div>
               </div>
             </div>

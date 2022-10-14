@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { AiOutlineDelete } from "react-icons/ai";
-import { StateProduct } from "../UiTypes/StateProduct";
+import { StateProduct } from "../UiTypes";
 
 function CardItem(props: { item: StateProduct | any; onClick: () => void }) {
   return (
@@ -20,9 +20,7 @@ function CardItem(props: { item: StateProduct | any; onClick: () => void }) {
         </p>
       </div>
       <div className={"flex items-center "}>
-        <p className={"m-0 mt-3"}>
-          $ {props.item.productPrice * props.item.quantity}
-        </p>
+        <p className={"m-0 mt-3"}>$ {props.item.productPrice * props.item.quantity}</p>
       </div>
       <AiOutlineDelete
         className={
