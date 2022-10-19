@@ -1,11 +1,11 @@
-import { BannerEntityResponseCollection } from "../graphql/generated/graphqlTypes";
+import {BannerEntityResponseCollection} from "../graphql/generated/graphqlTypes";
 import Image from "next/image";
-import { useECommerceStore } from "../states";
-import { GetProductState } from "../utils";
-import { StateProduct } from "../UiTypes";
-import { useRouter } from "next/router";
-import { Col, Container, Row, Text } from "@nextui-org/react";
-import { CartAlt } from "iconoir-react";
+import {useECommerceStore} from "../states";
+import {GetProductState} from "../utils";
+import {StateProduct} from "../UiTypes";
+import {useRouter} from "next/router";
+import {Col, Container, Row, Text} from "@nextui-org/react";
+import {CartAlt} from "iconoir-react";
 import DefaultButton from "./DefaultButton";
 
 interface mainBannerProps {
@@ -37,9 +37,14 @@ export default function MainBanner({ mainBannersData }: mainBannerProps) {
       <Row>
         <Col
           css={{
-            padding: "$24",
-            display: "flex",
-            flexDirection: "column",
+              "@xlMax": {
+                  padding: "$12 $24",
+              },
+              "@xlMin": {
+                  padding: "$24",
+              },
+              display: "flex",
+              flexDirection: "column",
           }}
         >
           <Text h2 size={"$6xl"}>
