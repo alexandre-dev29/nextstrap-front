@@ -1,14 +1,12 @@
 import Stripe from "stripe";
 import { NextApiRequest, NextApiResponse } from "next";
-import { StateProduct } from "../../UiTypes/StateProduct";
+import { StateProduct } from "../../UiTypes";
+
 const stripeApp = new Stripe(`${process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY}`, {
-  apiVersion: "2020-08-27",
+  apiVersion: "2022-08-01",
 });
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     try {
       // Create Checkout Sessions from body params.

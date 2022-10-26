@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Button, Loading } from "@nextui-org/react";
-import { LoginFormElement } from "../../../UiTypes/GlobalTypes";
+import { LoginFormElement } from "../UiTypes";
 import { FooterRegister, HeadingLogin, LoginInputs } from "./UtilsLogin";
-import { useLoginMutation } from "../../../graphql/generated/graphqlTypes";
-import { defaultApolloClient } from "../../../graphql";
+import { useLoginMutation } from "../graphql/generated/graphqlTypes";
+import { defaultApolloClient } from "../graphql";
 
 type Props = {};
 
@@ -17,10 +17,7 @@ export default function LoginForm({}: Props) {
     client: defaultApolloClient,
   });
   //handling submit event on the form
-  const onSubmitLogin: SubmitHandler<LoginFormElement> = async ({
-    username,
-    password,
-  }) => {
+  const onSubmitLogin: SubmitHandler<LoginFormElement> = async ({ username, password }) => {
     setLoadingActive("block");
     const { data, errors } = await loginMutation({
       variables: { input: { identifier: username, password: password } },

@@ -1,7 +1,7 @@
 import { Text, theme } from "@nextui-org/react";
 import { FieldErrors, UseFormRegisterReturn } from "react-hook-form";
-import { LoginFormElement } from "../../../UiTypes/GlobalTypes";
-import InputComponent from "../../../components/input-component";
+import { LoginFormElement } from "../UiTypes";
+import InputComponent from "./input-component";
 import Link from "next/link";
 import React from "react";
 

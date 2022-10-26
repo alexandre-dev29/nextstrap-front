@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { UnAutorizedLayout } from "../../../components/UnAutorizedLayout";
+import UnAutorizedLayout from "../../../components/UnAutorizedLayout";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { RegisterFormElement } from "../../../UiTypes";
 import { toast, Toaster } from "react-hot-toast";
 import { useRegisterMutation } from "../../../graphql/generated/graphqlTypes";
 import { Button, Loading, Text } from "@nextui-org/react";
 import InputComponent from "../../../components/input-component";
-import { FooterRegister } from "../Login/UtilsLogin";
+import { FooterRegister } from "../../../components";
 import { defaultApolloClient } from "../../../graphql";
 
 function Index() {
@@ -17,21 +17,16 @@ function Index() {
     formState: { errors },
   } = useForm<RegisterFormElement>();
   const notify = () =>
-    toast.success(
-      `You have registered successfully please write the OTP code you've just receive.`,
-      { position: "top-right" }
-    );
+    toast.success(`You have registered successfully please write the OTP code you've just receive.`, {
+      position: "top-right",
+    });
   const [registerMutation] = useRegisterMutation({
     errorPolicy: "all",
     fetchPolicy: "network-only",
     client: defaultApolloClient,
   });
 
-  const onSubmitLogin: SubmitHandler<RegisterFormElement> = async ({
-    username,
-    email,
-    password,
-  }) => {
+  const onSubmitLogin: SubmitHandler<RegisterFormElement> = async ({ username, email, password }) => {
     const { data, errors } = await registerMutation({
       variables: { input: { email, password, username } },
       errorPolicy: "all",
@@ -51,10 +46,7 @@ function Index() {
   };
   return (
     <UnAutorizedLayout>
-      <div
-        style={{ zIndex: 10 }}
-        className="flex flex-col w-screen h-screen px-12 py-6"
-      >
+      <div style={{ zIndex: 10 }} className="flex flex-col w-screen h-screen px-12 py-6">
         <div>
           <Toaster />
           <Text
