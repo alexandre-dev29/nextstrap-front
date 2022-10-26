@@ -13,7 +13,7 @@ import DefaultButton from "./DefaultButton";
 
 interface ProductListsProps {
   categoriesData: CategoryEntityResponseCollection | any;
-  productsData: ProductEntityResponseCollection;
+  productsData: ProductEntityResponseCollection | any;
 }
 
 export default function ProductLists({ productsData, categoriesData }: ProductListsProps) {
@@ -61,7 +61,7 @@ export default function ProductLists({ productsData, categoriesData }: ProductLi
 
         <Grid.Container justify={"center"} gap={5}>
           {productsData.data
-            .filter((value) => {
+            .filter((value: any) => {
               return category === "all"
                 ? `${value.attributes?.category?.data?.attributes?.category}` !== category
                 : `${value.attributes?.category?.data?.attributes?.category}` == category;
