@@ -11,7 +11,7 @@ export default function LayoutElement({ children }: LayoutProps) {
   const { setTheme } = useNextTheme();
   const { isDark, type } = useTheme();
   return (
-    <main>
+    <main className={"flex flex-col"}>
       <Switch
         checked={!isDark}
         color={"warning"}

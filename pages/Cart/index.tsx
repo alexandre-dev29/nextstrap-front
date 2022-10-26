@@ -6,11 +6,12 @@ import { getStripe } from "../../utils";
 import toast from "react-hot-toast";
 import LayoutElement from "../../components/Layout";
 import DefaultButton from "../../components/DefaultButton";
-import { Row } from "@nextui-org/react";
+import { Loading, Row } from "@nextui-org/react";
 
 const Index = () => {
   const { cardItems, totalPrice, toggleCartItemQuantity, onRemove } = useECommerceStore();
   const [isSSR, setIsSSR] = useState(true);
+  const [waitingCheck, setWaitingCheck] = useState(false);
   useEffect(() => {
     setIsSSR(false);
   }, []);
@@ -29,6 +30,9 @@ const Index = () => {
 
   return (
     <LayoutElement>
+      <div className={`absolute top-2/3 left-1/2 z-40 ${waitingCheck ? "block" : "hidden"}`}>
+        <Loading color="warning" size={"xl"} textColor="warning"></Loading>
+      </div>
       <h3 className={"font-bold tracking-widest text-3xl  text-center"}>Shopping Cart</h3>
       <div className={"lg:w-3/4  mx-auto mt-12  md:px-6 md:px-12 py-4"}>
         <div>
@@ -121,6 +125,7 @@ const Index = () => {
           <DefaultButton
             textButton={"Checkout"}
             onClickAction={async () => {
+              setWaitingCheck(true);
               await handleCheckout();
             }}
             isFilled={true}
