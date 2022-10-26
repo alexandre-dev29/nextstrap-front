@@ -25,21 +25,26 @@ const ProductDetails: PageProductBySlugComp = ({ data, error }) => {
 
   return (
     <LayoutElement>
-      <div className={"p-12 bg-white flex justify-between shadow-md"}>
-        <div className="w-2/5">
+      <div
+        className={"p-12 flex-col md:flex-row flex justify-between shadow-md "}
+        style={{ backgroundColor: "var(--nextui-colors-accents1)" }}
+      >
+        <div className="w-full  md:w-2/5">
           {data && <ProductDetailImage fileValues={currentProduct?.attributes?.productImages} />}
         </div>
-        <div className={"w-1/2 p-8"}>
+        <div className={"w-full mt-4 md:mt-0 p-2 md:w-1/2 md:p-8"}>
           <div className={"flex items-center justify-between"}>
-            <h2 className={"text-3xl m-0 font-bold tracking-widest"}>
+            <h2 className={"text-2xl md:text-3xl m-0 font-bold tracking-widest"}>
               {currentProduct?.attributes?.productName}
             </h2>
           </div>
-          <p className={"font-light text-lg w-3/4"}>{currentProduct?.attributes?.description}</p>
+          <p className={"font-light text-md md:text-lg md:w-3/4"}>
+            {currentProduct?.attributes?.description}
+          </p>
           <p className={"font-semibold text-4xl mt-5"}>{`$  ${currentProduct?.attributes?.productPrice}`}</p>
 
           {data && <ProductReviews productReviews={currentProduct?.attributes?.reviews} />}
-          <div className={"mt-2"}>
+          <div className={"flex mt-2"}>
             <DefaultButton
               textButton={"Buy Now"}
               onClickAction={async () => {

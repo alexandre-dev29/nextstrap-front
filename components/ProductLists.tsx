@@ -21,10 +21,11 @@ export default function ProductLists({ productsData, categoriesData }: ProductLi
   return (
     <>
       <Container
-        style={{ margin: "0 auto", padding: "4rem" }}
+        style={{ margin: "0 auto" }}
         display={"flex"}
         alignItems={"center"}
         direction={"column"}
+        css={{ "@smMax": { padding: "1rem" }, "@mdMin": { padding: "4rem" } }}
       >
         <Text h2 size={"$4xl"} css={{ fontWeight: "$semibold" }}>
           Product List
@@ -48,9 +49,9 @@ export default function ProductLists({ productsData, categoriesData }: ProductLi
           </ul>
         </div>
 
-        <Grid.Container justify={"flex-start"} gap={5}>
+        <Grid.Container justify={"center"} gap={5}>
           {productsData.data.map((product: ProductEntity) => (
-            <Grid xs={12} sm={6} md={3} key={product.id}>
+            <Grid xs={12} sm={6} md={3} key={product.id} style={{ padding: "0.5rem" }}>
               <ProductCard
                 productName={product.attributes?.productName}
                 productPrice={product.attributes?.productPrice}

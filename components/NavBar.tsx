@@ -28,7 +28,7 @@ export default function NavBarComponent() {
   };
 
   return (
-    <Navbar isBordered variant="static" shouldHideOnScroll={false}>
+    <Navbar isBordered variant="sticky" shouldHideOnScroll={false}>
       <Navbar.Brand css={{ mr: "$4" }}>
         <Link href={"/"}>
           <Text
@@ -44,7 +44,7 @@ export default function NavBarComponent() {
         <Navbar.Content hideIn="xs" variant="highlight"></Navbar.Content>
       </Navbar.Brand>
       <Navbar.Content css={{ "@xsMax": { w: "100%", jc: "flex-end" } }}>
-        <Navbar.Item css={{ "@xsMax": { w: "100%", jc: "center" } }} id={"5"}>
+        <Navbar.Item css={{ "@xsMax": { w: "100%", jc: "center" }, "@mdMax": { display: "none" } }} id={"5"}>
           <Input
             aria-label={"search"}
             id={"currentSearchInput"}

@@ -12,7 +12,7 @@ export default function ProductSuggestion({ allOtherProducts }: productSuggestio
   const { onAdd } = useECommerceStore();
 
   return (
-    <div className={"mx-auto flex items-center flex-col p-16"}>
+    <div className={"mx-auto flex items-center flex-col py-6 md:p-16"}>
       <h3 className={"font-medium text-4xl"}>Other you may like</h3>
       <div className={"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-10/12 gap-5"}>
         {allOtherProducts.data.map((product: ProductEntity) => (

@@ -41,7 +41,7 @@ export default function ProductCard({
       <Card.Footer
         css={{
           position: "absolute",
-          bgBlur: "#ffffff",
+          bgBlur: "$accent2",
           borderTop: "$borderWeights$light solid rgba(255, 255, 255, 0.2)",
           bottom: 0,
           zIndex: 1,
@@ -58,8 +58,8 @@ export default function ProductCard({
           </Col>
           <Col>
             <Row justify="flex-end">
-              <Button flat auto css={{ borderRadius: "5px" }} color="success" onClick={onClickButton}>
-                <Text css={{ color: "black" }} size={12} weight="bold" transform="uppercase">
+              <Button flat auto css={{ borderRadius: "5px" }} color="warning" onClick={onClickButton}>
+                <Text css={{ color: "$accent2" }} size={12} weight="bold" transform="uppercase">
                   {buttonText}
                 </Text>
               </Button>

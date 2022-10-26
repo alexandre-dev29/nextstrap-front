@@ -11,14 +11,7 @@ export default function LayoutElement({ children }: LayoutProps) {
   const { setTheme } = useNextTheme();
   const { isDark, type } = useTheme();
   return (
-    <main
-      style={{
-        maxWidth: "100%",
-        boxSizing: "border-box",
-        position: "relative",
-        minHeight: "100vh",
-      }}
-    >
+    <main>
       <Switch
         checked={!isDark}
         color={"warning"}
