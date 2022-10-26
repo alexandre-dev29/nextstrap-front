@@ -1,83 +1,43 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import {
-  ApolloClient,
-  ApolloProvider,
-  from,
-  InMemoryCache,
-} from "@apollo/client";
-import {
-  authLinkApp,
-  ErrorTypeGraphQl,
-  httpLinkApp,
-} from "../graphql/ConfigTypes";
-import { onError } from "@apollo/client/link/error";
-import { useEffect, useState } from "react";
-import ErrorPopup from "../components/ErrorPopup";
 import Head from "next/head";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-import { DarkTheme, LightTheme } from "../config/ThemeConfig";
+import { DarkTheme, LightTheme } from "../config";
 import { NextUIProvider } from "@nextui-org/react";
-import { UserContext } from "../config/UserContext";
+import Router from "next/router";
+import { Toaster } from "react-hot-toast";
+import { IconoirProvider } from "iconoir-react";
+import NProgress from "nprogress"; //nprogress module
+import "nprogress/nprogress.css";
+
+//Route Events.
+Router.events.on("routeChangeStart", () => NProgress.start());
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [errorType, setErrorType] = useState(ErrorTypeGraphQl.Request);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [messagesError, setMessagesError] = useState([""]);
-
-  useEffect(() => {
-    if (localStorage.getItem("currentUser")) {
-      setCurrentUser(JSON.parse(localStorage.getItem("currentUser") || ""));
-    }
-  }, []);
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  const errorLink = onError(({ graphQLErrors, networkError }) => {
-    if (graphQLErrors) {
-      setMessagesError(graphQLErrors.map((a) => a.message));
-      setErrorType(ErrorTypeGraphQl.Request);
-      setIsOpen(true);
-    }
-    if (networkError) {
-      setErrorType(ErrorTypeGraphQl.Network);
-      setMessagesError([
-        "Connection Issue Please check Your internet connection and try again",
-      ]);
-      setIsOpen(true);
-    }
-  });
-
-  const client = new ApolloClient({
-    link: from([errorLink, authLinkApp, httpLinkApp]),
-    cache: new InMemoryCache(),
-  });
-
   return (
     <div style={{ position: "relative", zIndex: 0 }}>
-      <ErrorPopup
-        errorType={errorType}
-        messages={messagesError}
-        onCloseEvent={closeModal}
-        openStatus={isOpen}
-      />
       <Head>
         <title>Welcome to NextStrap ECommerce</title>
       </Head>
       <NextThemesProvider
-        defaultTheme={"system"}
+        defaultTheme={"light"}
         attribute={"class"}
         value={{ light: LightTheme.className, dark: DarkTheme.className }}
       >
         <NextUIProvider>
-          <ApolloProvider client={client}>
-            <UserContext.Provider value={currentUser}>
-              <Component {...pageProps} />
-            </UserContext.Provider>
-          </ApolloProvider>
+          <Toaster />
+          <IconoirProvider
+            iconProps={{
+              color: "#2d2d2d",
+              strokeWidth: 1,
+              width: "1em",
+              height: "1em",
+            }}
+          >
+            <Component {...pageProps} />
+          </IconoirProvider>
         </NextUIProvider>
       </NextThemesProvider>
     </div>

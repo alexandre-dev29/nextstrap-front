@@ -1,0 +1,34 @@
+query categories($filters: CategoryFiltersInput, $pagination: PaginationArg = {}, $publicationState: PublicationState = LIVE, $sort: [String] = []){
+    categories(sort: $sort, publicationState: $publicationState, filters: $filters, pagination: $pagination){
+        ...CategoriesFragment
+    }
+}
+
+query category($id: ID){
+    category(id: $id){
+        ...CategoryFragment
+    }
+}
+
+fragment CategoryFragment on CategoryEntityResponse{
+    data {
+        id
+        attributes {
+            category
+            createdAt
+            updatedAt
+        }
+    }
+}
+
+fragment CategoriesFragment on CategoryEntityResponseCollection{
+    data {
+        id
+        attributes {
+            category
+            createdAt
+            updatedAt
+        }
+    }
+}
+

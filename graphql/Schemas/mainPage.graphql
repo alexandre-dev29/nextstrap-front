@@ -1,0 +1,11 @@
+query mainPageAllData{
+    banners{
+        ...BannersFragment
+    }
+    categories{
+        ...CategoriesFragment
+    }
+    products{
+        ...ProductsFragment
+    }
+}

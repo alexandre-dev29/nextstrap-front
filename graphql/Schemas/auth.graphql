@@ -1,0 +1,34 @@
+mutation login($input: UsersPermissionsLoginInput!){
+    login(input: $input){
+        user {
+            id
+            confirmed
+            email
+            username
+            role {
+                id
+                name
+                description
+            }
+        }
+        jwt
+    }
+}
+
+mutation  register($input: UsersPermissionsRegisterInput!){
+    register(input: $input){
+        user {
+            id
+            username
+            email
+            confirmed
+            blocked
+            role {
+                id
+                name
+                description
+            }
+        }
+        jwt
+    }
+}

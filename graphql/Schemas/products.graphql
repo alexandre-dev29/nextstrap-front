@@ -1,111 +1,191 @@
 query products($filters: ProductFiltersInput, $pagination: PaginationArg = {}, $publicationState: PublicationState = LIVE, $sort: [String] = []){
     products(filters: $filters,pagination: $pagination, publicationState: $publicationState, sort: $sort){
+        ...ProductsFragment
+    }
+}
+
+
+query productBySlug($slugValue: StringFilterInput){
+    products(filters: {productSlug: $slugValue}){
         data {
-            id
-            attributes {
-                productName
-                description
-                productPrice
-                productSlug
-                publishedAt
-                category {
-                    data {
-                        id
-                        attributes {
-                            category
-                        }
+            ...ProductEntityFragment
+        }
+    }
+    allOtherProducts: products(filters: {productSlug: {not: $slugValue}}){
+        ...ProductsFragment
+    }
+
+}
+query product($id: ID){
+    product(id: $id){
+        ...ProductFragment
+    }
+}
+
+fragment ProductFragment on ProductEntityResponse{
+    data {
+        id
+        attributes {
+            productName
+            description
+            productPrice
+            productSlug
+            publishedAt
+            quantity
+            category {
+                data {
+                    id
+                    attributes {
+                        category
                     }
                 }
-                productImages{
-                    data {
-                        id
-                        attributes {
-                            url
-                            previewUrl
-                            mime
-                            name
-                        }
+            }
+            productImages{
+                data {
+                    id
+                    attributes {
+                        url
+                        previewUrl
+                        mime
+                        name
                     }
                 }
-                reviews{
-                    data {
-                        id
-                        attributes {
-                            reviewText
-                            rating
-                            createdAt
-                            updatedAt
-                            users_permissions_user {
-                                data {
-                                    id
-                                    attributes {
-                                        username
-                                        email
-                                    }
+            }
+            reviews{
+                data {
+                    id
+                    attributes {
+                        reviewText
+                        rating
+                        createdAt
+                        updatedAt
+                        users_permissions_user {
+                            data {
+                                id
+                                attributes {
+                                    username
+                                    email
                                 }
                             }
                         }
                     }
                 }
-                updatedAt
-                createdAt
             }
+            updatedAt
+            createdAt
+        }
+    }
+}
+fragment ProductsFragment on ProductEntityResponseCollection{
+    data {
+        id
+        attributes {
+            productName
+            description
+            productPrice
+            productSlug
+            publishedAt
+            quantity
+            category {
+                data {
+                    id
+                    attributes {
+                        category
+                    }
+                }
+            }
+            productImages{
+                data {
+                    id
+                    attributes {
+                        url
+                        previewUrl
+                        mime
+                        name
+                    }
+                }
+            }
+            reviews{
+                data {
+                    id
+                    attributes {
+                        reviewText
+                        rating
+                        createdAt
+                        updatedAt
+                        users_permissions_user {
+                            data {
+                                id
+                                attributes {
+                                    username
+                                    email
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            updatedAt
+            createdAt
         }
     }
 }
 
-query product($id: ID){
-    product(id: $id){
-        data {
-            id
-            attributes {
-                productName
-                description
-                productPrice
-                productSlug
-                publishedAt
-                category {
-                    data {
-                        id
-                        attributes {
-                            category
-                        }
-                    }
+fragment ProductEntityFragment on ProductEntity{
+    id
+    attributes {
+        productName
+        description
+        productPrice
+        productSlug
+        publishedAt
+        quantity
+        category {
+            data {
+                id
+                attributes {
+                    category
                 }
-                productImages{
-                    data {
-                        id
-                        attributes {
-                            url
-                            previewUrl
-                            mime
-                            name
-                        }
-                    }
+            }
+        }
+        productImages{
+            data {
+                id
+                attributes {
+                    url
+                    previewUrl
+                    mime
+                    name
                 }
-                reviews{
-                    data {
-                        id
-                        attributes {
-                            reviewText
-                            rating
-                            createdAt
-                            updatedAt
-                            users_permissions_user {
-                                data {
-                                    id
-                                    attributes {
-                                        username
-                                        email
-                                    }
-                                }
+            }
+        }
+        reviews{
+            data {
+                id
+                attributes {
+                    reviewText
+                    rating
+                    createdAt
+                    updatedAt
+                    users_permissions_user {
+                        data {
+                            id
+                            attributes {
+                                username
+                                email
                             }
                         }
                     }
                 }
-                updatedAt
-                createdAt
             }
         }
+        updatedAt
+        createdAt
+    }
+}
+
+fragment ProductRelationFragment on ProductRelationResponseCollection{
+    data {
+        ...ProductEntityFragment
     }
 }
