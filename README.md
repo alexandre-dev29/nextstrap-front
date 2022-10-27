@@ -1,34 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NextStrap ECommerce
 
-## Getting Started
+NextStrap is a complete Ecommrce Application created using [Nextjs](https://nextjs.org/)
+and [Strapi CMS](https://strapi.io/)
 
-First, run the development server:
+Here are some technologies and library i used in this project
+
+- [NextUI](http://nextui.org/) allows you to make beautiful, modern, and fast websites/applications regardless of your
+  design experience, created with[React.js](https://reactjs.org/) and[Stitches](https://stitches.dev/), based
+  on[React Aria](https://react-spectrum.adobe.com/react-aria/index.html) and inspired by[Vuesax](https://vuesax.com/)
+- [Zustand](https://github.com/pmndrs/zustand)   A small, fast and scalable bearbones state-management solution. Zustand
+  has a comfy api based on hooks. It isn't boilerplatey or opinionated, but still has enough to be explicit and
+  flux-like.
+- [GraphQl](https://graphql.org/) is a query language for APIs and a runtime for fulfilling those queries with your
+  existing data. GraphQL provides a complete and understandable description of the data in your API, gives clients the
+  power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables
+  powerful developer tools.
+- [Stripe](https://stripe.com/) is a suite of APIs powering online payment processing and commerce solutions for
+  internet businesses of all sizes. Accept payments and scale faster.
+
+And other libraries just to name a few , you can see all dependences in the package.json
+
+### Getting Started
+
+First you need to clone the server here is the link Nextrap-Backend and follow instruction to run the serverr
+
+after the server is launch you need to feel to create an .env file and paste values has shown in .env.example
+
+then run
 
 ```bash
-npm run dev
-# or
+yarn install
+```
+
+once finish then run
+
+```bash
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.You can start editing the page
+by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Learn MoreTo learn more about Next.js, take a look at the following resources:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and
+  API. [Learn Next.js](https://nextjs.org/learn)
+- an interactive Next.js tutorial.You can check out the [Next.js GitHub repository](https://github.com/vercel/next.js/)
+  your feedback and contributions are welcom
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+### Deploy on Vercel
 
-## Learn More
+The easiest way to deploy your Next.js app is to use
+the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme)
+from the creators of Next.js.Check out the [Next.js deployment](https://nextjs.org/docs/deployment) documentation for
+more details.
 
-To learn more about Next.js, take a look at the following resources:
+### Contribution
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Contribution and Feedback are welcome 😋😋
