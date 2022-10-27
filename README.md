@@ -16,7 +16,6 @@ Here are some technologies and library i used in this project
   power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables
   powerful developer tools.
 - [Stripe](https://stripe.com/) is a suite of APIs powering online payment processing and commerce solutions for
-  internet businesses of all sizes. Accept payments and scale faster.
 
 And other libraries just to name a few , you can see all dependences in the package.json
 
