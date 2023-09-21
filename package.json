@@ -14,7 +14,7 @@
     "@apollo/client": "^3.7.0",
     "@nextui-org/react": "1.0.0-beta.10",
     "@stripe/stripe-js": "^1.42.0",
-    "graphql": "^16.6.0",
+    "graphql": "^16.8.1",
     "iconoir-react": "^5.3.2",
     "next": "12.3.1",
     "next-themes": "^0.2.1",
